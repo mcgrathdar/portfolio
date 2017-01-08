@@ -1,0 +1,89 @@
+/*
+ * Under Construction 
+ * Main backend CSS
+ * (c) Web factory Ltd, 2015 - 2016
+ */
+ 
+
+div.ucp-thumb {
+	width: 250px;
+	margin: 0 20px 0 0;
+	display: inline-block;
+}
+
+div.ucp-thumb img {
+	margin-bottom: 5px;
+  border: 1px solid transparent;
+  max-width: 100%;
+}
+
+div.ucp-thumb img:hover {
+  border: 1px solid #222;
+}
+
+div.ucp-thumb input {
+	margin-right: 5px;
+}
+
+.ucp-list {
+	list-style-type: circle;
+	list-style-position: outside;
+  margin-left: 14px;
+}
+
+input[type=url]:invalid {
+  border-color: #EA1919;
+  -webkit-box-shadow: 0 0 2px rgba(234,25,25,1);
+  box-shadow: 0 0 2px rgba(234,25,25,1);
+}
+
+
+/* on/off switch */
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch .onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #008EC2; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+/* on/off switch */
