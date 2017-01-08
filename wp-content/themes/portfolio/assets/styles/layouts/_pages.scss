@@ -237,20 +237,23 @@
 
 .close-header {
 	position: fixed;
-	background-color: #ffffff;
+	background-color: transparent;
 	width: 100%;
 	z-index: 5;
 	height: 60px;
+	left: 0;
 }
 
 #close {
 	background-size: contain;
     height: 30px;
     width: 30px;
+    margin-right: 10px;
     float: right;
     border: none;
     margin-top: 15px;
     cursor: pointer;
+    display: none;
 }
 
 .work-section {
@@ -286,10 +289,11 @@
 	position: absolute; 
 	z-index: -1; 
 	height: auto; 
-	padding-top: 5%; 
+/*	padding-top: 5%;*/ 
 	background-color: #ffffff; 
 	display: none;
 	left: 0;
+	overflow: scroll!important;
 }
 
 .work-title-divider {
@@ -308,35 +312,60 @@
     border-bottom: 5px solid #ffffff;
 }
 
-.work-container .overlay {
-	display: none;
+.work-title-overlay-divider {
+	width: 45px;
+    height: 1px;
+    background-color: #fff;
+    margin-top: 10px;
+    border-bottom: 5px solid #ffffff;
 }
 
 .work-container .overlay {
-    width:100%;
+	width:0;
+}
+
+.work-container .overlay {
+    width:0;
     height:100%;
     background: $brand-primary;
-    opacity: 0.8;
+	position: absolute;
+	top: 0;
+	z-index: 5;
+	overflow:hidden;
+	margin-left:-40px;
+	opacity: 0.95;
+	transform:skew(5deg);
+}
+
+.overlay-title {
+	width: 0;
+	overflow: hidden;
+}
+
+.overlay-title  {
+	color: #ffffff;
+	white-space: nowrap;
+	line-height: 39px;
+    text-align: left!important;
+    font-size: 36px;
+    left: 10px;
+    bottom: 20px;
+    z-index: 7;
     position: absolute;
-    z-index: 5;
-    top:0;
-    left:0;
-    display:inline-block;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    
+    font-weight: 300;
+    	
     h2 {
-    	color: #ffffff;
-    	display: none;
-    	text-align: left!important;
-    	font-size: 36px;
-    	bottom: 0;
-    	position: absolute;
-    	font-weight: 300;
+    	font-size: 28px;
     }
 }
 
+
+#contentarea h2 {
+	margin-top: 30px;
+    font-size: 64px;
+    color: #000000;
+    font-weight: 700;
+}
 
 
 

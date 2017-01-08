@@ -17,7 +17,7 @@
       
     <div class="col-md-4 col-xl-4 col-xs-12">       
       <p>
-        <b>Client:</b> You<br> 
+        <b>Client:</b> <?php echo get_post_meta($post->ID, 'Client', true); ?><br> 
         <b>Project:</b> This<br>
         Hello
       </p>
@@ -29,10 +29,19 @@
 
 <div class="row" style="margin-left: 0; margin-right: 0; margin-top: 50px">    
   <div class="col-md-1 col-xl-1 col-xs-0"></div>
-  
+
+
+
   <div class="col-md-10 col-xl-10 col-xs-12">
-    <img style="display: block; width: 100%" src="http://www.planwallpaper.com/static/images/canberra_hero_image_JiMVvYU.jpg"/>
+  <?php $image = get_field('main_image');
+
+    if( !empty($image) ): ?>
+  <img style="display: block; width: 100%"  src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+   <?php endif; ?>
+
     <img style="width: 100%; position: relative;" src="<?= get_template_directory_uri();?>/dist/images/macbook.svg"/>
+
+ 
   </div>
 
   <div class="col-md-1 col-xl-1 col-xs-0"></div>

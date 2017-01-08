@@ -74,15 +74,17 @@
 			</div>
 		</div>
 		
-		<div class="work-section" id="work">
-			<div class="col-md-12 col-xl-12 col-xs-12 work-row">
+		<div class="work-section" >
+			<div class="col-md-12 col-xl-12 col-xs-12 work-row" id="work">
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 					<?php if ( has_post_thumbnail() ) : ?>
 					<a href="javascript:ajaxpage('<?php the_permalink(); ?>', 'contentarea');">
 						<div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 work-container" id="<?php the_title(); ?>">
-							<div class="overlay">
+							<div class="overlay-title">
 								<h2><?php the_title(); ?></h2>
-							</div>			
+							 	<div class="work-title-overlay-divider"></div> 
+							</div>
+							<div class="overlay"></div>			
 							<img src="<?php the_post_thumbnail_url('full'); ?>" />
 						</div>		
 					</a>
@@ -92,19 +94,20 @@
  			<div class="work-title">
 				<h5>Work</h5>
 			</div>
-			<!-- <div class="pointer"></div>	 -->
-		</div>
 			
-		<div id="work-detail">
-			<div class="close-header">
-				<div class="col-md-12 col-xl-12 col-xs-12">
-					<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
+			<!-- <div class="pointer"></div>	 -->
+			
+			<div id="work-detail">
+				<div class="close-header">
+					<div class="col-md-12 col-xl-12 col-xs-12">
+						<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
+					</div>
 				</div>
-			</div>
-			<div class="row" style="margin-left: 0; margin-right: 0;" style="margin-top: 50px;">
-				<div id="contentarea" style="height: auto; width: 100%;"></div>
-			</div>
-		</div> 
+				<div class="row" style="margin-left: 0; margin-right: 0;" style="margin-top: 50px;">
+					<div id="contentarea" style="height: auto; width: 100%;"></div>
+				</div>
+			</div> 
+		</div>
 	</div>
 </body>
   
