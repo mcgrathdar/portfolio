@@ -1,6 +1,6 @@
 <?php while (have_posts()) : the_post(); ?>
   
-<div class="row" style="margin-left: 0; margin-right: 0; margin-top: 50px"> 
+<div class="row" > 
   <div class="col-md-1 col-xl-1 col-xs-0"></div>
         
   <div class="col-md-10 col-xl-10 col-xs-12">
@@ -12,14 +12,13 @@
     <div class="col-md-4 col-xl-4 col-xs-12"></div>
 
     <div class="col-md-8 col-xl-8 col-xs-12">
-      <?php the_content(); ?>
+        <?php the_content(); ?>
     </div>   
       
     <div class="col-md-4 col-xl-4 col-xs-12">       
       <p>
-        <b>Client:</b> <?php echo get_post_meta($post->ID, 'Client', true); ?><br> 
-        <b>Project:</b> This<br>
-        Hello
+        <b>Client:</b> <?php the_field('client'); ?><br> 
+        <b>Project:</b> <?php the_field('project'); ?>
       </p>
     </div>
 
@@ -27,32 +26,31 @@
   <div class="col-md-1 col-xl-1 col-xs-0"></div>
 </div>
 
-<div class="row" style="margin-left: 0; margin-right: 0; margin-top: 50px">    
+<?php $image = get_field('main_image');
+if( !empty($image) ): ?>
+<div class="row" >    
   <div class="col-md-1 col-xl-1 col-xs-0"></div>
-
-
-
-  <div class="col-md-10 col-xl-10 col-xs-12">
-  <?php $image = get_field('main_image');
-
-    if( !empty($image) ): ?>
-  <img style="display: block; width: 100%"  src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
-   <?php endif; ?>
-
-    <img style="width: 100%; position: relative;" src="<?= get_template_directory_uri();?>/dist/images/macbook.svg"/>
-
- 
-  </div>
-
+    <div class="col-md-10 col-xl-10 col-xs-12">
+        <img style="display: block; width: 100%"  src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+    </div>
   <div class="col-md-1 col-xl-1 col-xs-0"></div>
 </div>
+<?php endif; ?>
 
-<div class="row" style="margin-left: 0; margin-right: 0; margin-top: 50px">
+
+<div class="row" >
   <div class="col-md-1 col-xl-1 col-xs-0"></div> 
 
-  <div class="col-md-6 col-xl-6 col-xs-12"> 
+  <div class="col-md-5 col-xl-5 col-xs-12"> 
+     <?php $image_two = get_field('image_two');
+      if( !empty($image_two) ): ?>
+        <img style="display: block; width: 100%"  src="<?php echo $image_two['url']; ?>" alt="<?php echo $image_two['alt']; ?>" />
+      <?php endif; ?>
+  </div>
+
+  <div class="col-md-5 col-xl-5 col-xs-12"> 
     <div class="entry-content">
-      <?php the_content(); ?>
+      <?php the_field('image_two_text'); ?>
     </div>
   </div>
 
@@ -60,17 +58,6 @@
 </div>
 
 
-<div class="row" style="margin-left: 0; margin-right: 0; margin-top: 50px">
-  <div class="col-md-1 col-xl-1 col-xs-0"></div> 
 
-  <div class="col-md-6 col-xl-6 col-xs-12">
-    <div style="position: relative; height: 290px; width: 69.1%; overflow: hidden; top: 54.5px; left: 110px; z-index: 2; background-color: black;">
-      <img style="display: block; margin-left: auto; margin-right: auto; height: 100%" src="http://www.planwallpaper.com/static/images/canberra_hero_image_JiMVvYU.jpg"/>
-    </div>  
-    <img style="width: 100%; position: relative; top: 0px; left: 0px;" src="<?= get_template_directory_uri();?>/dist/images/macbook.svg"/>
-  </div>
-
-  <div class="col-md-1 col-xl-1 col-xs-0"></div> 
-</div>
 
 <?php endwhile; ?>

@@ -65,10 +65,6 @@
 //custom.js
 
 
-
-
-
-
 $(document).one('ready',function(){
 
 var interrupteurBg2 = false;
@@ -76,73 +72,63 @@ var workOpen = false;
 var aboutCVOpen = false;
 var projectNumber = 1;
 
-
 $('.identity').delay(300).animate({opacity : 1},1500);
 $('.work-title').delay(1200).animate({height : "35px"},1000);
 $('.work-title h5').delay(2000).fadeIn(1000);
 $('.pointer').delay(1000).animate({height : "20%"},1000);
 
-
-
-
 function next() {
-    $('.about-landing').css({"width":"0%"});
-    $('.about-details').css({"width":"100%"});
-    $('.next-about').css({'display' : 'none'});
-    $('.previous-about').css({'display' : 'block'});
-    aboutCVOpen = true;
-    switchBorderAbout(0);
-    switchAboutButton(1);
-  }
+  $('.about-landing').css({"width":"0%"});
+  $('.about-details').css({"width":"100%"});
+  $('.next-about').css({'display' : 'none'});
+  $('.previous-about').css({'display' : 'block'});
+  aboutCVOpen = true;
+  switchBorderAbout(0);
+  switchAboutButton(1);
+}
   
-  function previous() {
-    $('.about-landing').css({"width":"100%"});
-    $('.about-details').css({"width":"0%"});
-    $('.next-about').css({'display' : 'block'});
-    $('.previous-about').css({'display' : 'none'});
-    aboutCVOpen = false;
-    switchAboutButton(1);
-    switchBorderAbout(1); 
-  }
-
+function previous() {
+  $('.about-landing').css({"width":"100%"});
+  $('.about-details').css({"width":"0%"});
+  $('.next-about').css({'display' : 'block'});
+  $('.previous-about').css({'display' : 'none'});
+  aboutCVOpen = false;
+  switchAboutButton(1);
+  switchBorderAbout(1); 
+}
 
 function resetHome(){
-    previous();
-  }
-
+  previous();
+}
 
 function openWork(){ 
-    $('.gradient').animate({height : "5%"},400);
-    $('.work-section').animate({height : "95%"},400);
-    $('.about-title').animate({bottom : "0"},50);
-    $('.about-title').css({'display' : 'block'}, 1000);
-    $('.work-title').css({'display' : 'none'}, 400);
-    $('.identity').animate({top : "-200px"},400);
-    $('.next-about img').css({'display' : 'none'});
+  $('.gradient').animate({height : "5%"},400);
+  $('.work-section').animate({height : "95%"},400);
+  $('.about-title').animate({bottom : "0"},50);
+  $('.about-title').css({'display' : 'block'}, 1000);
+  $('.work-title').css({'display' : 'none'}, 400);
+  $('.identity').animate({top : "-200px"},400);
+  $('.next-about img').css({'display' : 'none'});
    // $('h3.work-title').addClass('open', 5000);
-    resetHome();
-    supprBgWork();
-   
-  }
+  resetHome();
+  supprBgWork(); 
+}
   
-
 function openAbout(){
-
-      $('.gradient').animate({height : "95%"},400);
-      $('.work-section').animate({height : "5%"},400);
-      $('.about-title').animate({bottom : "0"},400);
-      $('.identity').animate({top : "50%"},400);
-      $('.work-title').css({'display': 'block'}, 1000);
-      $('.about-title').css({'display': 'none'}, 400);
-       $('.next-about img').css({'display' : 'block'});
-       $('#work').fadeIn();
-      $('#work-detail').slideUp();
-     // $('h3.work-title').removeClass('open', 5000);
-      aboutCVOpen=true;
-      switchAboutButton(0); 
-      return false;  
-   
-  }
+  $('.gradient').animate({height : "95%"},400);
+  $('.work-section').animate({height : "5%"},0);
+  $('.about-title').animate({bottom : "0"},400);
+  $('.identity').animate({top : "50%"},400);
+  $('.work-title').css({'display': 'block'}, 1000);
+  $('.about-title').css({'display': 'none'}, 400);
+  $('.next-about img').css({'display' : 'block'});
+  $('#work').fadeIn();
+  $('#work-detail').slideUp();
+  // $('h3.work-title').removeClass('open', 5000);
+  aboutCVOpen=true;
+  switchAboutButton(0); 
+  return false;   
+}
 
 
 

@@ -43,7 +43,7 @@
 	margin-top : 50px;
 }
 	
-.social-bar{
+.social-bar {
 	width : 90px;
 	height :20px;
 	position : absolute;
@@ -70,17 +70,12 @@
 	-moz-transition : opacity 0.3s ease-in-out;
 	transition : opacity 0.3s ease-in-out;
 }
-		
-
-	
-	
 	
 .about-section{
 	width :100%;
 	height : 100%;
 	overflow: hidden;
 }
-
 
 .about-landing {
 	width : 100%;
@@ -120,7 +115,7 @@
 	}
 }
 	
-.previous-about:hover{
+.previous-about:hover {
 	opacity : 1;
 	left : -5px;
 	-webkit-transition : all 0.3s ease-in-out;
@@ -128,7 +123,7 @@
 	transition : all 0.3s ease-in-out;
 }
 	
-.next-about{
+.next-about {
 	position : absolute;
 	top: 50%;
 	background-size : auto ;
@@ -145,8 +140,6 @@
 		height: 60px;
 	}
 }
-
-
 	
 .next-about:hover{
 	opacity : 1;
@@ -264,15 +257,17 @@
 	bottom : 0;
 	left: 0;
 	right:0;
+	display: inline-block;
 }	
 
 .work-row {
-		margin-top: 40px;
+	height: 100%;
+	margin-top: 3%;
 }
 
 .work-container {
 	padding: 0;
-	height: 300px;
+	height: 45%;
 	overflow: hidden;
 }
 
@@ -297,11 +292,12 @@
 }
 
 .work-title-divider {
-	width: 45px;
+	width: 50px;
     height: 3px;
     background-color: #fff;
     margin-top: 30px;
     border-bottom: 10px solid $brand-primary;
+    margin-bottom: 20px;
 }
 
 .about-title-divider {
@@ -363,7 +359,7 @@
 #contentarea h2 {
 	margin-top: 30px;
     font-size: 64px;
-    color: #000000;
+    color: $brand-primary;
     font-weight: 700;
 }
 

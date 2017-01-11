@@ -1,10 +1,11 @@
 body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	background: #ffffff;
+	font-color: $brand-primary;
 }
 
-main, .col-xl-12, .col-md-12, .col-xs-12, .row {
+main {
 	margin: 0;
 	padding: 0;
 }
@@ -46,7 +47,6 @@ h5 {
 
 p {
 	line-height: normal;
-    padding: 20px 0 20px 0;
 }
 
 img {
