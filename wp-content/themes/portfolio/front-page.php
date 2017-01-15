@@ -78,7 +78,8 @@
 			<div class="col-md-12 col-xl-12 col-xs-12 work-row" id="work">
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 					<?php if ( has_post_thumbnail() ) : ?>
-					<a href="javascript:ajaxpage('<?php the_permalink(); ?>', 'contentarea');">
+
+					<a ic-post-to="<?php the_permalink(); ?>" ic-push-url="true" ic-indicator="#demo-spinner" ic-target='#contentarea'>
 						<div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 work-container" id="<?php the_title(); ?>">
 							<div class="overlay-title">
 								<h2><?php the_title(); ?></h2>
@@ -103,9 +104,9 @@
 						<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
 					</div>
 				</div>
-				<div class="row" style="margin-left: 0; margin-right: 0;" style="margin-top: 50px;">
-					<div id="contentarea" style="height: auto; width: 100%;"></div>
-				</div>
+					 <i class="ic-indicator" style="display:none"></i>
+					<div id="contentarea" style="width: 100%;"></div>
+				
 			</div> 
 		</div>
 	</div>

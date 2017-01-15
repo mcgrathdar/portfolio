@@ -53,6 +53,24 @@ img {
 	vertical-align: bottom!important;
 }
 
+.work {
+	height: auto;
+}
+
+.work img {
+	display: block; 
+	width: 100%;
+}
+
+.col-height {
+	display: table!important;
+}
+
+.col-height-text {
+		display: table-cell!important;
+		vertical-align: middle!important;
+	}
+
 .work-title {
 	color: #ffffff!important;
 	width: 120px!important;

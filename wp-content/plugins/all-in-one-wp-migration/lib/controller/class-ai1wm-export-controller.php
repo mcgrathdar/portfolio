@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014 ServMask Inc.
+ * Copyright (C) 2014-2016 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,89 +23,103 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
-class Ai1wm_Export_Controller
-{
+class Ai1wm_Export_Controller {
+
 	public static function index() {
-		try {
-			$is_accessible = StorageArea::getInstance()->getRootPath();
-		} catch ( Exception $e ) {
-			$is_accessible = false;
-		}
-
-		// Messages
-		$model    = new Ai1wm_Message;
-		$messages = $model->get_messages();
-
-		Ai1wm_Template::render(
-			'export/index',
-			array(
-				'messages'      => $messages,
-				'is_accessible' => $is_accessible,
-			)
-		);
+		Ai1wm_Template::render( 'export/index' );
 	}
 
-	public static function export() {
-		// Set default handlers
-		set_error_handler( array( 'Ai1wm_Error', 'error_handler' ) );
-		set_exception_handler( array( 'Ai1wm_Error', 'exception_handler' ) );
+	public static function export( $params = array() ) {
+		global $wp_filter;
 
-		// Get options
-		if ( isset( $_POST['options'] ) && ( $options = $_POST['options'] ) ) {
+		// Set error handler
+		@set_error_handler( 'Ai1wm_Handler::error' );
 
-			// Log options
-			Ai1wm_Logger::debug( AI1WM_EXPORT_OPTIONS, $options );
+		// Set params
+		if ( empty( $params ) ) {
+			$params = ai1wm_urldecode( $_REQUEST );
+		}
 
-			// Export site
-			$model = new Ai1wm_Export( $options );
-			$file  = $model->export();
+		// Set priority
+		$priority = 5;
+		if ( isset( $params['priority'] ) ) {
+			$priority = (int) $params['priority'];
+		}
 
-			// Send the file to the user
-			header( 'Content-Description: File Transfer' );
-			header( 'Content-Type: application/octet-stream' );
-			header( 'Content-Disposition: attachment; filename=' . self::filename() );
-			header( 'Content-Transfer-Encoding: binary' );
-			header( 'Expires: 0' );
-			header( 'Cache-Control: must-revalidate' );
-			header( 'Pragma: public' );
-			header( 'Content-Length: ' . $file->getSize() );
+		// Set secret key
+		$secret_key = null;
+		if ( isset( $params['secret_key'] ) ) {
+			$secret_key = $params['secret_key'];
+		}
 
-			// Clear output buffering and read file content
-			while ( @ob_end_clean() );
-
-			// Load file content
-			$handle = fopen( $file->getName(), 'rb' );
-			while ( ! feof( $handle ) ) {
-				echo fread( $handle, 8192 );
-			}
-			fclose( $handle );
-
-			// Flush storage
-			StorageArea::getInstance()->flush();
+		// Verify secret key by using the value in the database, not in cache
+		if ( $secret_key !== get_option( AI1WM_SECRET_KEY ) ) {
+			Ai1wm_Status::error(
+				sprintf( __( 'Unable to authenticate your request with secret_key = "%s"', AI1WM_PLUGIN_NAME ), $secret_key ),
+				__( 'Unable to export', AI1WM_PLUGIN_NAME )
+			);
 			exit;
 		}
+
+		// Get hook
+		if ( isset( $wp_filter['ai1wm_export'] ) && ( $filters = $wp_filter['ai1wm_export'] ) ) {
+			// WordPress 4.7 introduces new class for working with filters/actions called WP_Hook
+			// which adds another level of abstraction and we need to address it.
+			if ( is_object( $filters ) ) {
+				$filters = current( $filters );
+			}
+
+			ksort( $filters );
+
+			// Loop over filters
+			while ( $hooks = current( $filters ) ) {
+				if ( $priority === key( $filters ) ) {
+					foreach ( $hooks as $hook ) {
+						try {
+
+							// Run function hook
+							$params = call_user_func_array( $hook['function'], array( $params ) );
+
+							// Log request
+							Ai1wm_Log::export( $params );
+
+						} catch ( Exception $e ) {
+							Ai1wm_Status::error( $e->getMessage(), __( 'Unable to export', AI1WM_PLUGIN_NAME ) );
+							exit;
+						}
+					}
+
+					// Set completed
+					$completed = true;
+					if ( isset( $params['completed'] ) ) {
+						$completed = (bool) $params['completed'];
+					}
+
+					// Do request
+					if ( $completed === false || ( $next = next( $filters ) ) && ( $params['priority'] = key( $filters ) ) ) {
+						if ( isset( $params['ai1wm_manual_export'] ) ) {
+							echo json_encode( $params );
+							exit;
+						}
+
+						return Ai1wm_Http::get( admin_url( 'admin-ajax.php?action=ai1wm_export' ), $params );
+					}
+				}
+
+				next( $filters );
+			}
+		}
 	}
 
-	public static function filename() {
-		$url  = parse_url( home_url() );
-		$name = array();
-
-		// Add domain
-		if ( isset( $url['host'] ) ) {
-			$name[] = $url['host'];
-		}
-
-		// Add path
-		if ( isset( $url['path'] ) ) {
-			$name[] = $url['path'];
-		}
-
-		// Add year, month and day
-		$name[] = date('Ymd');
-
-		// Add hours, minutes and seconds
-		$name[] = date('His');
-
-		return sprintf( '%s.zip', implode( '-', $name ) );
+	public static function buttons() {
+		return array(
+			apply_filters( 'ai1wm_export_file', Ai1wm_Template::get_content( 'export/button-file' ) ),
+			apply_filters( 'ai1wm_export_ftp', Ai1wm_Template::get_content( 'export/button-ftp' ) ),
+			apply_filters( 'ai1wm_export_dropbox', Ai1wm_Template::get_content( 'export/button-dropbox' ) ),
+			apply_filters( 'ai1wm_export_gdrive', Ai1wm_Template::get_content( 'export/button-gdrive' ) ),
+			apply_filters( 'ai1wm_export_s3', Ai1wm_Template::get_content( 'export/button-s3' ) ),
+			apply_filters( 'ai1wm_export_onedrive', Ai1wm_Template::get_content( 'export/button-onedrive' ) ),
+			apply_filters( 'ai1wm_export_box', Ai1wm_Template::get_content( 'export/button-box' ) ),
+		);
 	}
 }

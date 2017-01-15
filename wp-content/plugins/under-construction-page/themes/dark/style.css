@@ -59,6 +59,13 @@ h1 {
   color: #cc6633;
 }
 
+#linkback {
+  font-size: small;
+  text-align: center;
+  opacity: 0.55;
+  margin: 10px;
+}
+
 @media(max-width:767px){
   h1 {
      font-size: 30px;

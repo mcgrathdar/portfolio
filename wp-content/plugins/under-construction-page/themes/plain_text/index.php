@@ -24,6 +24,7 @@ if (!defined('ABSPATH')) {
     <link rel="stylesheet" href="[theme-url]style.css?v=[version]" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="[theme-url-common]css/font-awesome.min.css?v=[version]" type="text/css">
+    [head]
   </head>
   
   <body>
@@ -54,5 +55,6 @@ if (!defined('ABSPATH')) {
       </div>
       
     </div>
+    [footer]
   </body>
 </html>

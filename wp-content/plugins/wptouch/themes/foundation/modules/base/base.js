@@ -3,8 +3,8 @@
 
 // Try to get out of frames!
 function wptouchFdnEscFrames() {
-	if ( window.top != window.self ) {
-		window.top.location = self.location.href
+	if ( window.top != window.self && window.top.location.pathname.indexOf( 'customize.php' ) == '-1' ) {
+		window.top.location = self.location.href;
 	}
 }
 
@@ -92,7 +92,7 @@ function wptouchFdnUpdateOrientation() {
 }
 
 function wptouchFdnDoDeviceAndOrientationListener() {
-	jQuery( window ).resize( function() {
+	jQuery( window ).on( 'resize', function() {
 		wptouchFdnUpdateDevice();
 		wptouchFdnUpdateOrientation();
 	}).resize();
@@ -101,7 +101,7 @@ function wptouchFdnDoDeviceAndOrientationListener() {
 // Back to top links in themes
 function wptouchFdnSetupBackToTopLinks() {
 	jQuery( 'body' ).on( 'click', '.back-to-top', function( e ){
-	    jQuery( 'body' ).animate( { scrollTop: jQuery( 'html' ).offset().top }, 550 );
+	    jQuery( 'body, html' ).animate( { scrollTop: jQuery( 'body' ).offset().top }, 550 );
 		e.preventDefault();
 	});
 }
@@ -124,22 +124,16 @@ function wptouchFdnSetupShowHideToggles() {
 			}
 
 			jQuery( this ).toggleClass( 'toggle-open' );
-			jQuery( '#' + targetId ).attr( 'data-source-click', linkId ).webkitSlideToggle();
+
+			if ( !jQuery(e.target).hasClass('menu-btn') || !jQuery( '.pushit' ).hasClass( 'slideout-menu' ) ) {
+				jQuery( '#' + targetId ).attr( 'data-source-click', linkId ).webkitSlideToggle();
+			}
 
 			e.preventDefault();
+			if ( !jQuery(e.target).hasClass('menu-btn') || !jQuery( '.pushit' ).hasClass( 'slideout-menu' ) || jQuery( this ).attr( 'id' ) != 'menu-toggle' ) {
+				e.stopImmediatePropagation();
+			}
 		});
-	});
-}
-
-function wptouchFdnCheckHideAddressBar() {
-	if ( jQuery( 'body' ).hasClass( 'hide-address-bar' ) ) {
-		window.scrollTo( 0,1 );
-	}
-}
-
-function wptouchFdnPreviewReload() {
-	jQuery( '#preview-bar' ).find( '.refresher' ).on( 'click', function() {
-		setTimeout( window.location.reload.bind( window.location ), 0 );
 	});
 }
 
@@ -176,7 +170,7 @@ function wptouchFdnSetupjQuery() {
 	    return this;
 	}
 
-	// Set the form element tabindex automagically
+	// Set form elements tabindex automagically
 	jQuery( function() {
 		var tabindex = 1;
 		jQuery( 'input, select, textarea' ).each( function() {
@@ -209,8 +203,6 @@ function wptouchFdnBaseReady() {
 	wptouchFdnDoDeviceAndOrientationListener();
 	wptouchFdnSetupBackToTopLinks();
 	wptouchFdnSetupShowHideToggles();
-	wptouchFdnCheckHideAddressBar();
-	wptouchFdnPreviewReload();
 	wptouchFdnSwitchToggle();
 	wptouchFdnHandleShortcode();
 	wptouchFdnSetupjQuery();

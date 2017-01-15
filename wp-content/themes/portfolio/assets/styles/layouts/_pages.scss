@@ -265,6 +265,10 @@
 	margin-top: 3%;
 }
 
+a {
+	cursor: pointer;
+}
+
 .work-container {
 	padding: 0;
 	height: 45%;
@@ -356,11 +360,19 @@
 }
 
 
-#contentarea h2 {
-	margin-top: 30px;
-    font-size: 64px;
-    color: $brand-primary;
-    font-weight: 700;
+#contentarea {
+	h2 {
+		margin-top: 30px;
+	    font-size: 64px;
+	    color: $brand-primary;
+	    font-weight: 700;
+	}
+
+	h4 {
+		text-align: left;
+    	font-weight: 600;
+    	font-size: 21px;
+	}
 }
 
 
@@ -409,7 +421,6 @@
 		left :0px;
 		margin-top : -17px;
 	}
-	
 }
 
 

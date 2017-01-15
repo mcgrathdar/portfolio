@@ -33,12 +33,22 @@ ol,ul {
 	padding: 0;
 }
 
+
+
 :focus {
 	outline: 0;
 }
 
 ins,a {
 	text-decoration: none;
+}
+
+.wptouch-clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
 }
 
 .clearfix:after {
@@ -63,7 +73,7 @@ iframe {
 
 sup {
 	vertical-align: super;
-	font-size: 50%;
+	font-size: 75%;
 	font-variant: small-caps;
 }
 
@@ -83,10 +93,15 @@ hr {
 	margin: 1% 8%;
 }
 
-blockquote {
+.post li.sow-carousel-item {
+	margin: 0;
+}
+
+blockquote, q {
 	margin-left: 5%;
 	margin-right: 5%;
 	font-style: italic;
+	display: block;
 }
 
 .aligncenter,
@@ -121,13 +136,6 @@ blockquote {
 	direction: rtl;
 }
 
-code, pre {
-	overflow: scroll;
-	padding: 5px;
-	font-family: monospace;
-	background-color: rgba(0,0,0,.1);
-}
-
 #content input {
 	font-size: 100% !important;
 }
@@ -155,6 +163,39 @@ img.wp-smiley {
 
 .post table img, .page table img {
 	margin: 0;
+}
+
+code, kbd, pre, tt {
+	border: 1px solid #ffd478;
+	word-wrap: break-word;
+	background-color: #f2fdc7;
+	padding: 5px;
+}
+
+var {
+	color: red;
+}
+
+pre {
+}
+
+ins {
+	vertical-align: super;
+}
+
+table {
+	text-align: left;
+}
+
+table thead th {
+	border-bottom: 1px solid #ccc;
+}
+
+table tbody tr {
+}
+
+table td:first-of-type {
+	padding: 10px;
 }
 
 /* @group WP Gallery & Captions */
@@ -378,7 +419,7 @@ to {
 
 /* @group Load More, Infinite */
 
-.load-more-link, .infinite-link, .load-more-comments-wrap, .load-more-post-link, .load-more-page-link {
+.load-more-link, .infinite-link, .load-more-comments-wrap, .load-more-post-link, .load-more-page-link, .load-more-custom-link {
 	display: block;
 	width: 100%;
 	text-align: center;
@@ -398,23 +439,23 @@ to {
 
 /* @group Advertising */
 
-.wptouch-ad {
+.wptouch-showcase {
 	text-align: center;
 	min-height: 50px;
 	margin: 0 auto;
 	padding: 0;
 }
 
-.wptouch-ad.ad-location-header {
+.wptouch-showcase.showcase-location-header {
 	padding-top: 5px;
 }
 
-.post .wptouch-ad {
+.post .wptouch-showcase {
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
 
-.wptouch-custom-ad {
+.wptouch-custom-showcase {
 	margin: 5px;
 	text-align: center;
 	display: block;
@@ -422,7 +463,7 @@ to {
 	height: auto;
 }
 
-.wptouch-custom-ad a, .wptouch-custom-ad img, .wptouch-custom-ad iframe * {
+.wptouch-custom-showcase a, .wptouch-custom-showcase img, .wptouch-custom-showcase iframe * {
 	max-width: 100%;
 	height: auto;
 }
@@ -460,6 +501,7 @@ to {
 .nav-controls a.next-post {
 	padding-top: 8px;
 	padding-bottom: 8px;
+    word-wrap: break-word;
 }
 
 .nav-controls a.prev-post:before {
@@ -478,19 +520,24 @@ to {
 
 /* @group Swipe */
 
-.swipe {
+#slider {
 	overflow: hidden;
-	border-bottom: 1px solid rgba(255,255,255,.2);
+	position: relative;
+	border-bottom: 0;
 }
 
-.swipe * {
+#slider * {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-touch-callout: none;
 }
 
-.swipe img {
+#slider .owl-item {
+	height: 220px;
+	overflow: hidden;
+}
+
+#slider img {
 	width: 114%;
-	-webkit-box-reflect: below 1px -webkit-gradient(linear, center top, center bottom, from(rgba(0,0,0,.2)), to(rgba(0,0,0,.3)));
 	margin-left: -7%;
 }
 
@@ -509,13 +556,12 @@ to {
 	height: 274px;
 }
 
-.swipe p {
-	background-color: rgba(0,0,0,0.5);
+#slider p {
+	background-color: rgba(0,0,0,0.6);
 	text-align: center;
 	font-size: 100%;
-	text-shadow: #000000 0 -1px 0;
 	margin: 0;
-	padding: 8px 5%;
+	padding: 12px 5%;
 	line-height: 100%;
 	color: #fff;
 	position: absolute;
@@ -525,15 +571,11 @@ to {
 	left: 0;
 }
 
-.rtl .swipe p {
-	direction: rtl;
-}
-
 p.featured-date, #slider .comments-number {
 	display: none;
 }
 
-.dark-body .swipe {
+.dark-body #slider {
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	-webkit-box-shadow: rgba(255,255,255,.05) 0px 1px 0px;
 	box-shadow: rgba(255,255,255,.05) 0px 1px 0px;
@@ -553,7 +595,15 @@ ul.dots {
 	margin-bottom: -30px;
 }
 
-ul.dots li {
+.owl-dots {
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+}
+
+ul.dots li,
+.owl-dot {
 	width: 6px;
 	height: 6px;
 	border-radius: 4px;
@@ -565,7 +615,9 @@ ul.dots li {
 	display: inline-block;
 }
 
-ul.dots li.active {
+ul.dots li.active,
+.owl-dot.active {
+	background-color: rgba( 255, 255, 255, .75);
 	-webkit-box-shadow: inset rgba(255,255,255,.05) 0px 1px 0px, rgba(255,255,255,.05) 0px 1px 0px;
 	box-shadow: inset rgba(255,255,255,.05) 0px 1px 0px, rgba(255,255,255,.05) 0px 1px 0px;
 }
@@ -584,7 +636,6 @@ ul.dots li.active {
 	width: 25%;
 	max-width: 25%;
 	display: block;
-	text-shadow: rgba(255,255,255,.8) 0 1px 0;
 	font-weight: bold;
 	font-size: 90%;
 	background-color: rgba(0,0,0,.05);
@@ -726,7 +777,7 @@ ul.dots li.active {
 
 .sharing-options.style-vibrant a {
 	text-shadow: rgba(0,0,0,.4) 0 -1px 0;
-	color: #fff;
+	color: #fff !important;
 }
 
 .sharing-options.style-vibrant .facebook-btn {
@@ -780,6 +831,7 @@ body.web-app-mode #switch {
 	content: "\e83b";
 	display: block;
 	font-size: 400%;
+	line-height: 150%;
 }
 
 .not-found-text {
@@ -914,6 +966,10 @@ p.nocomments {
 	margin-bottom: 25px;
 }
 
+.comment .comment-body img {
+    max-width: 100%;
+}
+
 /* @group Commentform */
 
 form#commentform label {
@@ -922,6 +978,11 @@ form#commentform label {
 
 form#commentform input[type="text"], form#commentform input[type="email"], form#commentform input[type="url"] {
 	width: 60%;
+}
+
+form#commentform.comment-form input[type="text"], form#commentform.comment-form input[type="email"], form#commentform.comment-form input[type="url"] {
+	width: 100%;
+	box-sizing: border-box;
 }
 
 form#commentform input:focus, form#commentform textarea:focus {
@@ -949,6 +1010,11 @@ form#commentform textarea {
 	margin: 0;
 	width: 95%;
 	-webkit-transition-duration: .5s;
+}
+
+form#commentform.comment-form textarea {
+	width: 100%;
+	box-sizing: border-box;
 }
 
 form#commentform textarea:focus {
@@ -1055,6 +1121,30 @@ form#commentform button#submit {
 	font-style: normal;
 	padding-right: 5px;
 }
+
+/* @end */
+
+/* @group Related Posts
+ */
+
+.related li {
+	min-height: 60px;
+}
+
+.related-posts ul li.no-excerpt {
+	height: 54px;
+	line-height: 54px; /* <-- this is what you must define */
+	vertical-align: middle;
+
+}
+
+.related-posts ul li.no-excerpt a {
+	width: 80%;
+	display: inline-block;
+	line-height: 120%;
+}
+
+
 
 /* @end */
 
@@ -1363,7 +1453,7 @@ span.wpcf7-form-control-wrap {
 	bottom: 30px;
 	left: 30px;
 	transition: background-color .5s linear;
-	z-index: 1;
+	z-index: 100;
 }
 
 .smartphone.web-app-mode .back-button.visible {

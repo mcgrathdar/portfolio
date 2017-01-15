@@ -1,1140 +1,240 @@
 === Plugin Name ===
-Contributors: bravenewcode, duanestorey, dalemugford, mkuplens
-Tags: wptouch, iphone, ipod, bravenewcode, mobile, android, blackberry, smartphone, responsive, design, mobile plugin, ios, mobile theme
-Requires at least: 3.8
-Stable tag: 3.7.3
-Tested up to: 4.1
+Contributors: kbmcardle, bravenewcode, duanestorey, dalemugford, adamdipardo,
+Tags: wptouch, iphone, ipod, bravenewcode, mobile, mobile-friendly, android, blackberry, smartphone, responsive, design, mobile plugin, ios, mobile theme
+Requires at least: 4.2
+Stable tag: 4.3.10
+Tested up to: 4.7
 License: GPLv2
 
-Create a slick mobile WordPress website with just a few clicks.
+Make your WordPress website mobile-friendly with just a few clicks.
 
 == Description ==
 
-WPtouch is a mobile plugin for WordPress that automatically enables a simple and elegant mobile theme for mobile visitors of your WordPress website.
+WPtouch is a mobile plugin for WordPress that automatically adds a simple and elegant mobile theme for mobile visitors to your WordPress website. Recommended by Google, it will instantly enable a mobile-friendly version of your website that passes the Google Mobile test, and ensure your SEO rankings do not drop due to not having a mobile-friendly website. For more information about using WPtouch to achieve Google mobile-friendly status, please read our [comprehensive mobile-friendly guide](http://bit.ly/bnc_mobilefriendly).
 
-The administration panel allows you to customize many aspects of its appearance, and deliver a *fast*, user-friendly and stylish version of your site to your mobile visitors, without modifying *a single bit of code* (or affecting) your regular desktop theme.
+The WPtouch administration panel and WordPress Customizer allow you to customize many aspects of its appearance, and deliver a *fast*, user-friendly and stylish version of your site to your mobile visitors, without modifying *a single bit of code*.  Your regular desktop theme is left intact, and will continue to show for your non-mobile visitors.
 
-The theme also includes the ability for visitors to switch between the theme on your mobile WordPress website and your website's regular theme.
+**Go Pro for support and more control, enhanced themes & features**
 
-**Now Available: WPtouch Pro + BraveNewCloud**
+WPtouch Pro offers a variety of enhanced themes for blogs, businesses, and WooCommerce retailers; extensions that add rich advertising options, advanced web font controls, caching, and more; and of course, top-notch one-on-one support from our professional team.
 
-With six themes and three new extensions installed & updated right from our new BraveNewCloud service, it's the best WPtouch yet!
+For more information visit [WPtouch.com](http://www.wptouch.com/?utm_campaign=wptouch-front-readme&utm_medium=web&utm_source=wordpressdotorg "WPtouch.com").
 
-For more information visit [WPtouch.com](http://www.wptouch.com/?utm_campaign=wptouch-front-readme&utm_medium=web&utm_source=wordpressdotorg "WPtouch.com").  You may also be interested in [Response](http://wpresponse.com/), a new BraveNewCode service that seamlessly integrates with WPtouch.
-
-'WPtouch' & ’WPtouch Pro' are trademarks of BraveNewCode Inc.
+'WPtouch' & 'WPtouch Pro' are trademarks of BraveNewCode Inc.
 
 == Screenshots ==
 
-1. Post listings
-2. Post listings (different options & colours)
-3. Single post w/ featured image
-4. Single post w/ featured image (different options & colours)
-5. Footer area on a single post w/ comments
-6. Page w/ featured image
-7. Drop-down menu showing a custom WordPress menu and child page tree navigation
-8. WPtouch admin - What’s New
-9. WPtouch admin - Core Settings
-10. WPtouch admin - Theme Branding Settings
-11. WPtouch admin - Menu Setup
+1. Glamour shot!
+2. Triple view of post/page view, main and comments area. Colours, fonts and more can be customized easily.
+3. Admin general settings
+4. Admin devices settings
+5. Menu settings
+6. Theme settings
 
 == Changelog ==
 
-= Version 3.7.3 (March 5, 2015) =
-
-* Changed: Further refinement of icon sets, ensuring compatibility with Simple Social Icons plugin and other sources of icon fonts.
-* Fixed: Reply link was being displayed beside comments with nested comments enabled, even when comments were closed.
-
-= Version 3.7 (February 25, 2015) =
-
-* Added: Overhauled support for shortcodes provided by desktop themes. WPtouch Pro can now optionally load content from WordPress with shortcodes processed. (Pro Only)
-* Fixed: Bug in URL-based filtering
-* Fixed: Possible hidden redirect exploit on mobile/desktop switcher
-
-= Version 3.6.6 (January 29, 2015) =
-
-* Added: The ability for themes and extensions to disable Web-App Mode. (Pro Only)
-* Added: If you set a custom excerpt for your posts, WPtouch will use it when it displays related posts. (Pro Only)
-* Changed: More localization updates (German, Greek, Hindi, and Indonesian)
-* Changed: More robust category listing
-* Changed: We moved support to the Freshdesk platform. All links have been updated to point to our new ticket & knowledgebase and the new My Account page. (Pro Only)
-* Changed: Web-App Mode is not compatible with off-site payment gateways. MobileStore no longer allows Web-App Mode to be used when no compatible gateways are found. (Pro Only)
-* Changed: MobileStore now allows selecting a custom latest posts page. (Pro Only)
-* Fixed: Bug in MobileStore where it was not possible to completely disable product filters once any had been selected. (Pro Only)
-* Fixed: Layout bug in menu on sites with sequential nested menu items.
+= Version 4.3.10 (December 22, 2016) =
 
-= Version 3.6.5 (January 8, 2015) =
+* Fixed: Bug that sometimes prevented the customizer from showing the mobile theme
 
-* Added: Better support for Nextgen Gallery for sites using the Responsive Images extension. (Pro Only)
-* Changed: Updated localizations – Arabic, Chinese (Simplified & Traditional), Danish, Dutch, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Russian, Swedish, Thai, Turkish, Vietnamese
-* Changed: Change spaces in uploaded logo & startup image filenames to dashes to prevent display issues
-* Changed: Removed festive icons
-* Fixed: Spelling of devanagari in Advanced Type (Pro Only)
+= Version 4.3.9 (December 12, 2016) =
 
-= Version 3.6.3 (December 18, 2014) =
+* Fixed: Error message that appeared when running the latest version of Wordfence
 
-* Tested for compatibility with WordPress 4.1
-* Added: WPtouch Pro now auto-updates installed themes and extensions, ensuring your site is always completely up-to-date. Changes made to the theme will be saved (WPtouch Pro will create a new child theme with your changes) and custom themes are left unchanged. (Pro Only)
+= Version 4.3.8 (December 8, 2016) =
 
-= Version 3.6.2 (December 11, 2014) =
+* Fixed: Minor bugs and issues reported by customers and users
+* Added: Compatibility with WordPress 4.7
 
-* Added: Upgrade your WPtouch Pro license from inside the plugin with instant upgrade activation if your site is web-accessible. (Pro Only)
-* Added: A little festive spirit!
-* Changed: Slimmed down plugin by moving screenshots out of the package.
-* Fixed: Typo in our URL - oops!
-* Fixed: Updated icon font with new icon & a new name to avoid conflicts with another plugin
+= Version 4.3.7 (November 23, 2016) =
 
+* Changed: Now using the standard WordPress comment form, for better compatibility with plugins that use or modify comments.
+* Fixed: Minor bugs and issues reported by customers and users
 
-= Version 3.6.1 (November 20, 2014) =
+= Version 4.3.6 (November 10, 2016) =
 
-* Added: Automatically disable WPtouch when activating WPtouch Pro
-* Added: Highlight available theme & extension updates (Pro Only)
-* Added: Better support for Shortcodes Ultimate
-* Added: Back-to-top links, and multilingual improvements in MobileStore (Pro Only)
-* Added: Minimum character count for mid-content ads in MultiAds (Pro Only)
-* Changed: Improved Custom Latest Posts Page pagination handling
-* Changed: Switch from WP_CONTENT_URL to content_url()
-* Fixed: PHP error on WPEngine when debug mode was enabled (Pro Only)
-* Fixed: Eliminated some warnings and notices
-* Fixed: Arrow directions for next/previous posts in RTL mode
-* Fixed: Custom Latest Posts page now uses WPtouch posts-per-page setting
+* Fixed: Featured slider now won't show if no posts have a featured image
+* Fixed: Minor bugs and issues reported by customers and users
 
+= Version 4.3.5 (October 27, 2016) =
 
-= Version 3.6 (November 6, 2014) =
+* Fixed: Warnings that appeared for sites running PHP 7
+* Fixed: Minor bugs and issues reported by customers and users
 
-* Added: New extension: Advanced Type (Pro Only)
-* Added: Ability to ignore tags when identifying related content
-* Added: Ability to have WPtouch work on specific URLs/pages only
-* Added: Ability to have the featured slider show the latest posts from a specific post type
-* Added: Prose theme now allows site owners to disable use of featured images as header background on single posts (Pro Only)
-* Added: Yelp option for footer social links
-* Changed: Improved appearance of Web App Notice Message on the WordPress login page (Pro Only)
-* Changed: When viewing a WordPress media gallery item, the item's post parent is linked
-* Changed: Share links adjust order and icon placement when the site is in an RTL language
-* Changed: Updated add to home scripts to latest version (3.0.8)
-* Fixed: WPtouch Pro can now disable certain Jetpack components that duplicate WPtouch functionality (Related Posts, Sharing Buttons, Like Box)
+= Version 4.3.4 (October 13, 2016) =
 
+* Added: Support for adding the featured post slider to a page
+* Fixed: Missing translations for number of comments in the blog listing
 
-= Version 3.5.3 (October 10th, 2014) =
+= Version 4.3.3 (October 3, 2016) =
 
-* Added: Startup Screen support for iPhone 6 and 6+ (Pro only)
-* Fixed: Removed php warnings
-* Fixed: Minor issues with our new MobileStore theme for WooCommerce (Pro only)
-* Added: New theme MobileStore (eCommerce theme for WooCommerce!) (Pro only)
-* Added: Option to turn off menu output on the Open homepage (Pro only)
-* Added: Open theme now supports custom post type content (Pro only)
-* Added: Optional comment support to Prose (Pro only)
-* Changed: Homescreen icon now recommends 180x180 (best size for iPhone 6, 6+, backwards compatible)
-* Changed: Better home-template.php support in themes
-* Changed: Updated FastClick module to 1.0.3 (fixes form issues)
-* Changed: Theme browser now shows theme demos instead of screenshots for WebKit-based browsers (Safari, Chrome)
-* Changed: Cache timing tweaked to allow filtering of cache behaviour in Infinity Cache (Pro only)
-* Changed: If enabled in WPtouch, comment block is shown on pages only when they either accept comments and/or have comments to display
-* Changed: Better SSL support w/ protocol-independent font and jQuery loading + image embeds
-* Fixed: An issue where Check All/None for menu items would affect all theme menus
-* Fixed: Better off-canvas menu support in Prose, Bauhaus and MobileStore
-* Fixed: Prevent Web App Mode from getting stuck in a logout loop (Pro only)
-* Fixed: Theme preview images causing SSL notices when viewing admin over HTTPS
-* Fixed: Prevent mobile switch link from appearing in Web App Mode when pages are loading from cache (Pro only)
-* Fixed: Bookmark icon not being used when bookmarking on iPad (Pro only)
+* Fixed: An issue in the admin panel which made it appear that other plugins were disabled while WPtouch is running. No plugins are disabled by default when WPtouch is active.
 
-= Version 3.4.11 (September 24th, 2014) =
+= Version 4.3.2 (September 28, 2016) =
 
-* Changed: Backup file information, excluded license information and obfuscated filenames
+* Fixed: Better compatibility with W3TC and PHP 5.2
 
-= Version 3.4.10 (September 23rd, 2014) =
+= Version 4.3.1 (September 27, 2016) =
 
-* Fixed: Potential security issue with URLs in comment forms
+* Fixed: Issue in Bauhaus theme related to old versions of PHP
 
-= Version 3.4.9 (September 5th, 2014) =
+= Version 4.3 (September 26, 2016) =
 
-* Fixed: Some customers reported ongoing issues with MIME-type detection for uploaded images.
-* Updated: Compatibility with WordPress 4.0
+* Added: Bauhaus 2. Updated Featured slider, may require you to set up your preferred settings again
+* Fixed: Minor issues and a settings bug which could cause settings to appear unsaved in the Customizer
 
-= Version 3.4.8 (August 28th, 2014) =
+= Version 4.2.6 (September 16, 2016) =
 
-* Fixed: Issue with uploading image files on servers that don’t advertise MIME type
-* Updated: Compatibility with WordPress 4.0
+* Modified: Newsletter sign-up information
 
-= Version 3.4.7 (August 27th, 2014)
+= Version 4.2.5 (September 2, 2016) =
 
-* Changed: Only images (png, jpg, gif, svg) will be accepted for home screens and icons.
-* Fixed: Issue with internal version upgrade notification
+* Fixed: An issue which causes the switch link setting to be hidden
+* Fixed: An issue which prevented category filtering from working correctly
 
-= Version 3.4.6 (August 26th, 2014) =
+= Version 4.2.4 (August 25, 2016) =
 
-* Fixed: Featured slider showing selected pages
-* Fixed: Display of comment count at top of posts in Bauhaus after comments have closed
-* Fixed: Shortcodes are now processed properly in the Multi-ads extension advertising code (Pro only)
-* Fixed: RTL issues with related posts
-* Changed: Now allow mid-content advertisements in Multi-ads (Pro only)* Fixed: Display of comment count at top of posts in Bauhaus after comments have closed
+* Added: New display option for Bauhaus featured slider
+* Fixed: Minor plugin compatibility improvements
 
-= Version 3.4.5 (August 7th, 2014) =
+= Version 4.2.3 (August 8, 2016) =
 
-* Fixed: Comments remain visible after commenting has been closed for a given post/page
+* Fixed: Made notices banner only show for administrators
+* Updated: Enhanced the ability to upgrade free version
 
-* Fixed: Custom Post Type module sometimes showed an error when searches were performed
-* Fixed: Featured Slider now shows posts from custom post types enabled for mobile display
-* Fixed: An issue which could cause the switch link to not store a cookie remembering the user's choice
-* Fixed: Bauhaus with off-canvas and fly-in login form issue
-* Changed: Improved off-canvas menu in Bauhaus
-* Changed: Reduced Custom Post Type module memory consumption
-* Note: Security issue found by Securi was already fixed in the previous release (3.4.3)
+= Version 4.2.1 (August 5, 2016) =
 
-= Version 3.4.3 (July 12th, 2014) =
+* Fixed: An issue which could prevent the Customizer from switching between desktop and mobile
 
-* Added: Bauhaus - off-canvas menu
-* Fixed: An issue with homescreen icons on Android
-* Fixed: Bauhaus: search and custom post types
-* Fixed: Minor admin issues
-* Fixed: Security issue with file uploads and authenticated users (found by Sucuri, Inc.)
-* Fixed: Custom post type support for customers whose web servers strip array indices from form fields
-* Updated: Custom post type content is included in category/taxonomy/tag archive listings
-* Updated: Fastclick js library to 1.0.2
-* Changed: Menu Setup in admin now refers to menus by name instead of location for consistency
+= Version 4.2 (August 3, 2016) =
 
-= Version 3.4.2 (June 27th, 2014) =
+* Added: NEW! Change theme settings in the WordPress Customizer!
+* Fixed: Minor bugs and issues
 
-* Fixed: Issue with date/time in Bauhaus
+= Version 4.1.8 (July 19, 2016) =
 
-= Version 3.4 (June 26th, 2014) =
+* Updated: Spanish translations
+* Fixed: Search behaviour in some languages
 
-* Added: New theme: Prose (Pro Only)
-* Added: New extension: Multi-Ads - multiple ad units per page view for Small Business+ customers (Pro Only)
-* Fixed: An issue with load more links in Web-App Mode with persistence enabled (Pro Only)
-* Fixed: CMS - an issue with blog listings on Firefox Mobile  (Pro Only)
-* Fixed: An issue with date formats and non-English languages
-* Fixed: An issue where an unwritable logfile would cause errors with debug enabled
-* Changed: Updated all language files
+= Version 4.1.7 (July 5, 2016) =
 
-= Version 3.3.4 (June 5th, 2014) =
+* Fixed: Display issues with RTL menus and some themes
 
-* Fixed: An issue which caused mobile themes to be shown inside Twitter app on iPads
-* Fixed: Improved Android Firefox browser and older browsers and OS versions support
+= Version 4.1.6 (June 30, 2016) =
 
-= Version 3.3.3 (May 30th, 2014) =
+* Updated: Autosave in admin panel is now a little more robust and optimized.
+* Changed: Replaced library used for off-canvas menu in some themes (now using Slideout)
 
-* Fixed: Issue with custom post type array_flip warning message
+= Version 4.1.5 (June 17, 2016) =
 
-= Version 3.3.2 (May 29th, 2014) =
+* Added: Option to choose which page the featured slider is shown on (Bauhaus, certain configurations)
+* Added: For sites that redirect mobile visitors to a landing page other than their latest posts page, added option to select on which page the featured slider is shown.
+* Changed: Auto-expand menu section if on a page within that section
+* Changed: Reduced frequency of API calls in admin
+* Changed: Cache warning is no longer displayed for sites running W3 Total Cache if a user agent group has been enabled to pass through mobile requests. As it is incompatible with this cache configuration, the desktop/mobile theme switch is disabled for sites using this cache configuration.
+* Changed: Custom field-based thumbnails are now displayed in post listings, related posts, featured slider, and at top of posts.
+* Changed: Featured slider no longer shows zero comment count
+* Fixed: Incorrect XML sitemap output when Featured Slider was enabled
+* Updated: Italian, Portuguese, Spanish translations
 
-* Fixed: The ability to switch languages in the free version of WPtouch
-* Added: Style support for Contact Form 7 forms in posts and pages
-* Fixed: Titles sometimes included HTML entities in shared Twitter content
-* Fixed: Links to posts and comments in Web-App Mode not working correctly
-* Changed: When enabled, related posts are now displayed before the next/previous links
-* Changed: Custom post types for display are now saved differently, allowing for more reliable settings behaviour and display
+= Version 4.1.4 (May 26, 2016) =
 
-= Version 3.3.1 (May 19th, 2014) =
+* Added: Support for new setting types in admin
+* Added: Improved RTL support for featured slider
+* Changed: Only display icon selection tool on items already saved to the menu (WordPress limitation)
+* Changed: Replaced library used for featured slider (now using Owl Carousel)
+* Changed: No icon selection shown for pending items (cannot select icons until item saved in menu)
+* Fixed: Icon selector not fully overlaying other menu items when they've been expanded
+* Fixed: Warnings when featured slider finds no content to display
+* Fixed: Menu fields showing through icon picker
+* Fixed: Display of long (non-breaking) titles in next/previous links
+* Fixed: 'Save settings' spinner triggered when non-saving actions were taken
 
-* Fixed: Increased theme/add-on caching time
-* Updated: Compatibility with WordPress 3.9.1
+= Version 4.1.3 (May 6, 2016) =
 
-= Version 3.3 (May 15th, 2014) =
+* Fixed: Auto-upgrade from WPtouch to WPtouch Pro when license is activated
+* Updated: Hebrew translation (partial)
 
-* Fixed: Issue where page icons configured for WPtouch no longer showed in WPtouch Pro when WPtouch was removed
-* Fixed: Menu items for custom taxonomy terms now link to the correct term archive URL
-* Fixed: Issue where single-file plugins could not be disabled the Compatibility screen
-* Fixed: Issue where WooRank wouldn’t properly detect WPtouch
-* Fixed: Issue where links extension info did not correctly target the extension in the browser
-* Fixed: Issue where some JavaScript was loaded over HTTP when the page was loaded via HTTPS
-* Changed: Use jQuery 2.x setting now includes jQuery 2.1.1 (latest)
-* Changed: Related Posts first finds posts with at least two matching tags; if not enough are found, finds posts with at least one matching category
+= Version 4.1.2 (May 3, 2016) =
 
-= Version 3.2.4 (April 23nd, 2014) =
+* Fixed: Auto-disable free plugin when WPtouch Pro is active
+* Fixed: Ensure correct theme is active when downgrading from WPtouch Pro
+* Fixed: Pinterest sharing link
+* Fixed: Search forms now allow searching while in preview mode
+* Updated: Translations for Arabic, French, Indonesian, Japanese, Portuguese
 
-* Added: Support for Windows Phone 8.1
-* Updated: product links from bravenewcode.com to wptouch.com
+= Version 4.1.1 (April 12, 2016) =
 
-= Version 3.2.3 (April 20nd, 2014) =
+* Added: Compatibility with WordPress 4.5
+* Added: Setting to control which side the Bauhaus menu is shown on
+* Changed: Adjusted colour conversion for Luma-based colouring, ensuring true value is used
+* Changed: Re-added 'show login' setting for sites that require users to be registered to comment.
+* Fixed: Bug with custom latest posts page when not set to the same as WordPress homepage
+* Fixed: Search forms now allow searching while in preview mode
+* Fixed: Eliminated PHP warnings
+* Fixed: Display of featured slider settings when slider is first enabled
 
-* Intentionally skipped
+= Version 4.1 (March 24, 2016) =
 
-= Version 3.2.2 (April 9th, 2014) =
+* Added: New filters to support AMP extension in WPtouch Pro
+* Changed: Streamlined wizard experience
+* Fixed: Case where featured posts would always be repeated in listing if featured slider was set to show only 1 post
+* Fixed: Error when page was not found
 
-* Fixed: Only show WPML switcher when WPML is installed and active
-* Changed: Featured content slider now uses slugs for category/tag filtering
+= Version 4.0.4 (February 29, 2016) =
 
-= Version 3.2.1 (March 19th, 2014) =
+* Added: Featured slider settings to control display of # of comments
+* Added: Featured slider option for more minimal slider appearance
+* Changed: Added styling for some rarer html elements, and updated others (ol, code, pre etc.)
+* Changed: Minor styling enhancements and fixes
+* Updated: Opera users agents to better specify supported opera versions and platforms
+* Fixed: Load more posts on custom posts page did not load posts in certain configurations
+* Fixed: Retain WPML language parameter when redirecting to mobile landing page
+* Fixed: Minor styling issues
+* Fixed: Toggle fields not saving on some server configurations
 
-* Added: Ability to enable/disable WPML language switcher in theme
-* Added: WPML support in all themes
-* Fixed: Problem with WPtouch Pro update notification not showing
-* Fixed: Link to network plugins page for updating WPtouch Pro on multisite
-* Changed: Spanish translation renamed to es_ES.mo/po - please verify selection in admin menu
-* Updated: Translations
+= Version 4.0.3 (January 19, 2016) =
 
-= Version 3.1.8 (Feb 28th, 2013) =
+* Changed: Restored homepage redirect setting - thanks for your feedback!
+* Fixed: Menu icon selection when using relative-protocol media URLs
+* Fixed: Black field on blog index when featured slider is disabled.
 
-* Changed: Added caching to API requests to minimize external HTTP queries
-* Added: Firefox OS mobile support
-* Added: Instagram to footer social links
-* Fixed: An issue with WPTOUCH_CACHE_COOKIE that could cause issues on servers with high load
-* Fixed: An issue with the WPtouch custom die handler
-* Fixed: Issue with Simple Sitemap Plugin and the number of posts per page
-* Fixed: Featured Slider now respects post/page ID order, better RTL behaviour
-* Fixed: Rare issue with slashes appearing in the site title
-* Fixed: Various RTL issues
+= Version 4.0.2 (December 29, 2015) =
 
-= Version 3.1.5 (Dec 21st, 2013) =
+* Added: On upgrade, migrate sites using the old "WordPress Pages" menu option to a custom WordPress menu
+* Fixed: Custom Latest Posts Page handling
 
-* Fixed: Style issues in Bauhaus (1.0.7)
-* Fixed: WordPress smileys alignments
-* Fixed: Excluded entries from categories still appearing in posts navigation
-* Fixed: Added meta charset html tag for better compatibility with non-english sites
+= Version 4.0.1 (December 22, 2015) =
 
-= Version 3.1.4 (Dec 17th, 2013) =
+* Added: Reset settings buttons
+* Added: Restored preview theme capability
 
-* Fixed: Issues running WPtouch correctly on Windows servers
-* Fixed: Memory issues on sites with huge taxonomies
-* Fixed: An issue which could cause Sharing Links not to display
-* Changed: More admin styling improvements for WordPress 3.8
-* Changed: Optimizations and file cleanup
+= Version 4.0 (December 22, 2015) =
 
-= Version 3.1.3 (Dec 13th, 2013) =
+* A whole new WPtouch that makes getting your WordPress website mobile-friendly easier than ever before
+* Added: Settings panel has been re-written and simplified into a single page, now much faster
+* Added: Settings auto-save— no need to click a settings save button (how 2013 of us)
+* Added: Settings types are easier to control, with toggles and elegant drop-downs to switch settings
+* Added: Added new options and controls (like controlling the devices WPtouch is active for)
+* Changed: Removed visible but inactive Pro settings
+* Changed: Simplified a few settings, you'll probably be mad at us but we really want this plugin to be easy to use for everyone!
+* Changed: Now using the WP color picker
+* Changed: Updated core plugin assets and optimized theme & admin speed
 
-* Added: Support for WordPress 3.8
-* Added: Support for all 8 WordPress 3.8 color schemes!
-* Changed: Featured gallery images and thumbnails now fallback to WordPress sizes if WPtouch's versions haven't been created yet (big speed boost!)
-* Changed: Featured image placeholder no longer shows a pencil icon; instead it shows the post date
-* Fixed: An issue which could cause the featured slider to be show even though it was disabled
-* Fixed: An issue which could cause problems related to formerror.php
-* Fixed: Removed call to erroneous get_error() function in Cloud migration routines
-* Fixed: Small file operations issues
 
-= Version 3.1.1 (Dec 6th, 2013) =
+= WordPress 4.0+ =
 
-* Updated: Everything ;)
-* Changed: Everything ;)
-* Fixed: Everything ;)
-
-= Version 1.9.8.9 =
-
-* Fix for Adsense settings issue
-
-= Version 1.9.8.8 =
-
-* Verified WordPress 3.7 compatibility
-
-= Version 1.9.8.7 =
-
-* Fixed: Issues with logging in / out on sites not in root
-* Updated: Information in read me about the new user manual
-* Updated: Links to user manual
-
-= Version 1.9.8.6 =
-
-* Added: The ability to share usage statistics to help improve the product
-
-= Version 1.9.8.5 =
-
-* Updated: Footer text
-
-= Version 1.9.8.4 =
-
-* Fixed: Issue with the settings page in the admin panel
-
-= Version 1.9.8.2 =
-
-* Fixed: Issue with WordPress multisite
-
-= Version 1.9.8.1 =
-
-* Fixed: Potential security issues
-* Added: Downloadable User's Guide in admin panel
-
-= Version 1.9.8 =
-
-* Updated: Modified Adsense code to use asynchronous version as well as slot ID - you must create a new 320x50px ad via your adsense account
-* Updated: Updated product tooltips codde
-* Updated: Administration text and README descriptions
-* Fixed: Admin bugs
-
-= Version 1.9.7.1 =
-
-* Added: Brazilian Português translation (thanks!)
-
-= Version 1.9.7 =
-
-* Fixed: Issue with comment posting
-* Fixed: Issue with Twitter sharing
-
-= Version 1.9.6.3 =
-
-* Changed: Added new notification for WPtouch Pro 3 in the admin
-* Changed: Removed affiliate program link (discontinued)
-* Changed: Updated read me text
-
-= Version 1.9.6.2 =
-
-* Changed: Made email menu item disabled by default
-
-= Version 1.9.6.1 =
-
-* Added BlackBerry 10 device support
-* Changed: Verified support for WordPress 3.5
-* Changed: Updated admin layout and fixed admin styling issues
-
-= Version 1.9.6 =
-
-* Added: Catalan translation
-* Fixed: Missing images in /images folder
-* Fixed: Issue with Sociable hooks
-* Note: Still working on issues with stock Android JellyBean browser
-
-= Version 1.9.5.3 =
-
-* Fixed: Enhanced security for Multisite installations
-
-= Version 1.9.5.2 =
-
-* Added: Ability to select german language
-* Changed: 'Powered by WPtouch' in footer is now off by default
-
-= Version 1.9.5.1 =
-
-* Fixed: Issue with menu sorting by ID
-* Fixed: Broken link for iPhone/iPad icon generator
-
-= Version 1.9.5 =
-
-* Updated: Compatibility with WordPress 3.4.1
-* Updated: Admin css with new prefixes for better cross-browser support, other improvements
-* Updated: Switch link redirect now redirects to current url even if a WPtouch homepage redirect is set
-* Updated: Added HP TouchPad and Nexus 7 to the excluded tablets list (also includes Xoom and Galaxy Tab)
-* Updated: Added a variety of new Blackberry OS7 devices agents (Bold, Touch and Curve)
-* Changed: Cleaned up and removed unused/old assets
-* Fixed: Depreciated references to options (replaced with home_url() and site_url())
-* Fixed: issue with search field
-* Fixed: Issue where the new switch link caused white box
-* Fixed: PHP warnings regarding detection of https, depreciated calls
-
-= Version 1.9.42 =
-
-* Added: 8 new background options, updated default background
-* Updated: Twitter and Facebook share logos
-* Updated: Changed drop menu arrow to text button
-* Updated: Enhanced usability of search
-* Updated: Changed mobile switch link to CSS only
-* Updated: Prefixes for Opera, Mozilla browsers
-* Updated: General styling updates
-
-= Version 1.9.41 =
-
-* Added: Italian language translation (thanks Roberto Gallerani)
-* Added: Turkish language translation
-
-= Version 1.9.40 =
-
-* Removed: AppStores support - please visit the AppStores website for the Javascript code to use if you'd like to continue using it
-* Changed: Updated fitvids() video script
-
-= Version 1.9.39 =
-
-* Fixed: Admin styling issues on some WordPress versions
-* Changed: File and image optimizations
-
-= Version 1.9.38 =
-
-* Added: Advertising integration with Appstores
-* Changed: Updated video code for better handling of videos
-
-= Version 1.9.37 =
-
-* Added: More CSS prefixes for Mozilla/Opera browsers
-* Added: Social Share plugin hiding
-* Changed: Layout of advertising section
-* Changed: Removed fixed header option for iOS5— it's half-baked and not fully working correctly yet
-* Fixed: Issue with ordered lists
-* Fixed: Issue with Login/My Account tab always showing in some situations
-
-= Version 1.9.35 =
-
-* Added: fitVids() for much better video handling
-* Added: Option to use fixed header for iOS 5 devices
-* Changed: Minor CSS fixes and improvements
-* Fixed: Nonce/re-direct behaviour for switch link
-
-= Version 1.9.34 =
-
-* Changed: Default settings
-
-= Version 1.9.33 =
-
-* Added: Ability to add WPtouch info in Twenty Ten & Eleven themes
-* Changed: Minor layout adjustment in admin panel
-
-= Version 1.9.32 =
-
-* Updated: Added nonces and extra security check for icon deletion (thanks Julio POTIER from BLOG.boiteaweb.fr)
-
-= Version 1.9.31 =
-
-* Added: Option to allow zooming on content
-* Updated: WordPress 3.2 compatibility changes
-* Updated: Re-compressed PNGs for performance and speed
-* Updated: Minimum WordPress version is now 3.0
-* Fixed: Issues with $wpt variable in js
-
-= Version 1.9.30 =
-
-* Fixed: Added nonces to redirect code
-
-= Version 1.9.29 =
-
-* IMPORTANT: Due to a WordPress.org issue, please update
-
-= Version 1.9.28 =
-
-* Fixed: Javascript issue with excerpts and load more entries
-
-= Version 1.9.27 =
-
-* Fixed: time_since() function naming conflict
-* Fixed: Fixed bug with reset settings
-* Fixed: Depreciated user level reference removed
-* Fixed: Page icons missing when page sort order is 'By Page ID'
-
-= Version 1.9.26 =
-
-* Added: 'Googlebot-Mobile' for mobile indexing
-* Added: lang attribute to head tag
-* Added Dougal's fix for XMLRPC / App requests via WordPress for iOS
-* Changed: Updated Japanese translation (thanks to Yamaguchi Kenji)
-* Changed: Optimized categories/tags listings queries
-* Fixed: Switch link edge case issue
-
-= Version 1.9.25 =
-
-* Added: Exclusion of Motorola Xoom and Galaxy Tab tablet devices
-* Changed: Cleaned up both category and tag exclusion logic, removed unneeded functions
-
-= Version 1.9.24 =
-
-* FIxed: Re-wrote category and tag exclusion code
-* Fixed: repaired code causing php warning items found in debug
-* Updated: wptouch.pot language file
-* Updated: French translation
-
-= Version 1.9.23 =
-
-* Fixed: IMPORTANT security issue with AJAX icon upload
-* Fixed: Issue with excluded categories not working
-* Added: Ability to exclude tags by ID from blog (experimental)
-* Added: Now filter the excluded categories and tags from the header listings
-* Changed: Now removing the admin bar when logged in and looking at WPtouch (will still show for regular theme)
-* Translators: please re-submit translations with updated strings (excluded tags area)
-
-= Version 1.9.22.1 =
-
-* Fixed additional switch link issue found after 1.9.22 (now handles www.domain.com and domain.com, along with http:// and https://)
-
-= Version 1.9.22 =
-
-* Added Basque translation courtesy of Ander Erguin
-* Added Japanese translation courtesy of Kenji Yamaguchi
-* Experimental LiveFyre commenting support
-* Added additional CSS to remove unneeded 3rd party plugin boxes on single posts
-* More tweaks for failing switch link in some scenarios
-* Changed: More robust category exclusion
-* Fix for images and emoticons in comments
-* Fix for share on Twitter Link
-* Added share on Facebook Link
-* Updates for admin panel
-
-= Version 1.9.21.1 =
-
-* Fixed: Bug with footer switch link (ampersand issue)
-* Fixed: Bug with footer switch link (cookie issue)
-* Fixed: Bug with login on some devices
-
-= Version 1.9.21 =
-
-* Added: touchstart JavaScript for supported devices (speeds up interface responsiveness)
-* Changed: More style adjustments in a few places, better Android compatibility
-* Fixed: An issue which could output site urls on single posts
-* Using CSS-generated comment bubbles for supported devices for crispness and clarity
-* Fixed: Incorrect detection of BlackBerry Torch
-* Fixed: An issue that prevented login from the header
-
-= Version 1.9.20 =
-
-* Added: Option to disable comments on posts completely in WPtouch
-* Fixed: Issues with WordTwit and GigPress drop-downs
-* FIxed: An issue with French text appearing in non-french installs
-* Fixed: An issue with whitespace in admin files
-* Fixed: Auto-capitalization of drop-menu items (should help localization efforts)
-* Updated: Screenshots
-
-= Version 1.9.19.5 =
-
-* Added: IMPORTANT: Security nonce and additional security check (thanks to Julio from http://Boiteaweb.fr for testing)
-* Changed: Improved header forms in theme
-* Changed: Minor styling improvements in theme
-* Changed: Fixed return on input in admin not saving
-* Changed: Other admin improvements
-
-= Version 1.9.19.4 =
-
-* More fixes for siteurl, url, home etc. for depreciation
-
-= Version 1.9.19.3 =
-
-* Fixed: Bug with YouTube & Vimeo videos
-* Fixed: Bug with posting comments on some installations
-
-= Version 1.9.19.2 =
-
-* Fixed: Changed references of 'siteurl' and 'home' to url, siteurl & home are depreciated in bloginfo()
-* Fixed: Other minor code warnings
-* Changed: Enhanced comment-bubbles on posts for iPhone/iPod using CSS.
-* Other improved styling
-
-= Version 1.9.19.1 =
-
-* Fixed: Localization changes and updates, including missing translatable text
-* Added: French localization
-* Added: Ability to change languages
-* Added: Filter for Follow Me plugin
-* Removed: Code which could cause a redeclare error if Super Cache is installed
-* Changed: Enqueue for admin js files
-
-= Version 1.9.19 =
-
-* Added: Compat for Share and Follow plugin
-* Added: Missing localization code, .pot file for translations (submit yours to translation@wptouch.com)
-* Fixed: Cleaned up unused code, empty strings
-* Changed: Optimized some assets
-
-= Versions 1.9.15 - 1.9.18 =
-
-* Added Samsung s8000, Bada device user agents (Dolphin Browser)
-* Added Blackberry Storm V2 user agents
-* Added Blackberry Torch user agent
-* Added Sticky post icon in post listings
-* Filtering Facebook Like plugin
-* Filtering Sharebar plugin
-* Fix for new Vimeo html5 embed code
-* Fix for sticky post icon when calendar icons and thumbnails are off
-* Fixed bug where footer message input would not clear in admin
-* Fixed viewport meta tag issue, fixes browser crashes on some devices
-* Fixed viewport switch issue, where regular theme was zoomed too far out/in on switch
-* Changed the_title() to the_title_attribute() for e-mailing posts
-* More image optimizations and file size reductions
-
-= Version 1.9.14 =
-
-* Added ability to customize the footer copyright message
-* Added credit to Marcelo Marfil for his icons
-* Added official WordPress 3.0 compatibility
-* Fixed issue with account tab logic
-* Fixed issue with account tab login
-* Fixed issue with comments on pages only showing 1 comment or not allowing replies
-* Fixed issue with comments on private posts/pages
-* Fixed compatibility with Banner Cycler plugin
-* Replaced depreciated link_pages with wp_link_pages function in single.php
-* Updated admin WPtouch Pro image/link
-* Updated compatibility section
-* Updated copy, minor edits in a few places
-
-= Version 1.9.13 =
-
-* Removed application Twitter links on single post page, replaced with post to m.twitter.com
-* Added filter for whydowork plugin ads (to prefer native Adsense in WPtouch)
-* Attempted new fix for YouTube overtop menu bug, it's a mobile browser issue (can't fix)
-* Minor styling fixes and adjustments
-
-= Version 1.9.12 =
-
-* Fixes login to admin through mobile device bug
-* Fixes issue where mobile theme may be shown to desktop users (non-cache related)
-* Fixes issue where YouTube videos are on top of menus, other content
-* Removed unused files
-
-= Version 1.9.11 =
-
-* Added automatic input focus to header Search for usability
-* Added option for truncated post titles on main, search and archive views
-* Fixed an issue with multi-page post links line height appearance
-* Fixed an issue where WPtouch would force all post thumbnails to be 50x50px (now respects user settings)
-* Fixed an issue where categories with 0 posts might be shown in the header
-* Now filtering Sociable from WPtouch automatically
-
-= Version 1.9.10 =
-
-* Updated styling for post listings, titles now use ellipses
-* Updated list item styling in posts
-* Updated block quote styling in posts
-* Changed default Gravatar image
-* Minor tweaks to calendar icon appearance
-* Removed a reference to an image that was missing and unused
-* Added new notice area in admin
-* Changed Saved Settings/Reset Settings overlay
-* Tweaked and fixed a couple issues with icon uploads
-* Replaced references to depreciated PHP functions
-* Added new notice for 2.0 in admin
-* Added line in core-functions.php for full support of qTranslate
-* Fixed issue with wp-skyscraper plugin
-* Added cache manifest file for speedier browsing on supported servers and devices
-* Added automatic WP Super Cache detection and configuration for the upcoming version of WP Super Cache
-
-= Version 1.9.9.8 =
-
-* Fixes admin panel not working or broken for some users
-* Changed admin panel RSS feeds to use AJAX
-* Added function_exists and object checks to admin RSS
-* Changed Tweet RSS Feed to Support Forum Topics
-* Fixed minor page menu CSS issue
-* Included 40% reduction in PNG sizes thanks to BNCID user 13xforever
-
-= Version 1.9.9.7 =
-
-* Fixed more GigPress CSS issues
-* Added option to choose flat bookmark icon
-
-= Version 1.9.9.6 =
-
-* Fix case where missing CURL would stop admin settings from loading
-* Minor Ajax upload fix
-* Minor spelling fixes
-
-= Version 1.9.9.5 =
-
-* Made changes to the way ajax uploads are handled
-* Updated and fixed JS error in ajax_upload.js file
-* Fixed more GigPress CSS issues
-* Removed replace class javascript for page & post images and caption areas (still needs work)
-* Only loading the ajax_comments.js on the single post pages now
-
-= Version 1.9.9.4 =
-
-* Updated and edited admin verbiage
-* Added remove action for Google Libraries plugin (for compatibility)
-* Added remove action for GigPress CSS
-* Fixed broken GigPress drop down, added new styling
-* Changed javascript handlers
-* Misc tweaks and fixes
-
-= Version 1.9.9.3 =
-
-* Theme CSS fixes and revisions
-* Updated outdated links in the admin panel
-* Updated outdated text in the admin panel
-* Re-validated admin XHTML with W3C
-* Fixed User Agent strings which caused browsers to show WPtouch
-
-
-= Version 1.9.9.2 =
-
-* Updated user agents for Opera Mini and Palm Pre ('mini' and 'pre')
-* Removed orphaned code relating to ajax comments option
-* Changed date/time parsing for WordTwit integration
-* Update to WordTwit 2.3.3 if you see incorrect date/times
-
-= Version 1.9.9.1 =
-
-* Bug fix for array warning issue on some installations
-
-= Version 1.9.9 =
-
-* Added HTML5 types for comment url and email (devices capable now show unique keyboard layouts for these inputs)
-* Added and refined jQuery code, effects
-* Revised post/page image sizing auto-detection features
-* Changed the way Ajax comments work - will now work for everyone
-* Changed code for JS - return false;
-* Changed admin panel to stop using Ajax that would sometimes fail to load
-* Removed comments-ajax.php from theme (not needed anymore)
-* Removed ajax comments option from the admin  (not needed anymore)
-* Removed obsolete code orphans from old code methods
-* Bug fixes
-
-= Version 1.9.8.3 =
-
-* Fixes an issue where post thumbnail selection would not be shown in the admin
-* Adds auto-detection for post and page images and captions (will now center align if above 150px)
-* Resolves an issue where save/reset settings would cause permissions error or fail
-* Resolves case where the upload path would not be found for custom-icons
-* Compatibility with WP 2.9.2
-
-= Version 1.9.8.2 =
-
-* Fixed broken thumbnail reflections on Android and other browsers. Now reflections only show for iPhone/iPod
-* Fixed issue where Tags & Categories links in the header may not show on some devices
-
-= Version 1.9.8.1 =
-
-* Added friendly display when there are no Twitter tweets available via WordTwit
-
-= Version 1.9.8 =
-
-* Fixed an undefined function error when commenting
-* Fixed case where post-thumbnails wouldn't work
-* Stopped GigPress CSS from loading in the header when it's not enabled
-* Fixed error where Icon Upload would fail in admin
-* Updated Ajax Upload script to v3.9
-
-= Version 1.9.7.7 =
-
-* Attempted fix for broken post thumbs reflections on Android. Now reflections only show for iPhone/iPod
-
-= Version 1.9.7.6 =
-
-* Minor administration changes
-* Updated readme to describe WordPress MU installation
-* Fixed an issue where thumbnails wouldn't show
-* Added support for thumbnails using James Lao's 'Simple Post Thumbnails' plugin
-* Changed functions.php check from version (2.9) to whether function exists (WP Security Scan bypass)
-* Added missing code to the theme's functions file for Post thumbs
-* Resolves an issue where blank spaces would appear, not Post Thumbs
-* Fix for broken switch links (missing images) on some installations when in regular theme view
-* Added detect for custom field key 'Thumbnail' to work first before using WP 2.9 Thumbs, for those who've been using this method already
-* Added Post Thumbnails View option (WordPress 2.9 only) for main post listings
-* Added option to show neither post thumbnails nor calendar icons
-* Added style option to choose the font of H2 elements on post listings, single entries and pages
-* Various style & code improvements and fixes
-
-= Version 1.9.6 =
-
-* Fixed php logic in adsense-new.php (thx JeanPaulH)
-* Added support for GigPress' Upcoming Shows to be a drop down in the header menu
-* Changed relative comments logic, added function for GMT detection
-* Adding padding, size to multipage links
-* Removed WP version from footer (security vulnerability)
-* Changed admin RSS feed from Support Topics to Twitter Topics
-* Updated admin settings image
-* Fixed cutoff tweets from WordTwit in the drop-down
-* Verified WP 2.9 compatibility
-
-= Version 1.9.5 =
-
-* Added Twitter updates menu item support for WordTwit's new features
-* Added CSS for TweetThis and AddThis plugins to be hidden
-* Added page/post title to HEAD for Tweet purposes
-* Added user agent detection for non-apple mobile devices to be served Twitter link correctly
-* Added 180-degree animation to post-arrow dropper and removed excess JS and code
-* Added new tab pane for the header (menu, tags, categories, account)
-* Added more theme compatibility for other touch devices
-* Added 'edit, delete, spam' links for admins on comments
-* Changed default OBJECT and EMBED css to only apply to .post, not site-wide
-* Changed comment ajax routine
-* Changed 'Links' appearance adding support for link categories, removed favicon scripts
-* Changed the way the header links are setup
-* Small refinements in the theme CSS all-around
-* Made progress towards reply and pagination in comments, not there yet
-
-
-= Versions 1.9.4.x =
-
-* Fixed space appearing below title on single post pages
-* Added compressed js for the admin
-* Updated Fancybox script & files to v1.2.5
-* Updated Ajax Upload script to v3.6
-* Fix for re-direct issues introduced with 1.9.3.4
-* Fixes and changes for Adsense appearance
-* Fix for direct messages not working with WPtouch exclusive mode
-* Added spam check for Push direct messages via a nonce
-* Added verification for Prowl API key
-* Added ability to define custom user agents in the admin (go nuts!)
-* Minor admin styling changes
-* Dropped official support for WP 2.6 (sorry folks, you should update!)
-* Dropped 'skins' references, they'll be a part of WPtouch 2.0
-* Compressed style.css in theme for faster load times
-* Removed unused files
-
-= Versions 1.9.3.x =
-
-* Fixed issues with adsense ads
-* Fixed time since code bug on comments
-* Fixed issue where comment count could read as 0 when there were no comments
-* Fix for width bug in some situations when switching themes
-* Fix for scenarios where a different uploads folder path or name is used
-* Minor admin refinements
-* Porting CSS styles to a global sheet applicable to all our plugins
-* Push messages now come from your blogname not 'wptouch'
-* Switch link now re-directs to the page the switch request came from, not back to home
-* Changed downloads admin area to support topics rss feed
-* Added additional icons in the admin
-* Fixed international languages display of time since on comments
-* Fixed logic with PUSH notification via Prowl
-* Removed unneeded files
-* Bug fixes
-* Style fixes for the display of comments
-* Fixed issue where regular theme view would not allow pinching for zoom
-* Fixed JS bug in theme
-* Possible fix for time since on comments not working in some situations
-* Added option to disable Ajax comments for those who can't get them working
-
-= Versions 1.9.2.x =
-
-* Fixed issue where mobile switch to regular theme was always zoomed in and required refresh
-* Fixed issue where pages changed from published to unpublished still showed in the WPtouch menu
-* Fixed issue where 'Load More Entries' caused blank page or other issues. WPtouch now detect possible issues and defaults to pagination
-* WPtouch now loads minified versions of its CSS and JS for the theme, speeding up load times
-* Added check for wp-load.php before attempting ajax comments. Should fix WP comment posting issues. Working on better Disqus and Intense Debate support as well
-* Removed 'Find in this page' button, until bugs are resolved
-* Now WPtouch will not hide mobileSafari addressbar on single post pages on slower connections
-* Fixed bug where WPtouch admin would report that CURL wasn't installed even if it was
-
-= Version 1.9.1 =
-
-* Fixed bug for admin panel Ajax not working in some situations
-* Adsense re-enabled
-* Fixed bug where SPAM comments were pushed via Prowl
-* Push Notification options now announces if Curl is not available, instead of not appearing at all
-* Removed text-size adjust option, now replaced with user-adjustable font sizes
-* Minor code corrections
-
-= Version 1.9 =
-
-* Fully compatible with WordPress 2.6 - 2.8.x
-* Major rewrites of theme files, css for simplicity, CoreTheme
-* Adsense has been temporarily disabled until we update code for new Google API changes
-* Added experimental support for Opera Mini & Palm Pre mobile browsers
-* Added filter trackbacks and pingbacks from display in comment counts
-* Added friendly 'noscript' display bezel for users with javascript Turned off
-* Added support for Prowl Push notifications for comments, user registrations, and direct messages (if Curl exists on the server)
-* Added ability to exclude categories
-* Added native select for Tags
-* Added theme switch confirm message, saves a cookie to not repeat
-* Added jQuery color picker in admin hex areas for easy selections
-* Added link to online icon generator in admin
-* Added style declaration for images in comments
-* Added 'My Account' button in the sub//header for logged in users replacing Logout
-* Added theme skin selection support, still no other skins enabled yet
-* Added post-options bar on single post page
-* Added new background selections
-* Updated plugin compatibility listing now loads from bravenewcode.com
-* Updated style for comments, working on full support for WP 2.7 comments, Intense Debate
-* Updated success message for ajax comments
-* Updated font zoom replaced by font-size adjust button
-* Updated ajax upload script to v3.1
-* Updated fancybox to compressed v1.2.1
-* Updated Ajax Upload script to 3.2
-* Updated compatibility code (Various WordPress install scenarios) ~ thanks to Will Norris for the suggestions
-* Updated a check if comments are open before showing the comments link
-* Updated local jquery in exclusive mode to use WP, not Google
-* Updated admin style and design
-* Updated search now floats overtop the headerbar
-* Updated the_content_rss() for excerpts, created a custom function which handles it nicely
-* Updated several images in the core images folder, building more dependency on CoreTheme
-* Removed support for WordPress 2.3, lowest known WordPress version supported: 2.6
-* Removed 404 image with English text in it, replaced it with localized 404 text
-* Removed depreciated or unused functions from previous releases
-* Removed ability to disable jQuery; WPtouch Exclusive mode should fix JS issues
-* Fixed home link in menu drop down now respects the logo/bookmark icon choice
-* Fixed WP Spam Free users having had new comments blocked
-* Fixed WPtouch appearing zoomed out and wide
-* Fixed custom page icons not showing up on pages
-* Fixed some domains not showing the beta download/news areas
-* Fixed style issue for icons on pages
-* Fixed the way javascript is called for a elements, should work better in other mobile browsers
-* Fixed switch link issue where regular theme switch link was broken
-* Fixed issue where chosen pages and icons did not appear in the drop down
-* Fixed a variety of scenarios where paths to files and images were broken
-* Fixed a few areas that had text not yet localized, improperly coded
-* More preparation for languages support
-* Preparation for WPtouch 2.0 and themes support (based on CoreTheme)
-* Other minor optimizations, fixes, changes
-
-
-= Version 1.8.9.1 =
-
-* Fixed refresh issue (some pages keep re-loading)
-* Fixed mkdir issue on PHP4 installations
-* Set viewport to fixed width for device to prevent some sites from loading wide
-* Minor revisions to new CSS calendar icon styling
-* Added exclusive mode feature to help in situations where other plugins are incompatible, load too many scripts/css files and both break and slow down WPtouch
-* Added Fancybox for some feature descriptions in the admin
-
-
-= Versions 1.8.x =
-
-* Changed calendar icons from images to CSS-based only (they look sexay!)
-* Refined styling of header logo, text shadow, general appearance
-* Removed unneeded declarations from the WPtouch stylesheet
-* Tested and works efficiently with WordPress MU when installed site-wide (Finally!)
-* Disqus commenting plugins out-of-the-box styling enhancements
-* Changed post nav on the single post page to prev/next post, instead of entry titles for length's sake
-* Fixed bug related to RSS feeds being broken in some situations
-* Fixed fatal error on line 153 undefined 'is_front_page' function for WP 2.3.x users
-* Fixed jQuery failing to load for WP 2.3.x users
-* Added option for font-zoom on rotate for accessibility, on by default
-* Fixed various styling bugs
-* Changed switch link in WPtouch to remain fixed width
-* Fixed various content overflow issues in WPtouch theme files
-* As a note for WordPress 2.3 users, WPtouch 1.9 will require WordPress 2.5+
-* Fixed new switch link to work under different WordPress install scenarios
-* Fixed switch link CSS style-sheet loading issues in some situations
-* Fixed missing mime types for icon upload through IE7
-* Fixed issues related to automatic favicon generation on a Links page
-* Changed footer switch links to mimic iPhone settings app appearance
-* Fixed misc scenarios for ajax-upload errors
-* Fixed path issues related to custom icons (sites on windows servers)
-* Fixed issues related to ajax comments not working in some situations
-* Added check for 'Allow Comments' on pages
-* Fixed Apache error (reported in logs)
-* Fixed admin styling issues on IE7, Firefox
-* Fixed issue with custom icons and the header logo
-* Fixed issue with the Classic background not appearing
-* Significant rewrite of core code for increased efficiency
-* Changed database calls to use wpdb object, will hopefully work with wpmu
-* Internationalization preparation of the admin and theme files (for WPtouch 1.9)
-* Added ability to add/delete custom icons that survive WPtouch & WordPress upgrades
-* Added ability to select left/full text justification, 3 font sizes
-* Changed how WPtouch admin panel shows icons, more room for custom icons
-* Added channel capability for Adsense
-* Now suppresses banners created by the Ribbon Manger Plugin
-* Minor tweaks to login, register, admin links, footer appearance
-* Minor tweaks to drop down menus, header styling
-* More refinements for search, categories & tag pages, 'load more' link
-* Text & code refinements in the WPtouch admin
-* Experimental support for the Blackberry Storm
-* Fixed issue with WPtouch header title display issue
-* Fixed issue related to login/logout/admin/register link path issues
-* Fixed issue where Bookmarks link when Advanced JS is turned off
-* Fixed issue with default icon case
-* Fixed issue with switch code on systems with PHP4
-* Fixed issue related to fresh installs
-* Fixed issue with Android and the sub-header menu links not working
-
-
-= Versions 1.7.x =
-
-* Added option to do GZIP compression
-* Suppressed warning about multiple gzhandlers
-* Fixed user agent detection code
-* Added ability to choose if WPtouch or regular version of your site is shown first
-* Fixed WP login/out button bugs
-* Added login/out auto-detect for WP 2.7 or pre-WP 2.7 sites
-* Fixed loading path issue that caused drop-down menu button to fail
-* Added choice between alphabetical or page order sorting of the drop down menu
-* Added clock icon
-* Fixes for categories drop-down menu (now shows post #'s)
-* Minor fix for categories drop-down menu
-* Automatic detection & support for Peter's anti-spam plugin
-* Built-in support for Adsense in posts
-* Moved Stats tracking box beside Advertising Options
-* Better WordPress version support detection
-* More refined image auto-sizing with WP added images & galleries in posts / pages
-* Fix for WordPress shortcodes appearing in excerpts
-* Changed how WPtouch shows switch links
-* Auto-adjusting width/height for MobileSafari plugin objects (YouTube, Quicktime)
-
-
-= Versions 1.6.x =
-
-* Auto-resizing images in posts/pages on orientation change!
-* Auto-resizing WP image galleries
-* Better support for captions on images, gallery items
-* Added the ability to enable a quick login button w/ drop-down in the WPtouch header
-* Added the ability to enable categories as a drop-down item in the WPtouch header
-* Added the ability to disable WPtouch automatic homepage redirection (resolves white page issue)
-* Added the ability to manually select a re-direct landing page
-* Refinements in WPtouch admin
-* Enhanced support for WordPress 2.7 admin
-* Re-designed post comment bubble icon
-* Input box to inject custom code (Google Analytics, MINT, etc) into WPtouch
-* Basic support for Incognito & WebMate browsers on iPhone & iPod touch
-* Other code fixes, cleanups & optimizations
-* Other theme style cleanups and enhancements
-
-
-= Versions 1.5.x =
-
-* Added support for WordPress image galleries
-* Added support for single post page split navigation
-* Fixed admin footer links which did not locate WordPress install correctly
-* Added basic Google Android support
-* Changes in WPtouch admin appearance and styling
-* Added donate message in WPtouch admin
-* WPtouch now supports WordPress 2.3 or higher
-
-
-= Versions 1.4.x =
-
-* More jQuery tune-ups, now loads through wp_enqueue_script() or Google to prevent collisions
-* Changed $J to $wptouch to prevent collisions using jQuery
-* Offloaded jQuery loading from our folder to Google instead for WP > 2.5 sites
-* Fixed a bug in wptouch.php on line 232, fixing drop-down menu display issue
-* Fixed a bug where blank admin options were allowed instead of refused
-* Fixed a bug with overriding the site title in the WPtouch admin
-* Fixed some instances where ajax comments would not work
-* Fixed a bug where the loading of javascript files would load in your site's default theme
-* Enhanced drop-down menu appearance
-* More compatibility with other plugins
-* Code cleanups and optimizations
-
-
-= Versions 1.3.x =
-
-* Tweaks for the jQuery bugs
-* No conflict setting added for jQuery
-* Support for DISQUS 2.0.2-x Plugin
-* Minor style edits and enhancements for the search dropdown
-* Another fix for drop-down Menu not working
-* Added ability to change the header border background color
-* Fix for slashes appearing before apostrophes in the header title
-* Admin wording changes, styling changes
-* Minor style enhancements to the theme
-* Fix for Menu not working on some installations
-* Style enhancements for the menu, search, drop downs
-* Style enhancements for comments, logged in users
-* Font adjustments for titles
-* Style changes for single post page heading, for better clarity
-* Admin wording changes
-
-
-= Versions 1.2.x =
-
-* Fix for the theme appearing in Safari browsers
-* Switch from Prototype to the more WordPress-native jQuery for javascript (much faster!)
-* Fix for wrong re-directs happening unintentionally if you use a static home page
-* Elimination of unneeded images, javascript (shaving more than 100KB!)
-* More template file cleanups, image & code optimizations
-* The addition of more comments in code templates to help you make custom modifications
-* Option to enable comments on pages
-* Option to manually enter in a new blog title (fixes cases where the blog title runs the length of the header and wraps)
-* Option to hide/show excerpts by default on the home, search, and archive pages
-* Switch code links are automatically injected into your regular theme's footer now, and is only seen on the iPhone/ipod touch
-* In all, despite the addition of new features we've cut load times for WPtouch in half with this release over 1.2.x releases!
-* The ability to disable Gravatars in comments (more control over optimization & speed)
-* Redundant, unused template file cleanups (archive.php, search.php & page.php are now all just index.php)
-* More style enhancements and tweaks, fixes
-* Switched to Snoopy from CURL for the admin news section (thanks to Joost de Valk (yoast.com)
-
-= Version 1.1 =
-
-* The ability to disable advanced javascript effects (fixes effects not working for some, speeds up the load time considerably)
-* Proper styling of embedded YouTube videos on mobileSafari in iPhone 2.0
-* Fix for the switch code not working on some blog installations
-* Redundant, unused code cleanups
-* More style enhancements and tweaks, fixes
-* the ability to enable/disable the default home, rss and email menu items
-* support for WordPress installations that have static home pages
-* dynamic WPtouch news in the administration panel
-* the ability to modify the default hyperlink color
-* major CSS & PHP cleaning, resulting in reduced size and faster load times
-* the ability to enable/disable tags, categories and author names on the index, search and author pages
-* support for DISQUS commenting
-* CSS refinements for comments, the drop-down menu, and overall appearance
-* styling for YouTube embedded videos
-* bug fixes for blogs installed in directories other than root
-
-
-= Version 1.0 =
-
-* Initial release
-
-== Installation ==
-
-= WordPress 3.5+ =
-You can install *WPtouch* directly from the WordPress admin! Visit the *Plugins - > Add New* page and search for 'WPtouch'. Click to install.
+You can install *WPtouch* directly from the WordPress admin. Visit the *Plugins - > Add New* page and search for 'WPtouch'. Click to install.
 
 Once you have installed and activated WPtouch, visit the admin page via the sidebar menu to customize your WPtouch installation's appearance.
 
+= Caching Plugin Configuration =
+
+Please note that if you are using a caching plugin like W3 Total Cache or WP Super Cache, you will have to do additional configuration, otherwise you may occasionally see the mobile site in a desktop browser and the desktop site in a mobile browser. These changes are outlined in the user manual which is accessible in the WPtouch admin.
+
 = User Manual =
 
-You can download the user manual from within the WPtouch administration panel.  It contains information on how to configure WPtouch.
+You can download the user manual from within the WPtouch administration panel, or [download the WPtouch manual here](). It contains information on how to configure WPtouch.  Please note that if you are using a caching plugin, you will need to perform additional steps for WPtouch to work as expected.
 
 For more information visit [WPtouch.com](http://www.wptouch.com/?utm_campaign=wptouch-front-readme&utm_medium=web&utm_source=wordpressdotorg "WPtouch.com").
 
@@ -1150,7 +250,7 @@ We created *WPtouch* to be a lightweight, fast-loading, feature-rich mobile plug
 
 = Well, what if my users don't like it and want to see my regular site? =
 
-There's a theme switch in the footer area of *WPtouch* for your visitors to easily switch between the *WPtouch* view and your site's regular appearance.
+There's a link to switch back to the desktop theme in the footer area of *WPtouch* so your visitors can easily switch between the *WPtouch* view and your site's regular appearance.
 
 We even automatically put a little snippet of code into your current desktop theme which will be shown only to iPhone, iPod touch, Android or BlackBerry touch mobile device visitors, giving them control to switch between the two themes easily.
 
@@ -1160,8 +260,76 @@ No. The entire *WPtouch* footprint is small. In fact, it should reduce load, bec
 
 For more information visit [WPtouch.com](http://www.wptouch.com/?utm_campaign=wptouch-front-readme&utm_medium=web&utm_source=wordpressdotorg "WPtouch.com").
 
+= I notice my desktop site shows for mobile visitors, or vice versa =
+
+It sounds like you are using a caching plugin but you haven't configured it. Please read the user manual (accessible from the WPtouch admin) and perform the cache changes are outlined in the user manual.  Once done, WPtouch will work as expected.
+
+= What's different about version 4 vs. version 3? =
+
+The biggest difference is the admin panel. Instead of multiple admin pages with settings split out, we've combined and streamlined the settings into one panel page.
+
+Tabs on the left, settings on the right. All settings instantly save via AJAX, so you don't have to save settings manually.
+
+= Will I lose anything upgrading? =
+
+WPtouch 4 is an upgrade from 3, and your theme settings will stay intact. You will notice a couple settings have been slimmed down, while we added a few new ones.
+
+Overall you might think there's less in WPtouch 4— but we actually removed how we showed Pro-only settings even though they weren't available in free, along with other non-essential panes and views to streamline the product.
+
+= What's New? =
+
+The best new additions for WPtouch 4 are in WPtouch Pro— we added support to live preview your changes in the WordPress Customizer, along with new theme and extension updates, features and more.
+
+In the free version, the newest changes have more to do with under the hood improvements for speed and performance in the theme, and of course the new admin panel making setup faster and easier.
+
+= What's Next? =
+
+We've got theme and feature updates planned into 2016 based on feedback from our users, but that's all we'll share!
+
+== Other Notes ==
+
+If you are using a caching plugin, you will need to configure it to work properly with WPtouch. If your caching plugin is not configured, or not configured properly, you will most encounter inconsistent behaviour where WPtouch shows for desktop visitors, or mobile visitors see your desktop site.
+
+= W3 Total Cache =
+
+1. If you have “Browser Cache” enabled, please disable ‘Set expires header' in the Browser cache settings to prevent Desktop/Mobile switch link issues.
+2. Go to the “Page Cache” settings under the Performance tab.
+3. Copy the list of mobile user agents found in our list of “User agent list for configuring cache plugins“.
+4. If you have added support for additional mobile devices in WPtouch's Compatibility > Custom User Agents field, you must also include those user agents in the “Rejected User 5. Agents” area in W3 Total Cache.
+5. Scroll down to the “Rejected User Agents” field and paste the list of WPtouch default user agents, adding one per line.
+Save your changes.
+6. Go to the “Minify” settings under the Performance tab.
+Scroll down to the “Rejected User Agents” field and paste the list of WPtouch default user agents, adding one per line.
+7. Save your changes.
+8. Go to the “CDN” settings under the Performance tab.
+9. Scroll down to the “Rejected User Agents” field and paste the list of WPtouch default user agents, adding one per line.
+10. Save your changes.
+11. Finally, go to the W3 Total Cache “Dashboard” and select “Empty All Caches”.
+
+Ensure that W3 Total Cache is selected in the plugins list in the Compatibility section of the WPtouch admin panel.
+
+= WP Super Cache =
+
+Note: The native support for the free version of WPtouch found in WP Super Cache (under the “Plugins” tab) must be disabled to prevent conflicts in WPtouch.
+
+1. In the Advanced tab of the WP Super Cache settings select “Mobile Device Support”* and click “Update Status”.
+2. Still in the Advanced tab, scroll down to the “Rejected User Agents” area. Paste the entire list of mobile user agents found in our list of “User agent list for configuring cache plugins” into the field and click “Save UA Strings”.
+3. If you have added support for additional mobile devices in WPtouch's Compatibility > Custom User Agents field, you must also include those user agents in the “Rejected User Agents” area in WP Super Cache.
+4. In the “Contents” tab, click “Delete Cache” and “Delete Expired” to delete pages that were likely cached before adding the new list of rejected user agents.
+5. Ensure that WP Super Cache is selected in the plugins list in the Compatibility section of the WPtouch admin panel.
+
+= WP Rocket =
+
+In the "Basic Options" of WP Rocket's settings page, make sure "Enable caching for mobile devices." is deselected. Ensure that WP Rocket is selected in the plugins list in the Compatibility section of the WPtouch admin panel.
+
+Please see the user manual for additional information.
+
+= WP Engine =
+
+Please contact WPEngine and ask them to exclude the user agents found in the “User agent list for configuring cache plugins“.
+
 == Upgrade Notice ==
 
-= 3.1.1 =
+= 4.0 =
 
-This is an entirely new release, everyone! It’s completely different… and new : )
+This is a major update, but maintains all previous settings. The biggest changes are in the admin appearance.

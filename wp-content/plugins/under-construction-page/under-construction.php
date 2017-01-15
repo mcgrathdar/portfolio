@@ -1,15 +1,15 @@
 <?php
 /*
   Plugin Name: Under Construction
-  Plugin URI: https://wordpress.org/plugins/under-construction-page/
+  Plugin URI: https://underconstructionpage.com/
   Description: Hide your site behind a great looking under construction page while you do maintenance work.
   Author: Web factory Ltd
-  Version: 1.25
+  Version: 1.40
   Author URI: http://www.webfactoryltd.com/
   Text Domain: under-construction-page
   Domain Path: lang
 
-  Copyright 2015 - 2016  Web factory Ltd  (email : ucp@webfactoryltd.com)
+  Copyright 2015 - 2016  Web factory Ltd  (email: ucp@webfactoryltd.com)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as
@@ -85,8 +85,11 @@ class UCP {
       // AJAX endpoints
       add_action('wp_ajax_ucp_dismiss_pointer', array(__CLASS__, 'dismiss_pointer_ajax'));
     } else {
-      // main logic
+      // main plugin logic
       add_action('wp', array(__CLASS__, 'display_construction_page'), 0, 1);
+      
+      // show under construction notice on login form
+      add_filter('login_message', array(__CLASS__, 'login_message'));
 
       // disable feeds
       add_action('do_feed_rdf', array(__CLASS__, 'disable_feed'), 1, 1);
@@ -188,11 +191,19 @@ class UCP {
   } // get_meta
   
 
-  // fetch and display construction the page if it's enabled
+  // fetch and display the construction page if it's enabled or preview requested
   static function display_construction_page() {
     $options = self::get_options();
-
-    if (true == self::is_construction_mode_enabled(false)) {
+    
+    // some URLs have to be accessible at all times
+    if ($_SERVER['REQUEST_URI'] == '/wp-admin' ||
+        $_SERVER['REQUEST_URI'] == '/wp-admin/' ||
+        $_SERVER['REQUEST_URI'] == '/wp-login.php') {
+      return true;
+    }
+    
+    if (true == self::is_construction_mode_enabled(false) 
+        || (is_user_logged_in() && isset($_GET['ucp_preview']))) {
       header(wp_get_server_protocol() . ' 503 Service Unavailable');
       echo self::get_template($options['theme']);
       exit;
@@ -220,6 +231,11 @@ class UCP {
                          
     if ('settings_page_ucp' == $hook) {
       wp_enqueue_style('ucp-admin', UCP_PLUGIN_URL . 'css/ucp-admin.css', array(), self::$version);
+      wp_enqueue_style('ucp-select2', UCP_PLUGIN_URL . 'css/select2.min.css', array(), self::$version);
+      
+      wp_enqueue_script('jquery-ui-tabs');
+      wp_enqueue_script('ucp-jquery-plugins', UCP_PLUGIN_URL . 'js/ucp-jquery-plugins.js', array('jquery'), self::$version, true);
+      wp_enqueue_script('ucp-select2', UCP_PLUGIN_URL . 'js/select2.min.js', array(), self::$version, true);
       wp_enqueue_script('ucp-admin', UCP_PLUGIN_URL . 'js/ucp-admin.js', array('jquery'), self::$version, true);
     }
     
@@ -297,10 +313,49 @@ class UCP {
     if (!empty($options['social_pinterest'])) {
       $out .= '<a href="' . $options['social_pinterest'] . '" target="_blank"><i class="fa fa-pinterest-square fa-3x"></i></a>';
     }
+    if (!empty($options['social_dribbble'])) {
+      $out .= '<a href="' . $options['social_dribbble'] . '" target="_blank"><i class="fa fa-dribbble fa-3x"></i></a>';
+    }
     
     return $out;
   } // generate_social_icons
   
+  
+  // shortcode for inserting things in header
+  static function generate_head($options, $template_id) {
+    $out = '';
+    
+    if (!empty($options['ga_tracking_id'])) {
+      $out .= "<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', '{$options['ga_tracking_id']}', 'auto');
+        ga('send', 'pageview');
+      </script>";
+    }
+    
+    return $out;
+  } // generate_head
+  
+  
+  // shortcode for inserting things in footer
+  static function generate_footer($options, $template_id) {
+    $out = '';
+    
+    if ($options['linkback'] == 1) {
+      $tmp = md5(get_site_url());
+      if ($tmp[0] < 9) {
+        $out .= '<p id="linkback">Create great looking <a href="https://underconstructionpage.com/" target="_blank">under construction pages for WordPress</a> for free.</p>';
+      } else {
+        $out .= '<p id="linkback">Create free <a href="https://underconstructionpage.com/" target="_blank">landing pages for WordPress</a>.</p>';
+      }
+    }
+    
+    return $out;
+  } // generate_footer
+   
    
   // returnes parsed template
   static function get_template($template_id) {
@@ -317,6 +372,8 @@ class UCP {
     $vars['content'] = nl2br(self::parse_vars($options['content']));
     $vars['description'] = get_bloginfo('description');
     $vars['social-icons'] = self::generate_social_icons($options, $template_id);
+    $vars['head'] = self::generate_head($options, $template_id);
+    $vars['footer'] = self::generate_footer($options, $template_id);
     
     ob_start();
     require UCP_PLUGIN_DIR . 'themes/' . $template_id . '/index.php';
@@ -332,10 +389,12 @@ class UCP {
 
   
   // checks if construction mode is enabled for the current visitor
-  static function is_construction_mode_enabled($global = false) {
+  static function is_construction_mode_enabled($settings_only = false) {
     $options = self::get_options();
+    $current_user = wp_get_current_user();
     
-    if ($global) {
+    // just check if it's generally enabled
+    if ($settings_only) {
       if ($options['status']) {
         return true;
       } else {
@@ -345,7 +404,13 @@ class UCP {
       // check if enabled for current user
       if (!$options['status']) {
         return false;
+      } elseif (defined('WP_CLI') && WP_CLI) {
+        return false;
       } elseif (self::user_has_role($options['roles'])) {
+        return false;
+      } elseif (in_array($current_user->ID, $options['whitelisted_users'])) {
+        return false;
+      } elseif (strlen($options['end_date']) === 16 && $options['end_date'] !== '0000-00-00 00:00' && $options['end_date'] < current_time('Y-m-d H:i')) {
         return false;
       } else {
         return true;
@@ -370,17 +435,12 @@ class UCP {
   
   // displays various notices in admin header
   static function admin_notices() {
-    // temporary disabled, todo
-    if (0 && self::is_construction_mode_enabled(true)) {
-      echo '<div id="message" class="error"><p>Caution: Under Construction mode is <strong>enabled</strong>! Edit <a href="' . admin_url('options-general.php?page=ucp') . '" title="Under Construction Settings">settings</a> to disable it.</p></div>';
-    }
-    
     $notices = get_option(UCP_NOTICES_KEY);
     $meta = self::get_meta();
     
     if (empty($notices['dismiss_rate']) &&
         (current_time('timestamp') - $meta['first_install']) > (DAY_IN_SECONDS * 3)) {
-      $rate_url = 'https://wordpress.org/support/plugin/under-construction-page/reviews/#new-post';
+      $rate_url = 'https://wordpress.org/support/plugin/under-construction-page/reviews/?rate=5#new-post';
       $dismiss_url = add_query_arg(array('action' => 'ucp_dismiss_notice', 'notice' => 'rate', 'redirect' => urlencode($_SERVER['REQUEST_URI'])), admin_url('admin.php'));
 
       echo '<div id="ucp_rate_notice" class="notice-info notice"><p>Hi! We saw you\'ve been using <b>Under Construction</b> plugin for a few days and wanted to ask for your help to <b>make the plugin better</b>.<br>We just need a minute of your time to rate the plugin. Thank you!';
@@ -437,6 +497,18 @@ class UCP {
         'meta'  => array('class' => $class)
     ));
   } // admin_bar_notice
+  
+  
+  // show under construction notice on WP login form
+  static function login_message($message) {
+    $options = get_option('wf_mm');
+
+    if (self::is_construction_mode_enabled(true)) {
+      $message .= '<div class="message">Under Construction mode is <b>enabled</b>.</div>';
+    }
+    
+    return $message;
+  } // login_notice
 
   
   // add settings link to plugins page
@@ -462,7 +534,7 @@ class UCP {
 
   // create the admin menu item
   static function admin_menu() {
-    add_options_page('Under Construction', 'Under Construction', 'manage_options', 'ucp', array(__CLASS__, 'options_page'));
+    add_options_page('Under Construction', 'Under Construction', 'manage_options', 'ucp', array(__CLASS__, 'main_page'));
   } // admin_menu
 
   
@@ -475,6 +547,8 @@ class UCP {
   // set default settings
   static function default_options() {
     $defaults = array('status' => '0',
+                      'end_date' => '',
+                      'ga_tracking_id' => '',
                       'theme' => 'mad_designer',
                       'title' => '[site-title] is under construction',
                       'heading1' => 'Sorry, we\'re doing some work on the site',
@@ -485,7 +559,10 @@ class UCP {
                       'social_linkedin' => '',
                       'social_youtube' => '',
                       'social_pinterest' => '',
-                      'roles' => array('administrator')
+                      'social_dribbble' => '',
+                      'linkback' => '0',
+                      'roles' => array('administrator'),
+                      'whitelisted_users' => array()
                       );
 
     return $defaults;
@@ -507,14 +584,27 @@ class UCP {
         case 'social_linkedin':
         case 'social_youtube':
         case 'social_pinterest':
+        case 'social_dribbble':
           $options[$key] = trim($value);
+        break;
+        case 'ga_tracking_id':
+          $options[$key] = substr(strtoupper(trim($value)), 0, 15);
+        break;
+        case 'end_date':
+          $options[$key] = substr(trim($value), 0, 16);
         break;
       } // switch
     } // foreach
     
     $options['roles'] = (array) $options['roles'];
-    $options = self::check_var_isset($options, array('status' => 0));
+    $options['whitelisted_users'] = (array) $options['whitelisted_users'];
+    $options = self::check_var_isset($options, array('status' => 0, 'linkback' => 0));
+    
+    if (!empty($options['ga_tracking_id']) && preg_match('/^UA-\d{3,}-\d{1,3}$/', $options['ga_tracking_id']) === 0) {
+      add_settings_error('ucp', 'ga_tracking_id', 'Please enter a valid Google Analytics Tracking ID, or leave empty to disable tracking.');
+    }
 
+    // empty cache in 3rd party plugins
     if ($options['status'] != $old_options['status']) {
       if (function_exists('w3tc_pgcache_flush')) {
         w3tc_pgcache_flush(); 
@@ -522,6 +612,13 @@ class UCP {
       if (function_exists('wp_cache_clean_cache')) {
         global $file_prefix;
         wp_cache_clean_cache($file_prefix); 
+      }
+      if (function_exists('wp_cache_clear_cache')) {
+        wp_cache_clear_cache();
+      }
+      if (class_exists('Endurance_Page_Cache')) {
+        $epc = new Endurance_Page_Cache;
+        $epc->purge_all();  
       }
     }
     
@@ -587,34 +684,13 @@ class UCP {
       return $out;
     }
   } // create_select_options
-
   
-  // output the whole options page
-  static function options_page() {
-    if (!current_user_can('manage_options'))  {
-      wp_die('You do not have sufficient permissions to access this page.');
-    }
-
+  
+  static function tab_main() {
     $options = self::get_options();
     $default_options = self::default_options();
-
-    echo '<div class="wrap">
-          <h1>Under Construction</h1>';
-
-    echo '<form action="options.php" method="post">';
-    settings_fields(UCP_OPTIONS_KEY);
-
-    echo '<table class="form-table"><tbody>';
-
-    $status[] = array('val' => '0', 'label' => 'Disabled - site is working normally');
-    $status[] = array('val' => '1', 'label' => 'Enabled - site is in under construction mode');
-
-    $tmp_roles = get_editable_roles();
-    foreach ($tmp_roles as $tmp_role => $details) {
-      $name = translate_user_role($details['name']);
-      $roles[] = array('val' => $tmp_role,  'label' => $name);
-    }
-    $roles[] = array('val' => 'guest', 'label' => 'Guest (not logged in user)');
+    
+    echo '<table class="form-table">';
 
     echo '<tr valign="top">
     <th scope="row"><label for="status">Status</label></th>
@@ -624,27 +700,34 @@ class UCP {
         <span class="onoffswitch-inner"></span>
         <span class="onoffswitch-switch"></span>
     </label>
-</div>
-    ';
+    </div>';
     
-    echo '<p class="description">By enabling construction mode all users (<a href="#whitelisted-roles">except selected ones</a>) will not be able to access the site\'s content. They will only see the under construction page.</p>';
+    echo '<p class="description">By enabling construction mode all users (<a class="change_tab" data-tab="3" href="#whitelisted-roles">except selected ones</a>) will not be able to access the site\'s content. They will only see the under construction page.</p>';
     echo '</td></tr>';
-
-    $img = plugins_url('/images/', __FILE__);
+    
     echo '<tr valign="top">
-    <th scope="row">Theme</th>
-    <td>
-    <div class="ucp-thumb"><label for="layout-1"><img src="' . $img . 'mad_designer.png" alt="Mad Designer" title="Mad Designer" /></label><br /><input ' . self::checked('mad_designer', $options['theme']) . ' type="radio" id="layout-1" name="' . UCP_OPTIONS_KEY . '[theme]" value="mad_designer" /> Mad Designer</div>
+    <th scope="row"><label for="end_date">End Date &amp; Time</label></th>
+    <td><input id="end_date" type="text" class="datepicker" name="' . UCP_OPTIONS_KEY . '[end_date]" value="' . $options['end_date'] . '" placeholder="yyyy-mm-dd hh:mm"><span title="Open date & time picker" alt="Open date & time picker" class="show-datepicker dashicons dashicons-calendar-alt"></span> <span title="Clear date & time" alt="Clear date & time" class="clear-datepicker dashicons dashicons-no"></span>';
+    echo '<p class="description">If enabled, construction mode will automatically stop showing on the selected date.<br>
+    This option will not "auto-enable" construction mode. Status has to be set to "On".</p>';
+    echo '</td></tr>';
     
-    <div class="ucp-thumb"><label for="layout-2"><img src="' . $img . 'plain_text.png" alt="Plain Text" title="Plain Text" /></label><br /><input ' . self::checked('plain_text', $options['theme']) . ' type="radio" id="layout-2" name="' . UCP_OPTIONS_KEY . '[theme]" value="plain_text" /> Plain Text</div>
+    echo '<tr valign="top">
+    <th scope="row"><label for="ga_tracking_id">Google Analytics Tracking ID</label></th>
+    <td><input id="ga_tracking_id" type="text" class="code" name="' . UCP_OPTIONS_KEY . '[ga_tracking_id]" value="' . $options['ga_tracking_id'] . '" placeholder="UA-xxxxxx-xx">';
+    echo '<p class="description">Enter the unique tracking ID found in your GA tracking profile settings to track visits to the page.<br>Leave blank to disable tracking.</p>';
+    echo '</td></tr>';
     
-    <div class="ucp-thumb"><label for="layout-3"><img src="' . $img . 'under_construction.png" alt="Under Construction" title="Under Construction" /></label><br /><input ' . self::checked('under_construction', $options['theme']) . ' type="radio" id="layout-3" name="' . UCP_OPTIONS_KEY . '[theme]" value="under_construction" /> Under Construction</div>
+    echo '</table>';
+  } // tab_main
+  
+  
+  static function tab_content() {
+    $options = self::get_options();
+    $default_options = self::default_options();
     
-    <div class="ucp-thumb"><label for="layout-4"><img src="' . $img . 'dark.png" alt="Things Went Dark" title="Things Went Dark" /></label><br /><input ' . self::checked('dark', $options['theme']) . ' type="radio" id="layout-4" name="' . UCP_OPTIONS_KEY . '[theme]" value="dark" /> Things Went Dark</div>
+    echo '<table class="form-table">';
     
-    <div class="ucp-thumb"><a href="https://twitter.com/intent/tweet?text=' . urlencode('@webfactoryltd I need more themes for Under Construction #wordpress plugin. When are they coming out?') . '&url=https://wordpress.org/plugins/under-construction-page/" target="_blank"><img src="' . $img . 'more_coming_soon.png" alt="Need more themes?" title="Need more themes?" /></a><br />Click for More Themes</div>
-    </td></tr>';
-
     echo '<tr valign="top">
     <th scope="row"><label for="title">Title</label></th>
     <td><input type="text" id="title" class="regular-text" name="' . UCP_OPTIONS_KEY . '[title]" value="' . $options['title'] . '" />';
@@ -707,7 +790,78 @@ class UCP {
     <td><input id="social_pinterest" type="url" class="regular-text code" name="' . UCP_OPTIONS_KEY . '[social_pinterest]" value="' . $options['social_pinterest'] . '" placeholder="Pinterest profile URL">';
     echo '<p class="description">Complete URL, with http prefix, to Pinterest profile.</p>';
     echo '</td></tr>';
-
+    
+    echo '<tr valign="top">
+    <th scope="row"><label for="social_dribbble">Dribbble Profile</label></th>
+    <td><input id="social_dribbble" type="url" class="regular-text code" name="' . UCP_OPTIONS_KEY . '[social_dribbble]" value="' . $options['social_dribbble'] . '" placeholder="Dribbble profile URL">';
+    echo '<p class="description">Complete URL, with http prefix, to Dribbble profile.</p>';
+    echo '</td></tr>';
+    
+    echo '<tr valign="top">
+    <th scope="row"><label for="linkback">Show some Love</label></th>
+    <td><div class="onoffswitch">
+    <input ' . self::checked(1, $options['linkback']) . ' type="checkbox" value="1" name="' . UCP_OPTIONS_KEY . '[linkback]" class="onoffswitch-checkbox" id="linkback">
+    <label class="onoffswitch-label" for="linkback">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+    </div>';
+    echo '<p class="description">Please help others learn about this free plugin by placing a small link in the footer. Thank you very much!</p>';
+    echo '</td></tr>';
+    
+    echo '</table>';
+  } // tab_content
+  
+  
+  static function tab_design() {
+    $options = self::get_options();
+    $default_options = self::default_options();
+    
+    $img_path = UCP_PLUGIN_URL . 'images/';
+    
+    $themes = array('mad_designer' => 'Mad Designer', 'plain_text' => 'Plain Text', 'under_construction' => 'Under Construction', 'dark' => 'Things Went Dark', 'forklift' => 'Forklift at Work', 'under_construction_text' => 'Under Construction Text', 'cyber_chick' => 'Cyber Chick');
+    
+    echo '<table class="form-table">';
+    echo '<tr valign="top">
+    <th scope="row">Theme</th>
+    <td>';
+    echo '<input type="hidden" id="theme_id" name="' . UCP_OPTIONS_KEY . '[theme]" value="' . $options['theme'] . '">';
+    
+    foreach ($themes as $theme_id => $theme_name) {
+      if ($theme_id === $options['theme']) {
+        $class = ' active';
+      } else {
+        $class = '';
+      }
+      echo '<div class="ucp-thumb' . $class . '" data-theme-id="' . $theme_id . '"><img src="' . $img_path . $theme_id . '.png" alt="' . $theme_name . '" title="' . $theme_name . '" /><span>' . $theme_name . '</span></div>';
+    }
+    
+    echo '<div class="ucp-thumb-special"><a href="https://twitter.com/intent/tweet?text=' . urlencode('@webfactoryltd I need more themes for the free Under Construction #wordpress plugin. When are they coming out?') . '&url=https://wordpress.org/plugins/under-construction-page/" target="_blank"><img src="' . $img_path . 'more_coming_soon.png" alt="Need more themes?" title="Need more themes?" /></a><br />Click for More Themes</div>';
+    
+    echo '</td></tr>';
+    
+    echo '</table>';
+  } // tab_design
+  
+  
+  static function tab_access() {
+    $options = self::get_options();
+    $default_options = self::default_options();
+    $roles = $users = array();
+    
+    $tmp_roles = get_editable_roles();
+    foreach ($tmp_roles as $tmp_role => $details) {
+      $name = translate_user_role($details['name']);
+      $roles[] = array('val' => $tmp_role,  'label' => $name);
+    }
+    
+    $tmp_users = get_users(array('fields' => array('id', 'display_name')));
+    foreach ($tmp_users as $user) {
+      $users[] = array('val' => $user->id, 'label' => $user->display_name);
+    }
+    
+    echo '<table class="form-table">';
+    
     echo '<tr valign="top" id="whitelisted-roles">
     <th scope="row">Whitelisted User Roles</th>
     <td>';
@@ -717,11 +871,85 @@ class UCP {
     }
     echo '<p class="description">Selected user roles will <b>not</b> be affected by the under construction mode and will always see the "normal" site. Default: administrator.</p>';
     echo '</td></tr>';
+    
+    echo '<tr valign="top">
+    <th scope="row"><label for="whitelisted_users">Whitelisted Users</label></th>
+    <td><select id="whitelisted_users" class="select2" style="width: 50%; max-width: 300px;" name="' . UCP_OPTIONS_KEY . '[whitelisted_users][]" multiple>';
+    self::create_select_options($users, $options['whitelisted_users'], true);
+    
+    echo '</select><p class="description">Selected users (when logged in) will <b>not</b> be affected by the under construction mode and will always see the "normal" site.</p>';
+    echo '</td></tr>';
+    
+    echo '</table>';
+  } // tab_access
+  
 
-    echo '</tbody></table>';
+  // todo next version  
+  static function tab_emails() {
+    $options = self::get_options();
+    $default_options = self::default_options();
+  } // tab_emails
+  
+  
+  // todo next version
+  static function tab_advanced() {
+    $options = self::get_options();
+    $default_options = self::default_options();
+  } // tab_advanced
 
-    echo get_submit_button('Save Changes');
-    echo '</form></div>';
+  
+  // output the whole options page
+  static function main_page() {
+    if (!current_user_can('manage_options'))  {
+      wp_die('You do not have sufficient permissions to access this page.');
+    }
+
+    $options = self::get_options();
+    $default_options = self::default_options();
+
+    echo '<div class="wrap">
+          <h1><img src="' . UCP_PLUGIN_URL . '/images/under-construction-page-logo.png" alt="UnderConstructionPage" title="UnderConstructionPage">UnderConstructionPage</h1>';
+
+    echo '<form action="options.php" method="post" id="ucp_form">';
+    settings_fields(UCP_OPTIONS_KEY);
+
+    $tabs = array();
+    $tabs[] = array('id' => 'ucp_main', 'icon' => 'dashicons-admin-settings', 'class' => '', 'label' => 'Main', 'callback' => array(__CLASS__, 'tab_main'));
+    $tabs[] = array('id' => 'ucp_design', 'icon' => 'dashicons-admin-customizer', 'class' => '', 'label' => 'Design', 'callback' => array(__CLASS__, 'tab_design'));
+    $tabs[] = array('id' => 'ucp_content', 'icon' => 'dashicons-format-aside', 'class' => '', 'label' => 'Content', 'callback' => array(__CLASS__, 'tab_content'));
+    $tabs[] = array('id' => 'ucp_access', 'icon' => 'dashicons-shield', 'class' => '', 'label' => 'Access', 'callback' => array(__CLASS__, 'tab_access'));
+    
+    // todo next version
+    //$tabs[] = array('id' => 'ucp_emails', 'class' => '', 'label' => 'Emails', 'callback' => array(__CLASS__, 'tab_emails'));
+    //$tabs[] = array('id' => 'ucp_advanced', 'class' => '', 'label' => 'Advanced', 'callback' => array(__CLASS__, 'tab_advanced'));
+    $tabs = apply_filters('ucp_tabs', $tabs);
+
+    echo '<div id="ucp_tabs" class="ui-tabs" style="display: none;">';
+    echo '<ul>';
+    foreach ($tabs as $tab) {
+      if(!empty($tab['label'])){  
+          echo '<li><a href="#' . $tab['id'] . '" class="' . $tab['class'] . '"><span class="icon"><span class="dashicons ' . $tab['icon'] . '"></span></span><span class="label">' . $tab['label'] . '</span></a></li>';
+      }
+    }
+    echo '</ul>';
+    
+    foreach ($tabs as $tab) {
+      if(is_callable($tab['callback'])) {
+        echo '<div style="display: none;" id="' . $tab['id'] . '">';
+        call_user_func($tab['callback']);
+        echo '</div>';
+      }      
+    } // foreach
+
+    echo '</div>'; // ucp_tabs
+    
+    echo '<p class="submit">';
+    echo get_submit_button('Save Changes', 'primary large', 'submit', false);
+    echo ' &nbsp; &nbsp; <a id="ucp_preview" href="' . get_home_url() . '/?ucp_preview" class="button button-large button-secondary" target="_blank">Preview</a>';
+    echo '</p>';
+    
+    echo '</form>'; // ucp_tabs
+    echo '</div>'; // wrap
   } // options_page
   
   

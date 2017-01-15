@@ -1,38 +1,40 @@
 <?php
-
-define( 'FOUNDATION_VERSION', '2.3' );
+define( 'FOUNDATION_VERSION', '4.0' );
 
 define( 'FOUNDATION_DIR', WPTOUCH_DIR . '/themes/foundation' );
 define( 'FOUNDATION_URL', WPTOUCH_URL . '/themes/foundation' );
 
 define( 'FOUNDATION_SETTING_DOMAIN', 'foundation' );
 
-define( 'FOUNDATION_PAGE_GENERAL', __( 'General', 'wptouch-pro' ) );
+define( 'FOUNDATION_PAGE_GENERAL', __( 'Theme Settings', 'wptouch-pro' ) );
 define( 'FOUNDATION_PAGE_BRANDING', __( 'Branding', 'wptouch-pro') );
 define( 'FOUNDATION_PAGE_MEDIA', __( 'Media Handling', 'wptouch-pro' ) );
-define( 'FOUNDATION_PAGE_WEB_APP', __( 'Web-App Mode', 'wptouch-pro' ) );
 define( 'FOUNDATION_PAGE_HOMESCREEN_ICONS', __( 'Bookmark Icons', 'wptouch-pro' ) );
-define( 'FOUNDATION_PAGE_ADVERTISING', __( 'Advertising', 'wptouch-pro' ) );
 define( 'FOUNDATION_PAGE_CUSTOM', __( 'Custom Content', 'wptouch-pro' ) );
 define( 'FOUNDATION_MAX_LOGO_SIZE', 1136 );
 
-add_action( 'admin_enqueue_scripts', 'foundation_enqueue_admin_scripts' );
 add_filter( 'wptouch_registered_setting_domains', 'foundation_setting_domain' );
 add_filter( 'wptouch_setting_defaults_foundation', 'foundation_setting_defaults' );
 add_filter( 'wptouch_admin_page_render_wptouch-admin-theme-settings', 'foundation_render_theme_settings' );
 add_filter( 'wptouch_setting_version_compare', 'foundation_setting_version_compare', 10, 2 );
 add_filter( 'wptouch_body_classes', 'foundation_body_classes' );
 add_filter( 'wptouch_the_content', 'foundation_insert_multipage_links');
-//add_filter( 'wp_die_handler', 'foundation_custom_die_handler' );
+
+// fix for JetPack
+add_filter( 'jetpack_check_mobile', 'foundation_override_jetpack_check_mobile' );
 
 add_action( 'wptouch_post_head', 'foundation_setup_smart_app_banner' );
 add_action( 'wptouch_post_head', 'foundation_setup_viewport' );
 add_action( 'wptouch_post_head', 'foundation_setup_homescreen_icons' );
 add_action( 'wptouch_post_head', 'foundation_inline_styles' );
+add_action( 'wptouch_post_head', 'foundation_add_meta_theme_color' );
+
 add_action( 'pre_get_posts', 'foundation_posts_per_page' );
 add_filter( 'pre_get_posts', 'foundation_exclude_categories_tags' );
+
 add_action( 'wptouch_pre_footer', 'foundation_handle_footer' );
-add_action( 'wptouch_parent_style_queued', 'foundation_enqueue_color_data' );
+add_action( 'wptouch_post_footer', 'foundation_enqueue_color_data' );
+add_action( 'wptouch_post_footer', 'foundation_handle_custom_css_declarations' );
 add_action( 'wptouch_post_process_image_file', 'foundation_process_image_file', 10, 2 );
 
 add_action( 'wptouch_language_insert', 'foundation_add_wpml_lang_switcher', 20 );
@@ -111,32 +113,53 @@ function foundation_process_image_file( $file_name, $setting_name ) {
 	}
 }
 
+function foundation_prepare_uploaded_file_url( $uploaded_file ) {
+	if ( !strstr( $uploaded_file, 'http' ) && !strstr( $uploaded_file, 'wp-content' ) ) {
+		$uploaded_file = WPTOUCH_BASE_CONTENT_URL . $uploaded_file;
+	} else {
+		$uploaded_file = wptouch_check_url_ssl( $uploaded_file );
+	}
+
+	return $uploaded_file;
+}
+
 function foundation_setting_defaults( $settings ) {
 
-	// General
-	$settings->video_handling_type = 'fitvids';
+	// Depreciated and removed in 4.0
+	$settings->allow_nested_comment_replies = false;
+	$settings->twitter_account = false;
+
+	// Landing Pages
 	$settings->latest_posts_page = 'none';
+
+	// Compatibility
+	$settings->new_video_handling = true;
+
+	// Theme Settings
+	$settings->allow_zoom = false;
+	$settings->smart_app_banner = '';
+	$settings->custom_footer_message = '';
+	$settings->custom_css_declarations = '';
+
+	// Misc
 	$settings->logo_image = '';
 
-	// Login
-	$settings->show_login_box = false;
-	$settings->show_login_links = false;
+	// Blog
+	$settings->posts_per_page = '5';
+	$settings->excluded_categories = '';
+	$settings->excluded_tags = '';
 
 	// Branding
 	$settings->typography_sets = 'default';
-	$settings->smart_app_banner = '';
 
 	// Homescreen Icons
-	$settings->homescreen_icon_title = get_bloginfo( 'name' );
 	$settings->iphone_icon_retina = false;
 	$settings->android_others_icon = false;
 	$settings->ipad_icon_retina = false;
 
 	// Web App Mode
-	$settings->webapp_mode_enabled = false;
-	$settings->webapp_enable_persistence = true;
+	$settings->webapp_enable_persistence = false;
 	$settings->webapp_show_notice = true;
-	$settings->webapp_notice_message = __( 'Install this Web-App on your home screen: tap [icon] then "Add to Home Screen"', 'wptouch-pro' );
 	$settings->webapp_ignore_urls = '';
 	$settings->webapp_notice_expiry_days = 30;
 
@@ -150,6 +173,9 @@ function foundation_setting_defaults( $settings ) {
 	$settings->startup_screen_ipad_1_landscape = false;
 	$settings->startup_screen_ipad_3_portrait = false;
 	$settings->startup_screen_ipad_3_landscape = false;
+	$settings->startup_screen_full_res = false;
+	$settings->startup_screen_ipad_full_portrait = false;
+	$settings->startup_screen_ipad_full_landscape = false;
 
 	// Advertising
 	$settings->advertising_type = 'none';
@@ -184,15 +210,15 @@ function foundation_setting_defaults( $settings ) {
 	$settings->social_email_url = '';
 	$settings->social_rss_url = '';
 
-	// Custom Content
-	$settings->custom_footer_message = '';
-
 	// Featured Slider
 	$settings->featured_enabled = true;
+	$settings->featured_blog = true;
+	$settings->featured_homepage = true;
+	$settings->featured_style = 'enhanced';
 	$settings->featured_autoslide = false;
 	$settings->featured_continuous = false;
 	$settings->featured_grayscale = false;
-	$settings->featured_title_date = true;
+	$settings->featured_comments = false;
 	$settings->featured_type = 'latest';
 	$settings->featured_tag = '';
 	$settings->featured_category = '';
@@ -201,20 +227,6 @@ function foundation_setting_defaults( $settings ) {
 	$settings->featured_speed = 'normal';
 	$settings->featured_max_number_of_posts = '5';
 	$settings->featured_filter_posts = true;
-
-	// Blog
-	$settings->posts_per_page = '5';
-	$settings->excluded_categories = '';
-	$settings->excluded_tags = '';
-	$settings->allow_nested_comment_replies = false;
-	$settings->twitter_account = 'none';
-
-	// Pages
-	$settings->show_comments_on_pages = false;
-
-	// Related posts
-	$settings->related_posts_enabled = false;
-	$settings->related_posts_max = 3;
 
 	return $settings;
 }
@@ -228,18 +240,7 @@ function foundation_has_logo_image() {
 function foundation_the_logo_image() {
 	$settings = foundation_get_settings();
 
-	echo WPTOUCH_BASE_CONTENT_URL . $settings->logo_image;
-}
-
-
-function foundation_enqueue_admin_scripts() {
-	wp_enqueue_script(
-		'foundation_admin',
-		FOUNDATION_URL . '/admin/foundation-admin.js',
-		array( 'jquery', 'wptouch-pro-admin' ),
-		FOUNDATION_VERSION,
-		true
-	);
+	echo foundation_prepare_uploaded_file_url( $settings->logo_image );
 }
 
 function foundation_enqueue_color_data() {
@@ -249,16 +250,23 @@ function foundation_enqueue_color_data() {
 
 		foreach( $colors as $color ) {
 			$settings = wptouch_get_settings( $color->domain );
+
 			$setting_name = $color->setting;
+
+			$output_color = $settings->$setting_name;
+
 			if ( $color->fg_selectors ) {
-				$inline_color_data .= $color->fg_selectors . " { color: " . $settings->$setting_name . "; }\n";
+				$inline_color_data .= $color->fg_selectors . " { color: " . $output_color . "; }\n";
 			}
 
 			if ( $color->bg_selectors ) {
-				$inline_color_data .= $color->bg_selectors . " { background-color: " . $settings->$setting_name . "; }\n";
+				$inline_color_data .= $color->bg_selectors . " { background-color: " . $output_color . "; }\n";
 			}
 		}
-		wp_add_inline_style( 'wptouch-parent-theme-css', $inline_color_data );
+
+		echo '<style>';
+		echo $inline_color_data;
+		echo '</style>';
 	}
 }
 
@@ -275,6 +283,22 @@ function foundation_handle_footer() {
 		}
 
 		echo apply_filters( 'foundation_footer_message_output', $output_message );
+	}
+}
+
+function foundation_handle_custom_css_declarations() {
+	$settings = foundation_get_settings();
+	if( $settings->custom_css_declarations ) {
+		$styles = apply_filters( 'foundation_custom_css_declarations', $settings->custom_css_declarations );
+		$trimmed_styles = trim( $styles );
+
+		if ( strip_tags( $trimmed_styles ) == $trimmed_styles ) {
+			$output_code = '<style>' . $trimmed_styles . '</style>';
+		} else {
+			$output_code = $trimmed_styles;
+		}
+
+		echo apply_filters( 'foundation_footer_css_declarations_output', $output_code );
 	}
 }
 
@@ -331,25 +355,65 @@ function foundation_get_category_list() {
 }
 
 function foundation_setup_viewport(){
-	echo '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" />';
-	// iPhone 5
-	echo '<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" media="(device-height: 568px)" />';
+	$settings = foundation_get_settings();
+	$zoomState = 'no';
+	if ( $settings->allow_zoom == true ) {
+		$zoomState = 'yes';
+	}
+	echo '<meta name="viewport" content="initial-scale=1.0, maximum-scale=3.0, user-scalable=' . $zoomState .', width=device-width" />';
 }
 
 function foundation_render_theme_settings( $page_options ) {
-	wptouch_add_sub_page( FOUNDATION_PAGE_GENERAL, 'foundation-page-general', $page_options );
-	wptouch_add_sub_page( FOUNDATION_PAGE_BRANDING, 'foundation-page-branding', $page_options );
+	wptouch_add_sub_page( FOUNDATION_PAGE_GENERAL, 'foundation-page-theme-settings', $page_options );
+
+	if ( !wptouch_admin_use_customizer() ) {
+		if ( foundation_has_theme_colors() ) {
+			$color_settings = array();
+
+			$colors = foundation_get_theme_colors();
+
+			foreach( $colors as $name => $color ) {
+				$color_settings[] = wptouch_add_setting(
+					'color',
+					$color->setting,
+					$color->desc,
+					'',
+					WPTOUCH_SETTING_BASIC,
+					'1.0',
+					'',
+					$color->domain
+				);
+			}
+
+			wptouch_add_page_section(
+				FOUNDATION_PAGE_BRANDING,
+				__( 'Theme Colors', 'wptouch-pro' ),
+				'foundation-colors',
+				$color_settings,
+				$page_options,
+				FOUNDATION_SETTING_DOMAIN,
+				false,
+				false,
+				20
+			);
+		}
+	}
 
 	$foundation_blog_settings = array(
-		wptouch_add_setting(
-			'text',
+		wptouch_add_pro_setting(
+			'range',
 			'posts_per_page',
 			__( 'Number of posts in post listings', 'wptouch-pro' ),
 			__( 'Overrides the WordPress Reading settings for "Blog pages show at most"', 'wptouch-pro' ),
 			WPTOUCH_SETTING_BASIC,
-			'1.0'
+			'1.0',
+			array(
+				'min' => 1,
+				'max' => 15,
+				'step' => 1,
+			)
 		),
-		wptouch_add_setting(
+		wptouch_add_pro_setting(
 			'text',
 			'excluded_categories',
 			__( 'Excluded categories', 'wptouch-pro' ),
@@ -357,25 +421,18 @@ function foundation_render_theme_settings( $page_options ) {
 			WPTOUCH_SETTING_BASIC,
 			'1.0'
 		),
-		wptouch_add_setting(
+		wptouch_add_pro_setting(
 			'text',
 			'excluded_tags',
 			__( 'Excluded tags', 'wptouch-pro' ),
 			__( 'Comma separated by tag name', 'wptouch-pro' ),
 			WPTOUCH_SETTING_BASIC,
 			'1.0'
-		),
-		wptouch_add_setting(
-			'checkbox',
-			'allow_nested_comment_replies',
-			__( 'Allow nested comment replies from mobile visitors', 'wptouch-pro' ),
-			__( 'Will show a Reply link after each comment', 'wptouch-pro' ),
-			WPTOUCH_SETTING_BASIC,
-			'1.0'
-		),
+		)
 	);
 
 	$foundation_blog_settings = apply_filters( 'foundation_settings_blog', $foundation_blog_settings );
+	$foundation_page_settings = apply_filters( 'foundation_settings_page', array() );
 
 	wptouch_add_page_section(
 		FOUNDATION_PAGE_GENERAL,
@@ -383,192 +440,143 @@ function foundation_render_theme_settings( $page_options ) {
 		'foundation-web-theme-settings',
 		$foundation_blog_settings,
 		$page_options,
-		FOUNDATION_SETTING_DOMAIN
+		FOUNDATION_SETTING_DOMAIN,
+		true
 	);
-
-	$foundation_page_settings = array(
-		wptouch_add_setting(
-			'checkbox',
-			'show_comments_on_pages',
-			__( 'Show comments on pages', 'wptouch-pro' ),
-			__( 'Overrides the WordPress settings for showing comments on pages.', 'wptouch-pro' ),
-			WPTOUCH_SETTING_BASIC,
-			'1.0'
-		)
-	);
-
-	$foundation_page_settings = apply_filters( 'foundation_settings_pages', $foundation_page_settings );
 
 	wptouch_add_page_section(
 		FOUNDATION_PAGE_GENERAL,
 		__( 'Pages', 'wptouch-pro' ),
-		'foundation-pages',
+		'foundation-page-settings',
 		$foundation_page_settings,
 		$page_options,
-		FOUNDATION_SETTING_DOMAIN
+		FOUNDATION_SETTING_DOMAIN,
+		true
 	);
 
-	wptouch_add_sub_page( FOUNDATION_PAGE_HOMESCREEN_ICONS, 'foundation-page-homescreen-icons', $page_options );
-
-	/* Homescreen Icon Area */
-
-	wptouch_add_page_section(
-		FOUNDATION_PAGE_HOMESCREEN_ICONS,
-		__( 'Icon Title', 'wptouch-pro' ),
-		'admin_menu_homescreen_icons_options',
-		array(
-			wptouch_add_pro_setting(
-				'text',
-				'homescreen_icon_title',
-				__( 'Icon title', 'wptouch-pro' ),
-				__( 'When visitors bookmark your website, this will be the title shown.', 'wptouch-pro' ),
-				WPTOUCH_SETTING_BASIC,
-				'1.0'
-			),
-		),
-		$page_options,
-		FOUNDATION_SETTING_DOMAIN
-	);
-
-	wptouch_add_page_section(
-		FOUNDATION_PAGE_HOMESCREEN_ICONS,
-		__( 'Android', 'wptouch-pro' ),
-		'admin_menu_homescreen_android',
-		array(
-			wptouch_add_setting(
-				'image-upload',
-				'android_others_icon',
-				sprintf( __( '%d by %d pixels (PNG)', 'wptouch-pro' ), 96, 96 ),
-				'',
-				WPTOUCH_SETTING_BASIC,
-				'2.0'
-			),
-		),
-		$page_options,
-		FOUNDATION_SETTING_DOMAIN
-	);
-
-	wptouch_add_page_section(
-		FOUNDATION_PAGE_HOMESCREEN_ICONS,
-		__( 'iPhone & iPod touch', 'wptouch-pro' ),
-		'admin_menu_homescreen_iphone_android_retina',
-		array(
-			wptouch_add_setting(
-				'image-upload',
-				'iphone_icon_retina',
-				sprintf( __( '%d by %d pixels (PNG)', 'wptouch-pro' ), 180, 180 ),
-				'',
-				WPTOUCH_SETTING_BASIC,
-				'2.0'
-			),
-		),
-		$page_options,
-		FOUNDATION_SETTING_DOMAIN
-	);
-
-	if ( foundation_has_theme_colors() ) {
-		$color_settings = array();
-
-		$colors = foundation_get_theme_colors();
-
-		foreach( $colors as $name => $color ) {
-			$color_settings[] = wptouch_add_setting(
-				'color',
-				$color->setting,
-				$color->desc,
-				'',
-				WPTOUCH_SETTING_BASIC,
-				'1.0',
-				'',
-				$color->domain
-			);
-		}
-
+	if ( !function_exists( 'has_site_icon' ) ) {
 		wptouch_add_page_section(
-			FOUNDATION_PAGE_BRANDING,
-			__( 'Theme Colors', 'wptouch-pro' ),
-			'foundation-colors',
-			$color_settings,
+			FOUNDATION_PAGE_GENERAL,
+			__( 'Site Icon', 'wptouch-pro' ),
+			'admin_menu_homescreen_android',
+			array(
+				wptouch_add_setting(
+					'image-upload',
+					'iphone_icon_retina',
+					sprintf( __( '%d by %d pixels (PNG)', 'wptouch-pro' ), 192, 192 ),
+					false,
+					WPTOUCH_SETTING_BASIC,
+					'2.0'
+				),
+			),
 			$page_options,
-			FOUNDATION_SETTING_DOMAIN
+			FOUNDATION_SETTING_DOMAIN,
+			true,
+			false,
+			30
 		);
 	}
 
-	$foundation_logo_settings = array(
+	$foundation_header_settings = array(
 		wptouch_add_setting(
 			'image-upload',
 			'logo_image',
-			__( '(Scaled by themes to fit logo areas as needed)', 'wptouch-pro' ),
-			'',
+			__( 'Site Logo', 'wptouch-pro' ),
+			false,
 			WPTOUCH_SETTING_BASIC,
+			false,
 			'1.0'
 		)
 	);
 
-	$foundation_logo_settings = apply_filters( 'foundation_settings_logo', $foundation_logo_settings );
+	$foundation_header_settings = apply_filters( 'foundation_settings_header', $foundation_header_settings );
 
 	wptouch_add_page_section(
 		FOUNDATION_PAGE_BRANDING,
-		__( 'Site Logo', 'wptouch-pro' ),
-		'foundation-logo',
-		$foundation_logo_settings,
+		__( 'Header', 'wptouch-pro' ),
+		'foundation-header',
+		$foundation_header_settings,
 		$page_options,
-		FOUNDATION_SETTING_DOMAIN
+		FOUNDATION_SETTING_DOMAIN,
+		true,
+		false,
+		10
 	);
 
 	wptouch_add_page_section(
 		FOUNDATION_PAGE_BRANDING,
-		__( 'Smart App Banner', 'wptouch-pro' ),
-		'foundation-smart-app-banner',
-		array(
-			wptouch_add_setting(
-				'text',
-				'smart_app_banner',
-				sprintf( __( 'Enter your app\'s %sApp Store ID%s', 'wptouch-pro' ), '<a href="http://itunes.apple.com/linkmaker/" target="_blank">', '</a>' ),
-				__( 'Your app\'s unique identifier. Find your ID from the iTunes Link Maker: Search for your app. In the link it provides, your app ID is the nine-digit number in between id and ?mt. For example Angry Birds\'s ID is 343200656.', 'wptouch-pro' ),
-				WPTOUCH_SETTING_ADVANCED,
-				'1.0'
-			),
-		),
-
-		$page_options,
-		FOUNDATION_SETTING_DOMAIN
-	);
-
-	wptouch_add_page_section(
-		FOUNDATION_PAGE_BRANDING,
-		__( 'Theme Footer', 'wptouch-pro' ),
+		__( 'Footer', 'wptouch-pro' ),
 		'foundation-custom-content',
 		array(
-			wptouch_add_setting( 'textarea', 'custom_footer_message', __( 'Custom footer content (HTML is allowed)', 'wptouch-pro' ), __( 'You can add custom footer content that will be displayed below the switch link.', 'wptouch-pro' ), WPTOUCH_SETTING_BASIC, '1.0' )
+			wptouch_add_setting(
+				'textarea',
+				'custom_footer_message',
+				__( 'Custom footer content (HTML is allowed)', 'wptouch-pro' ),
+				false,
+				WPTOUCH_SETTING_BASIC,
+				'1.0'
+			)
 		),
 		$page_options,
-		FOUNDATION_SETTING_DOMAIN
+		FOUNDATION_SETTING_DOMAIN,
+		true,
+		false,
+		70
 	);
 
-	// No settings added to this by Foundation
-	wptouch_add_sub_page( FOUNDATION_PAGE_CUSTOM, 'foundation-page-custom', $page_options );
+	wptouch_add_page_section(
+		FOUNDATION_PAGE_BRANDING,
+		__( 'Custom CSS', 'wptouch-pro' ),
+		'foundation-custom-css-declarations',
+		array(
+			wptouch_add_setting(
+				'textarea',
+				'custom_css_declarations',
+				__( 'Custom CSS Declarations', 'wptouch-pro' ),
+				false,
+				WPTOUCH_SETTING_BASIC,
+				'4.0'
+			)
+		),
+		$page_options,
+		FOUNDATION_SETTING_DOMAIN,
+		true,
+		false,
+		80
+	);
 
 	return $page_options;
+}
+
+add_action( 'wptouch_customizer_start_setup', 'foundation_recover_images' );
+function foundation_recover_images() {
+	wptouch_customizer_port_image( 'wptouch_iphone_icon_retina', 'iphone_icon_retina' );
+	wptouch_customizer_port_image( 'wptouch_logo_image', 'logo_image' );
 }
 
 function foundation_maybe_output_homescreen_icon( $image, $width, $height, $pixel_ratio = 1 ) {
 	$settings = foundation_get_settings();
 
-	if ( $image ) {
+	if ( function_exists( 'has_site_icon' ) && has_site_icon() ) {
+		$use_wordpress_icon = true;
+	} else {
+		$use_wordpress_icon = false;
+	}
+
+	if ( $image && !$use_wordpress_icon ) {
 		if ( $width != 57 ) {
 			$size_string = ' sizes="' . $width . 'x' . $height . '"';
 		} else {
 			$size_string = '';
 		}
 
-		echo '<link rel="apple-touch-icon-precomposed" ' . $size_string . ' href="' . WPTOUCH_BASE_CONTENT_URL . $image  . '" />' . "\n";
+		echo '<link rel="apple-touch-icon-precomposed" ' . $size_string . ' href="' . foundation_prepare_uploaded_file_url( $image ) . '" />' . "\n";
 	}
 }
 
 function foundation_setup_homescreen_icons() {
 	$settings = foundation_get_settings();
-	$has_icon = $settings->android_others_icon;
+	$has_icon = $settings->ipad_icon_retina;
 
 	if ( wptouch_is_device_real_ipad() ) {
 		// iPad home screen icons
@@ -580,10 +588,11 @@ function foundation_setup_homescreen_icons() {
 		echo '<link rel="apple-touch-icon-precomposed" href="' . WPTOUCH_DEFAULT_HOMESCREEN_ICON . '" />' . "\n";
 	} else {
 		// iPhone / Android home screen icons
+		foundation_maybe_output_homescreen_icon( $settings->iphone_icon_retina, 192, 192, 2 );
 		foundation_maybe_output_homescreen_icon( $settings->iphone_icon_retina, 180, 180, 2 );
 		foundation_maybe_output_homescreen_icon( $settings->iphone_icon_retina, 120, 120, 2 );
 		foundation_maybe_output_homescreen_icon( $settings->iphone_icon_retina, 114, 114, 2 );
-		foundation_maybe_output_homescreen_icon( $settings->android_others_icon, 57, 57, 1 );
+		foundation_maybe_output_homescreen_icon( $settings->iphone_icon_retina, 57, 57, 1 );
 
 		// Default (if no icon added in admin, or icon isn't formatted correctly, and as a catch-all)
 		if ( !$has_icon ) {
@@ -649,6 +658,11 @@ function foundation_load_theme_modules() {
 
 	if ( count( $theme_data->theme_support ) ) {
 		foreach( $theme_data->theme_support as $module ) {
+
+			$allow_module_load = apply_filters( 'wptouch_allow_module_' . $module, true );
+			if ( !$allow_module_load ) {
+				continue;
+			}
 
 			$bootstrap_file = dirname( __FILE__ ) . '/modules/' . $module . '/' . $module . '.php';
 			$defined_name = 'WPTOUCH_MODULE_' . str_replace( '-', '_', strtoupper( $module ) ) . '_INSTALLED';
@@ -716,7 +730,7 @@ function foundation_body_classes( $classes ) {
 
 	$settings = foundation_get_settings();
 
-	if ( $settings->video_handling_type != 'none' ) {
+	if ( $settings->new_video_handling != false ) {
 		$classes[] = 'css-videos';
 	}
 
@@ -754,9 +768,8 @@ function foundation_body_classes( $classes ) {
 		$classes[] = 'rtl';
 	}
 
-	if ( wptouch_fdn_iOS_7() || wptouch_fdn_iOS_8() ) {
-		$classes[] = 'ios7';
-	}
+	// iOS 7 or higher now
+	$classes[] = 'ios7';
 
 	$classes[] = 'theme-' . $global_settings->current_theme_name;
 
@@ -774,7 +787,7 @@ function foundation_get_base_module_url() {
 global $foundation_registered_colors;
 $foundation_registered_colors = array();
 
-function foundation_register_theme_color( $setting_name, $desc, $fg_selectors, $bg_selectors, $domain = FOUNDATION_SETTING_DOMAIN ) {
+function foundation_register_theme_color( $setting_name, $desc, $fg_selectors, $bg_selectors, $domain = FOUNDATION_SETTING_DOMAIN, $live_preview = false, $luma_threshold = false, $luma_class = false ) {
 	$theme_color = new stdClass;
 
 	$theme_color->setting = $setting_name;
@@ -782,6 +795,9 @@ function foundation_register_theme_color( $setting_name, $desc, $fg_selectors, $
 	$theme_color->fg_selectors = $fg_selectors;
 	$theme_color->bg_selectors = $bg_selectors;
 	$theme_color->domain = $domain;
+	$theme_color->luma_threshold = $luma_threshold;
+	$theme_color->luma_class = $luma_class;
+	$theme_color->live_preview = $live_preview;
 
 	global $foundation_registered_colors;
 	$foundation_registered_colors[ $setting_name ] = $theme_color;
@@ -800,46 +816,6 @@ function foundation_get_theme_colors() {
 }
 
 /////* Foundation Functions (can be used by all child themes) */////
-
-/*
-If we're on iOS7
-*/
-function wptouch_fdn_iOS_7() {
-	if ( strpos( $_SERVER['HTTP_USER_AGENT'],'iPhone OS 7_' ) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/*
-If we're on iOS8
-*/
-function wptouch_fdn_iOS_8() {
-	if ( strpos( $_SERVER['HTTP_USER_AGENT'],'iPhone OS 10_' ) || strpos( $_SERVER['HTTP_USER_AGENT'],'iPhone OS 8_' ) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/*
-Detects if we're in Web-App mode.
-
-Caveats: Returns true in some other iOS browsers.
-Can also probably be turned into a media query,
-where we look for the browser window height in
-addition to it being an iOS device.
-*/
-function wptouch_fdn_is_web_app_mode(){
-	if ( strpos( $_SERVER['HTTP_USER_AGENT'], 'Safari/' ) === false &&
-	( strpos( $_SERVER['HTTP_USER_AGENT'], 'iPhone' ) || strpos( $_SERVER['HTTP_USER_AGENT'], 'iPod' ) || strpos( $_SERVER['HTTP_USER_AGENT'], 'iPad' ) ) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 
 /* If there are more comments than the pagination setting, we know we should show the pagination links */
 function wptouch_fdn_comments_pagination() {
@@ -891,15 +867,6 @@ function wptouch_fdn_if_previous_post_link(){
 	$prev_post = get_adjacent_post( false, $excluded, true );
 
 	if ( $prev_post ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function wptouch_fdn_show_comments_on_pages() {
-	$settings = foundation_get_settings();
-	if ( ( comments_open() || wptouch_have_comments() ) && !post_password_required() && $settings->show_comments_on_pages ) {
 		return true;
 	} else {
 		return false;
@@ -1287,4 +1254,18 @@ function foundation_custom_die_handler( $function ) {
 	}
 
 	return $function;
+}
+
+function foundation_add_meta_theme_color() {
+
+	$header_color = apply_filters( 'wptouch_theme_color', '' );
+
+	if ( strlen( $header_color ) ) {
+		echo '<meta name="theme-color" content="' . $header_color . '">';
+	}
+
+}
+
+function foundation_override_jetpack_check_mobile() {
+	return false;
 }

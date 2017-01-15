@@ -2,8 +2,8 @@
 Contributors: WebFactory
 Tags: under construction page, coming soon page, maintenance, maintenance page, coming soon, maintenance mode, under construction mode, coming soon mode, site unavailable, under construction, landing page
 Requires at least: 4.0
-Tested up to: 4.6
-Stable tag: 1.25
+Tested up to: 4.7
+Stable tag: 1.40
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,16 +12,18 @@ Display an Under Construction Page or Landing Page that takes less than 5 second
 
 == Description ==
 
-A simple, no-nonsense plugin for all those situations when you have to hide the site behind an Under Construction page for a while.
+A simple, no-nonsense plugin for all those situations when you have to hide the site behind an Under Construction page for a while. Live examples will be up soon on <a href="https://underconstructionpage.com/" rel="friend">Under Construction website</a>. Till then give us a shout on Twitter <a href="http://twitter.com/WebFactoryLtd">@WebFactoryLtd</a>.
+
 
 **Options**
 
 * Under construction mode - off / on
-* Theme - see screenshots
+* End date & time - automatically disable construction mode on a set date
+* Google Analytics Tracking ID - enable tracking via Google Analytics
+* Theme - a new one is added with each update, <a href="https://wordpress.org/plugins/under-construction-page/screenshots/">see screenshots</a>
 * Title
 * Headline
 * Content
-* Whitelisted User Roles - users who see the site, instead of maintenance page
 * Social icons/links:
   * Facebook
   * Twitter
@@ -29,6 +31,9 @@ A simple, no-nonsense plugin for all those situations when you have to hide the 
   * LinkedIn
   * YouTube
   * Pinterest
+  * Dribbble
+* Whitelisted User Roles - user roles who see the site, instead of maintenance page
+* Whitelisted Users - users who see the site, instead of maintenance page
 
 
 == Installation ==
@@ -50,14 +55,41 @@ Or if needed, upload manually;
 
 == Screenshots ==
 
-1. Under Construction settings screen
+1. Under Construction Text theme
 2. Mad Designer theme
 3. Plain Text theme
 4. Under Construction theme
 5. Things Went Dark theme
+6. Forklift at Work theme
+7. Cyber Chick theme
+8. Main settings
+9. Design settings
+10. Content settings
+11. Access settings
 
 
 == Changelog ==
+
+= 1.40 =
+* 2017/01/03
+* 1 new theme - Cyber Chick
+* added "Google Analytics Tracking ID" option
+* added "Whitelisted Users" option
+* added "Show some Love" option
+
+= 1.35 =
+* 2016/12/23
+* 1 new theme - Under Construction Text
+* GUI enhancements
+* added "end date" option
+
+= 1.30 =
+* 2016/11/29
+* we've crossed the 20k users mark & 100k downloads ;)
+* added notice on login form when Maintenance is enabled
+* 1 new theme - Forklift at Work
+* GUI overhaul started
+* added Dribbble social icon
 
 = 1.25 =
 * 2016/10/24

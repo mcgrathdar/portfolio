@@ -22,14 +22,11 @@ use Roots\Sage\Wrapper;
           <?php include Wrapper\template_path(); ?>
         </main><!-- /.main -->
      </div><!-- /.content -->
-  </div><!-- /.wrap -->
+    </div><!-- /.wrap -->
 
-   <?php } else { ?>
-
-       <?php include Wrapper\template_path(); } ?>
-
-     
-
+    <?php } else { ?>
+    
+    <?php include Wrapper\template_path(); } ?>
 
     <?php
       do_action('get_footer');
@@ -37,7 +34,6 @@ use Roots\Sage\Wrapper;
       wp_footer();
     ?>
 
-    
   </body>
 </html>
 

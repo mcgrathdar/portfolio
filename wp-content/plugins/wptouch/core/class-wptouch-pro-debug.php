@@ -20,13 +20,15 @@ class WPtouchProDebug {
 	var $enabled;
 	var $log_level;
 
-	function WPtouchProDebug() {
+	function __construct() {
 		$this->debug_file = false;
 		$this->enabled = false;
 	}
 
 	function enable() {
-		$this->enabled = true;
+		$this->disable();
+
+/*		$this->enabled = true;
 
 		// Create the debug file
 		if ( !$this->debug_file ) {
@@ -37,7 +39,7 @@ class WPtouchProDebug {
 				$this->disable();
 			}
 		}
-	}
+*/	}
 
 	function disable() {
 		$this->enabled = false;

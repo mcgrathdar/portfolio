@@ -78,6 +78,13 @@ h1 {
   color: #de2a13;
 }
 
+#linkback {
+  font-size: small;
+  text-align: center;
+  opacity: 0.55;
+  margin: 10px;
+}
+
 @media(max-width:767px){
   h1 {
      font-size: 4rem;

@@ -13,7 +13,14 @@ function WPtouchAjax( actionName, actionParams, callback ) {
 	});
 }
 
-jQuery( 'table' ).parent( 'p,div' ).addClass( 'table-parent' );
+jQuery( '#content table' ).each( function() {
+	parentElement = jQuery( this ).parent( 'p,div' );
+	if ( parentElement.hasClass( 'post' ) === false ) {
+		parentElement.addClass( 'table-parent' );
+	} else {
+		jQuery( this ).wrap( '<div class="table-parent"></div>' );
+	}
+});
 
 jQuery( '#footer .back-to-top' ).click( function( e ) {
 	e.preventDefault();
@@ -21,6 +28,9 @@ jQuery( '#footer .back-to-top' ).click( function( e ) {
 });
 
 function doWPtouchReady() {
+	// Parse query vars json
+	wptouchMain.query_vars = jQuery.parseJSON( wptouchMain.query_vars );
+
 	// Shortcode
 	var shortcodeDiv = jQuery( '.wptouch-sc-content' );
 
@@ -28,18 +38,18 @@ function doWPtouchReady() {
 		// We have a shortcode
 		var params = {
 			post_id: shortcodeDiv.attr( 'data-post-id' ),
-			post_content: jQuery( '.wptouch-orig-content' ).html()
+			page: shortcodeDiv.attr( 'data-page' ),
+			post_content: jQuery( '.wptouch-orig-content' ).html(),
+			post_nonce: wptouchMain.security_nonce
 		};
 
-		WPtouchAjax( 'handle_shortcode', params, function( response ) {
-			if ( response == 'WPTOUCH_NO_SHORTCODE' ) {
-				// No desktop shortcode, show the original one
-				shortcodeDiv.hide();
-				jQuery( '.wptouch-orig-content' ).show();
-			} else {
-				shortcodeDiv.html( response );
+		console.log( params );
+
+		jQuery.post( wptouchMain.current_shortcode_url + '&current_time=' + jQuery.now(), params, function( result ) {
+				shortcodeDiv.html( result );
+				jQuery( document ).trigger( 'wptouch_ajax_content_loaded' );
 			}
-		});
+		);
 	}
 }
 

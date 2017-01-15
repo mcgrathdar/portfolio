@@ -321,13 +321,11 @@
 	}, {
 		filter: [ 'width', 'items', 'settings' ],
 		run: function() {
-
-
-
 			var i, n, width = (this.width() / this.settings.items).toFixed(3), css = {
-				'width': Math.abs(this._coordinates[this._coordinates.length - 1]) + this.settings.stagePadding * 1,
+				'width': Math.abs(this._coordinates[this._coordinates.length - 1]) + this.settings.stagePadding * 2,
+				'padding-left': this.settings.stagePadding || '',
+				'padding-right': this.settings.stagePadding || ''
 			};
-			css[this.settings.rtl ? 'padding-left' : 'padding-right'] = this.settings.stagePadding;
 
 			this.$stage.css(css);
 
@@ -357,7 +355,7 @@
 		filter: [ 'width', 'position', 'items', 'settings' ],
 		run: function() {
 			var rtl = this.settings.rtl ? 1 : -1,
-				padding = this.settings.stagePadding * 1,
+				padding = this.settings.stagePadding * 2,
 				begin = this.coordinates(this.current()) + padding,
 				end = begin + this.width() * rtl,
 				inner, outer, matches = [], i, n;
@@ -553,7 +551,7 @@
 			case Owl.Width.Outer:
 				return this._width;
 			default:
-				return this._width - this.settings.stagePadding * 1 + this.settings.margin;
+				return this._width - this.settings.stagePadding * 2 + this.settings.margin;
 		}
 	};
 

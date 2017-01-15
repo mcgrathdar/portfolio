@@ -3,6 +3,7 @@ add_action( 'init', 'foundation_google_fonts_enable' );
 add_action( 'foundation_module_init_mobile', 'foundation_google_fonts_enable', 5 );
 add_action( 'foundation_module_init_mobile', 'foundation_google_fonts_init' );
 add_action( 'wptouch_admin_page_render_wptouch-admin-theme-settings', 'foundation_admin_panel' );
+add_filter( 'wptouch_amp_get_fonts', 'foundation_build_google_fonts' );
 
 global $google_fonts_enabled;
 
@@ -17,7 +18,7 @@ function foundation_admin_panel( $page_options ) {
 		$fonts = foundation_get_google_font_pairings();
 
 		if ( count( $fonts ) ) {
-			$font_defaults = array( 'default' => __( 'Browser Fonts', 'wptouch-pro' ) );
+			$font_defaults = array( 'default' => __( 'Browser Default Fonts', 'wptouch-pro' ) );
 
 			foreach( $fonts as $setting_value => $font_info ) {
 				$font_defaults[ $setting_value ] = sprintf( '%s & %s', $font_info[0]->name, $font_info[1]->name );
@@ -29,9 +30,9 @@ function foundation_admin_panel( $page_options ) {
 				'foundation-typography',
 				array(
 					wptouch_add_setting(
-						'list',
+						'select',
 						'typography_sets',
-						__( 'Font style', 'wptouch-pro' ),
+						__( 'Font Pairing', 'wptouch-pro' ),
 						__( 'Choose a Google font pairing designed for this theme, or default browser fonts.', 'wptouch-pro' ),
 						WPTOUCH_SETTING_BASIC,
 						'1.0',
@@ -39,7 +40,10 @@ function foundation_admin_panel( $page_options ) {
 					)
 				),
 				$page_options,
-				FOUNDATION_SETTING_DOMAIN
+				FOUNDATION_SETTING_DOMAIN,
+				true,
+				false,
+				20
 			);
 		}
 	}
@@ -95,16 +99,11 @@ function foundation_google_fonts_init() {
 					$selected_font_info = array_slice( $selected_font_info, 0, 2 );
 				}
 
+				$new_families = foundation_build_google_fonts();
+
 				foreach( $selected_font_info as $font_info ) {
-					$font_string = htmlentities( $font_info->name );
-					if ( isset( $font_info->variants ) && is_array( $font_info->variants ) ) {
-						$font_string .=  ':' . implode( ',', $font_info->variants );
-					}
-
-					$new_families[] = $font_string;
-
-					$inline_style_data .= "." . $font_info->selector . "-font" . " {\n";
-					$inline_style_data .= "\tfont-family: '" . $font_info->name . "', " . $font_info->fallback . ";\n";
+					$inline_style_data .= "." . $font_info->selector . "-font" . "{\n";
+					$inline_style_data .= "\t font-family: '" . $font_info->name . "', " . $font_info->fallback . ";\n";
 					$inline_style_data .= "}\n";
 				}
 
@@ -116,7 +115,7 @@ function foundation_google_fonts_init() {
 					'foundation_google_fonts',
 					'//fonts.googleapis.com/css?family=' . $family_string,
 					false,
-					FOUNDATION_VERSION,
+					md5( FOUNDATION_VERSION ),
 					false
 				);
 
@@ -126,6 +125,22 @@ function foundation_google_fonts_init() {
 			}
 		}
 	}
+}
+
+function foundation_build_google_fonts( $fonts = array() ) {
+	$selected_font_info = foundation_google_fonts_get_selected_info();
+	if ( is_array( $selected_font_info ) ) {
+		foreach( $selected_font_info as $font_info ) {
+			$font_string = htmlentities( $font_info->name );
+			if ( isset( $font_info->variants ) && is_array( $font_info->variants ) ) {
+				$font_string .=  ':' . implode( ',', $font_info->variants );
+			}
+
+			$fonts[ $font_info->selector ] = $font_string;
+		}
+	}
+
+	return $fonts;
 }
 
 global $wptouch_google_fonts;
