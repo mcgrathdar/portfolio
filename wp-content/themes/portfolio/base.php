@@ -17,7 +17,7 @@ use Roots\Sage\Wrapper;
     <![endif]-->
    
     <div class="wrap " role="document">
-      <div class="content row">
+      <div class="content">
         <main class="main">
           <?php include Wrapper\template_path(); ?>
         </main><!-- /.main -->

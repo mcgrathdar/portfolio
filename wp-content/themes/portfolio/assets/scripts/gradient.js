@@ -102,11 +102,6 @@ $(document).one('ready',function(){
     }
   }
 
-  function supprBgWork(){
-    $('.bg-workBloc').css({"background-image" : "none"}); 
-    $('#bg-workBloc2').css({"background-image" : "none"});
-  } 
-  
   function next() {
     $('.about-landing').css({"width":"0%"});
     $('.about-details').css({"width":"100%"});
@@ -127,37 +122,59 @@ $(document).one('ready',function(){
     // switchBorderAbout(1); 
   }
 
-  function resetHome(){
-    previous();
-  }
-
   function openWork(){ 
-    $('.gradient').animate({height : "5%"},400);
-    $('.work-section').animate({height : "95%"},400);
-    $('.about-title').animate({bottom : "0"},50);
-    $('.about-title').css({'display' : 'block'}, 1000);
-    $('.work-title').css({'display' : 'none'}, 400);
-    $('.identity').animate({top : "-200px"},400);
-    $('.next-about img').css({'display' : 'none'});
-     // $('h3.work-title').addClass('open', 5000);
-    resetHome();
-    supprBgWork(); 
+    if ($(window).width() < 768) {
+      $('.gradient').animate({height : "7%"},400);
+      $('.work-section').animate({height : "92%"},400);
+      $('.about-title').animate({bottom : "0"},50);
+      $('.about-title').css({'display' : 'block'}, 1000);
+      $('.work-title').css({'display' : 'none'}, 400);
+      $('.identity').animate({top : "-200px"},400);
+      $('.next-about img').css({'display' : 'none'});
+      $('.work-container').delay(500).css({'display' : 'block'}, 800);
+      previous();
+    }
+    else {
+      $('.gradient').animate({height : "5%"},400);
+      $('.work-section').animate({height : "95%"},400);
+      $('.about-title').animate({bottom : "0"},50);
+      $('.about-title').css({'display' : 'block'}, 1000);
+      $('.work-title').css({'display' : 'none'}, 400);
+      $('.identity').animate({top : "-200px"},400);
+      $('.next-about img').css({'display' : 'none'});
+      $('.work-container').delay(500).css({'display' : 'block'}, 800);
+      previous();
+    }
   }
   
   function openAbout(){
-    $('.gradient').animate({height : "95%"},400);
-    $('.work-section').animate({height : "5%"},0);
-    $('.about-title').animate({bottom : "0"},400);
-    $('.identity').animate({top : "50%"},400);
-    $('.work-title').css({'display': 'block'}, 1000);
-    $('.about-title').css({'display': 'none'}, 400);
-    $('.next-about img').css({'display' : 'block'});
-    $('#work').fadeIn();
-    $('#work-detail').slideUp();
-    // $('h3.work-title').removeClass('open', 5000);
-    // aboutCVOpen=true;
-    // switchAboutButton(0); 
-    return false;   
+     if ($(window).width() < 768) {
+      $('.gradient').animate({height : "93%"},400);
+      $('.work-section').animate({height : "7%"},0);
+      $('.about-title').animate({bottom : "0"},400);
+      $('.identity').animate({top : "50%"},400);
+      $('.work-title').css({'display': 'block'}, 1000);
+      $('.about-title').css({'display': 'none'}, 400);
+      $('.next-about img').css({'display' : 'block'});
+      $('#work').fadeIn();
+      $('#work-detail').slideUp();
+      $('.work-container').css({'display' : 'none'}, 500);
+      return false;  
+    }
+
+    else {
+      $('.gradient').animate({height : "95%"},400);
+      $('.work-section').animate({height : "5%"},0);
+      $('.about-title').animate({bottom : "0"},400);
+      $('.identity').animate({top : "50%"},400);
+      $('.work-title').css({'display': 'block'}, 1000);
+      $('.about-title').css({'display': 'none'}, 400);
+      $('.next-about img').css({'display' : 'block'});
+      $('#work').fadeIn();
+      $('#work-detail').slideUp();
+      $('.work-container').css({'display' : 'none'}, 500);
+      return false; 
+    }
   }
 
   $("a .work-container").mouseenter(function(){
@@ -184,11 +201,21 @@ $(document).one('ready',function(){
   });
 
   $('#close').on('click', function(e) {
-    $('#work').slideDown();
-    $('#work-detail').slideUp();
-    $('#contentarea').fadeOut();
-    $('.work-section').css({'overflow' : 'hidden'});
-    $('#close').fadeOut(0);
+    if ($(window).width() < 768) {
+      $('#work').slideDown();
+      $('#work').css({'overflow' : 'scroll'});
+      $('#work-detail').slideUp();
+      $('#contentarea').fadeOut();
+      $('.work-section').css({'overflow' : 'scroll'});
+      $('#close').fadeOut(0);
+    }
+    else {
+      $('#work').slideDown();
+      $('#work-detail').slideUp();
+      $('#contentarea').fadeOut();
+      $('.work-section').css({'overflow' : 'hidden'});
+      $('#close').fadeOut(0);
+    }
   });
 });
 

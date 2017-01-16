@@ -41,16 +41,18 @@
 				<div class="about-details">
 					<div class="work-study-block">
 						<div class="employment">
-							<h1>Work</h1>
+							<h1>Work
 							<div class="about-title-divider"></div>
+							</h1>
 							<br/>
 							<h2>Clickworks</h2>
 							<h2>Connectors Marketplace<br />
 								Output studios</h2>
 						</div>
 						<div class="studied">
-							<h1>Study</h1>
+							<h1>Study
 							<div class="about-title-divider"></div>
+							</h1>
 							<br />
 							<h2>MSc<br /> Creative Digital Media</h2><br />
 							<h2>BA<br /> Fine Art</h2>
@@ -74,21 +76,23 @@
 			</div>
 		</div>
 		
-		<div class="work-section" >
+		<div class="work-section">
 			<div class="col-md-12 col-xl-12 col-xs-12 work-row" id="work">
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 					<?php if ( has_post_thumbnail() ) : ?>
 
-					<a ic-post-to="<?php the_permalink(); ?>" ic-push-url="true" ic-indicator="#demo-spinner" ic-target='#contentarea'>
+					
 						<div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 work-container" id="<?php the_title(); ?>">
+							<a ic-post-to="<?php the_permalink(); ?>"  ic-indicator="#demo-spinner" ic-target='#contentarea'>
 							<div class="overlay-title">
 								<h2><?php the_title(); ?></h2>
 							 	<div class="work-title-overlay-divider"></div> 
 							</div>
 							<div class="overlay"></div>			
 							<img src="<?php the_post_thumbnail_url('full'); ?>" />
+							</a>
 						</div>		
-					</a>
+					
 					<?php endif; ?>	
 				<?php endwhile; endif; ?>	
  			</div>
@@ -105,7 +109,7 @@
 					</div>
 				</div>
 					 <i class="ic-indicator" style="display:none"></i>
-					<div id="contentarea" style="width: 100%;"></div>
+					<div id="contentarea"></div>
 				
 			</div> 
 		</div>
