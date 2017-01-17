@@ -38,25 +38,27 @@
 						</div>
 					</div>
 				</div>
-				<div class="about-details">
-					<div class="work-study-block">
-						<div class="employment">
-							<h1>Work
-							<div class="about-title-divider"></div>
-							</h1>
-							<br/>
-							<h2>Clickworks</h2>
-							<h2>Connectors Marketplace<br />
-								Output studios</h2>
+				<div class="about-details">				
+					<div class="employment">
+						<h2>Employment</h2>
+						<div class="about-divider-container-one">
+							<div class="about-divider"></div>
+						</div><br />
+						<p>
+							Clickworks<br />
+							Connectors Marketplace<br />
+							Output Studios
+						</p>
+						<br /><br />
+						<h2>Education</h2>
+						<div class="about-divider-container-two">
+							<div class="about-divider"></div>
 						</div>
-						<div class="studied">
-							<h1>Study
-							<div class="about-title-divider"></div>
-							</h1>
-							<br />
-							<h2>MSc<br /> Creative Digital Media</h2><br />
-							<h2>BA<br /> Fine Art</h2>
-						</div>
+						<br />
+						<p>
+							MSc Creative Digital Media<br />
+							BA Fine Art
+						</p>
 					</div>
 					<a href="#" target="_blank">
 						<div class="cv">

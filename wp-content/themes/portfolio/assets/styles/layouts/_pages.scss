@@ -159,22 +159,23 @@
 	
 .employment{
 	width: 280px;
-	height: 280px;
-	color: #999;
-	float: left;
-	background-color: $brand-primary;
-	margin-right: 120px; 
-	padding: 20px;
-	text-align : center;
+    color: #999;
+    padding: 20px;
+    text-align: center;
+    margin: 190px auto 0 auto;
+
+    p {
+    	color: #ffffff!important;
+		font-weight: 100;
+    }
 }
 
-.employment h1, .studied h1 {
+.employment h2, .studied h2 {
 	margin-top: 15px;
-    font-size: 23px;
+    font-size: 26px;
     line-height: 23px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
-    width: 80px;
     margin: 0 auto;
     display: block;
 }
@@ -324,6 +325,31 @@ a {
     border-bottom: 5px solid #ffffff;
 }
 
+.about-divider-container-one {
+	width: 35px;
+	display: block;
+	position: relative;
+	margin-right: 20px;
+	margin: 0 auto 0 44px;
+}
+
+.about-divider-container-two {
+	width: 35px;
+	display: block;
+	position: relative;
+	margin-right: 20px;
+	margin: 0 auto 0 60px;
+}
+
+.about-divider {
+	width: 35px;
+    height: 1px;
+    background-color: #fff;
+    margin-top: 10px;
+    border-bottom: 3px solid #ffffff;
+}
+
+
 .work-title-overlay-divider {
 	width: 45px;
     height: 1px;
@@ -428,27 +454,12 @@ a {
 	    width: 100%;
 	}
 
-	.studied {
-	    width: 100%;
-	    height: auto;
+	.employment{
+		width: 280px;
 	    color: #999;
-	    float: left;
-	    background-color: #343434;
-	    text-align: center;
-	    margin: 0 auto;
-	    padding: 20px;
-	}
-
-	.employment {
-	    width: 100%;
-	    height: auto;
-	    color: #999;
-	    background-color: #343434;
-	    margin-right: 120px;
 	    padding: 20px;
 	    text-align: center;
-	    margin: 0 auto;
-	    display: inline-block;
+	    margin: 90px auto 0 auto;
 	}
 }
 	
