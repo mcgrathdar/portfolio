@@ -177,12 +177,12 @@ $(document).one('ready',function(){
     }
   }
 
-  $("a .work-container").mouseenter(function(){
+  $(".work-container a").mouseenter(function(){
      $(this).find('.overlay').animate({width : "100%"},400);
      $(this).find('.overlay-title').animate({width : "100%"},400);
   });
   
-  $("a .work-container").mouseleave(function(){
+  $(".work-container a").mouseleave(function(){
       $(this).find('.overlay').delay(500).animate({width : "0"},100);
       $(this).find('.overlay-title').animate({width : "0"},200);
   });

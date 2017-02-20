@@ -10,6 +10,10 @@ use Roots\Sage\Wrapper;
 <?php if (is_home()) { ?>
   <?php get_template_part('templates/head'); ?>
   <body <?php body_class(); ?>>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KC8KB4J"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!--[if IE]>
       <div class="alert alert-warning">
         <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>

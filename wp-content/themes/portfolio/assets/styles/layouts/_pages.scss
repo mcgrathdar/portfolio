@@ -42,6 +42,10 @@
 	margin:0 auto;
 	margin-top : 50px;
 }
+
+#work-detail {
+	padding:0 15px;
+}
 	
 .social-bar {
 	width : 90px;
@@ -416,7 +420,21 @@ a {
 	}
 }
 
+.video-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
 
+.video-container iframe {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
 
 /*------------responsive----------*/
 	
@@ -460,6 +478,27 @@ a {
 	    padding: 20px;
 	    text-align: center;
 	    margin: 90px auto 0 auto;
+	}
+
+	.col-height {
+		height: auto;
+	}
+
+	#contentarea h2 {
+		margin-top: 30px;
+		font-size: 45px;
+		color: $brand-primary;
+		font-weight: 700;
+		line-height: 40px;
+	}
+
+	.work-title-divider {
+		margin-top: 10px;
+		margin-bottom: 0px;
+	}
+
+	#contentarea .row:nth-child(2) {
+	    margin-top: 20px;
 	}
 }
 	

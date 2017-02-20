@@ -83,15 +83,14 @@
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 					<?php if ( has_post_thumbnail() ) : ?>
 
-					
 						<div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 work-container" id="<?php the_title(); ?>">
-							<a ic-post-to="<?php the_permalink(); ?>"  ic-indicator="#demo-spinner" ic-target='#contentarea'>
-							<div class="overlay-title">
-								<h2><?php the_title(); ?></h2>
-							 	<div class="work-title-overlay-divider"></div> 
-							</div>
-							<div class="overlay"></div>			
-							<img src="<?php the_post_thumbnail_url('full'); ?>" />
+							<a ic-post-to="<?php the_permalink(); ?>"  ic-target='#contentarea'>
+								<div class="overlay-title">
+									<h2><?php the_title(); ?></h2>
+								 	<div class="work-title-overlay-divider"></div> 
+								</div>
+								<div class="overlay"></div>			
+								<img src="<?php the_post_thumbnail_url('full'); ?>" />
 							</a>
 						</div>		
 					
@@ -110,9 +109,7 @@
 						<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
 					</div>
 				</div>
-					 <i class="ic-indicator" style="display:none"></i>
-					<div id="contentarea"></div>
-				
+				<div id="contentarea"></div>
 			</div> 
 		</div>
 	</div>
