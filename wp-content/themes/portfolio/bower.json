@@ -10,7 +10,7 @@
     "bootstrap-sass": "3.3.6",
     "jQuery": "3.1.1",
     "jquery-1.8.3.min": "https://code.jquery.com/jquery-1.8.3.min.js",
-    "intercooler-js": "^1.0.3",
+    "intercooler-js": "^1.1.0",
     "matchHeight": "matchheight#^0.7.0"
   },
   "overrides": {

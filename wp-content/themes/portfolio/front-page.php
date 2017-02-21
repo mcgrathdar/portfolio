@@ -84,7 +84,7 @@
 					<?php if ( has_post_thumbnail() ) : ?>
 
 						<div class="col-xl-3 col-md-3 col-sm-6 col-xs-12 work-container" id="<?php the_title(); ?>">
-							<a ic-post-to="<?php the_permalink(); ?>"  ic-target='#contentarea'>
+							<a ic-post-to="<?php the_permalink(); ?>" ic-verb="POST" ic-target='#contentarea'>
 								<div class="overlay-title">
 									<h2><?php the_title(); ?></h2>
 								 	<div class="work-title-overlay-divider"></div> 
@@ -106,7 +106,9 @@
 			<div id="work-detail">
 				<div class="close-header">
 					<div class="col-md-12 col-xl-12 col-xs-12">
-						<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
+						<div class="close-container">
+							<img id="close" style="background-image: url('<?= get_template_directory_uri();?>/dist/images/close.png');"/>
+						</div>
 					</div>
 				</div>
 				<div id="contentarea"></div>

@@ -197,7 +197,8 @@ $(document).one('ready',function(){
     $('#work-detail').slideDown();
     $('#contentarea').delay(480).fadeIn(400);
     $('.work-section').css({'overflow' : 'scroll'});
-    $('#close').delay(500).fadeIn(300);
+    $('.close-container').delay(500).slideDown(300);
+    $('#close').delay(1000).fadeIn(300);
   });
 
   $('#close').on('click', function(e) {
@@ -207,6 +208,7 @@ $(document).one('ready',function(){
       $('#work-detail').slideUp();
       $('#contentarea').fadeOut();
       $('.work-section').css({'overflow' : 'scroll'});
+      $('.close-container').slideUp(0);
       $('#close').fadeOut(0);
     }
     else {

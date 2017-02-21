@@ -253,6 +253,13 @@
 	left: 0;
 }
 
+.close-container {
+	background-color: $brand-primary;
+	height: 60px;
+	width: 50px;
+	float: right;
+}
+
 #close {
 	background-size: contain;
     height: 30px;
@@ -375,7 +382,7 @@ a {
 	z-index: 5;
 	overflow:hidden;
 	margin-left:-40px;
-	opacity: 0.95;
+	opacity: 1;
 	transform:skew(5deg);
 }
 

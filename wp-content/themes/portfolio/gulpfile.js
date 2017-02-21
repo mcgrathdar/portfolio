@@ -86,7 +86,7 @@ var cssTasks = function(filename) {
       return gulpif(enabled.maps, sourcemaps.init());
     })
     .pipe(function() {
-      return gulpif('*.less', less());
+      return gulpif('*.scss', sass());
     })
     .pipe(function() {
       return gulpif('*.scss', sass({
