@@ -50,12 +50,9 @@ p {
 	font-size: 18px;
 }
 
-img {
-	vertical-align: bottom!important;
-}
-
 .work {
 	height: auto;
+	padding: 0 15px;
 }
 
 .work img {
@@ -113,8 +110,8 @@ img {
 
 .work-title:hover{
 	color : #ffffff!important;
-	height: 40px!important;
-		width: 100%!important;
+	height: 100%!important;
+	width: 100%!important;
 	-webkit-transition : all 0.3s ease-in-out;
 	-moz-transition : all 0.3s ease-in-out;
 	transition : all 0.3s ease-in-out;
@@ -155,12 +152,13 @@ img {
 
 .about-title {
 	width: 120px;
-	height: 35px;
+	height: 95%;
 	background-color: #ffffff;
 	text-align: center;
-	border: 1px solid #ffffff;
+	border: 0px;
 	position: absolute;
-	display: none;
+
+	height:0;
 	bottom: 0;
     right: 0;
     left: 0;
@@ -174,6 +172,8 @@ img {
 
 .about-title h5 {
 	bottom: 0;
+	display: none;
+	margin-bottom:10px;
 	position: absolute;
 	text-align: center;
 	color : #000000!important;
@@ -184,7 +184,7 @@ img {
 	
 .about-title:hover{
 	color : #000000!important;
-	height: 40px!important;
+	height: 100%!important;
 	width: 100%!important;
 	-webkit-transition : all 0.3s ease-in-out;
 	-moz-transition : all 0.3s ease-in-out;
