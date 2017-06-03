@@ -1,11 +1,3 @@
-<?
-    $vidID = $_POST['vidID'];
-    $url = "http://gdata.youtube.com/feeds/api/videos/". $vidID;
-    $doc = new DOMDocument;
-    $doc->load($url);
-    $title = $doc->getElementsByTagName("title")->item(0)->nodeValue;
-?>
-
 <?php while (have_posts()) : the_post(); ?>
   
 <div class="row work"> 

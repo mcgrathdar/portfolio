@@ -1,3 +1,8 @@
-#contentarea .row {
+#contentarea .row:first-child {
 	margin-top:40px;
 }
+
+#contentarea .row {
+	margin-top:20px;
+}
+

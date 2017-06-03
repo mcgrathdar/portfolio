@@ -43,10 +43,6 @@
 	margin-top : 50px;
 }
 
-#work-detail {
-	padding:0 15px;
-}
-	
 .social-bar {
 	width : 90px;
 	height :20px;
@@ -102,7 +98,7 @@
 }
 	
 .previous-about{	
-	position : absolute;
+	position: relative;
 	top: 50%;
 	background-size : auto ;
 	background-repeat:no-repeat;
@@ -128,8 +124,9 @@
 }
 	
 .next-about {
-	position : absolute;
+	position: relative;
 	top: 50%;
+	float: right;
 	background-size : auto ;
 	background-repeat:no-repeat;
 	right: 5px;
@@ -250,13 +247,13 @@
 	background-color: transparent;
 	width: 100%;
 	z-index: 5;
-	height: 60px;
+	height: 0px;
 	left: 0;
 }
 
 .close-container {
 	background-color: $brand-primary;
-	height: 60px;
+	height: 0px;
 	width: 50px;
 	float: right;
 }
@@ -287,25 +284,32 @@
 .work-row {
 	height: 100%;
 	margin-top: 3%;
+	max-width: 1500px!important;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	position: relative;
+	float: none!important;
 }
 
 a {
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 .work-container {
 	padding: 0;
 	height: 45%;
+	line-height: 45%;
 	overflow: hidden;
 	display: none;
 }
 
 .work-container img {
-	height: 100%;
-    position: absolute;
-    margin: 0 auto;
-    left: 50%;
-    transform: translateX(-50%);
+	width: 100%;
+     top: 50%;
+    position: relative;
+    transform: translate(0,-50%);
 }
 
 #work-detail {
@@ -313,7 +317,7 @@ a {
 	position: absolute; 
 	z-index: -1; 
 	height: auto; 
-/*	padding-top: 5%;*/ 
+	padding:0 15px;
 	background-color: #ffffff; 
 	display: none;
 	left: 0;
@@ -413,6 +417,11 @@ a {
 #contentarea {
 	
 	width: 100%;
+	max-width: 1500px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	position: relative;
 
 	h2 {
 		margin-top: 30px;
@@ -445,15 +454,21 @@ a {
 }
 
 /*------------responsive----------*/
-	
+
+
+
 @media screen and (max-width: 768px) {
+	.work {
+		padding: 0;
+	}
+
 	.row {
 	    margin-left: 0px;
 	    margin-right: 0px;
 	}
 
 	.gradient {
-	  	height: 93%;
+	  	height: 92%;
 	}
 
 	.work-row {
@@ -462,11 +477,7 @@ a {
 
 	.work-section {
 		overflow: scroll!important;
-		height: 7%;
-	}
-
-	.work-container:first-child {
-		margin-top: 20px;
+		height: 8%;
 	}
 
 	.work-container:last-child {
@@ -478,14 +489,6 @@ a {
 	    margin: 0 auto;
 	    z-index: 5;
 	    width: 100%;
-	}
-
-	.employment{
-		width: 280px;
-	    color: #999;
-	    padding: 20px;
-	    text-align: center;
-	    margin: 90px auto 0 auto;
 	}
 
 	.col-height {
@@ -508,7 +511,59 @@ a {
 	#contentarea .row:nth-child(2) {
 	    margin-top: 20px;
 	}
+
+	#contentarea .row:nth-child(2) p {
+	   margin: 0 0 30px!important;
+	}
+
+	#work-detail {
+		padding: 0;
+	}
+
+	.work img {
+	    margin-bottom: 20px;
+	}
+
+	.previous-about {
+		top: 45%;
+	}
+
+	.next-about {
+		top: 45%;
+	}
 }
 	
+@media screen and (max-width: 576px) {
 
+	.work-container:first-child {
+		margin-top: 20px;
+	}
+
+	.employment{
+		width: 280px;
+	    color: #999;
+	    padding: 20px;
+	    text-align: center;
+	    margin: 90px auto 0 auto;
+	}
+
+	.about-title h5 {
+		margin-bottom: 10px;
+	}
+
+	.work-title h5 {
+		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+
+	.gradient {
+	  	height: 92%;
+	}
+
+	.work-section {
+		height : 8%;
+	}	
+}
 

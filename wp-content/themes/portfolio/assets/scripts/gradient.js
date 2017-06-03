@@ -78,7 +78,7 @@ $(document).one('ready',function(){
   var projectNumber = 1;
 
   $('.identity').delay(300).animate({opacity : 1},1500);
-  $('.work-title').delay(1200).animate({height : "35px"},1000);
+  $('.work-title').delay(1200).animate({height : "95%"},1000);
   $('.work-title h5').delay(2000).fadeIn(1000);
   $('.cv').delay(1200).animate({height : "35px"},1000);
   $('.cv h5').delay(2000).fadeIn(1000);
@@ -127,23 +127,40 @@ $(document).one('ready',function(){
   }
 
   function openWork(){ 
-    if ($(window).width() < 768) {
-      $('.gradient').animate({height : "7%"},400);
-      $('.work-section').animate({height : "92%"},400);
-      $('.about-title').animate({bottom : "0"},50);
-      $('.about-title').css({'display' : 'block'}, 1000);
-      $('.work-title').css({'display' : 'none'}, 400);
+
+      if ($(window).width() < 320) {
+        $('.gradient').animate({height : "10%"},400);
+      $('.work-section').animate({height : "90%"},400);
+      $('.about-title h5').delay(400).fadeIn();
+      $('.work-title').css({'height' : '0%', 'display' : 'none'});
+      $('.about-title').css({'display' : 'block'});
+      $('.about-title').delay(400).animate({height : "92%"},400);
       $('.identity').animate({top : "-200px"},400);
       $('.next-about img').css({'display' : 'none'});
       $('.work-container').delay(500).css({'display' : 'block'}, 800);
       previous();
-    }
-    else {
+      }
+
+     if ($(window).width() < 768) {
+      $('.gradient').animate({height : "8%"},400);
+      $('.work-section').animate({height : "92%"},400);
+      $('.about-title h5').delay(400).fadeIn();
+      $('.work-title').css({'height' : '0%', 'display' : 'none'});
+      $('.about-title').css({'display' : 'block'});
+      $('.about-title').delay(400).animate({height : "92%"},400);
+      $('.identity').animate({top : "-200px"},400);
+      $('.next-about img').css({'display' : 'none'});
+      $('.work-container').delay(500).css({'display' : 'block'}, 800);
+      previous();
+     }
+
+     else {
       $('.gradient').animate({height : "5%"},400);
       $('.work-section').animate({height : "95%"},400);
-      $('.about-title').animate({bottom : "0"},50);
-      $('.about-title').css({'display' : 'block'}, 1000);
-      $('.work-title').css({'display' : 'none'}, 400);
+      $('.about-title h5').delay(400).fadeIn();
+      $('.work-title').css({'height' : '0%', 'display' : 'none'});
+      $('.about-title').css({'display' : 'block'});
+      $('.about-title').delay(400).animate({height : "90%"},400);
       $('.identity').animate({top : "-200px"},400);
       $('.next-about img').css({'display' : 'none'});
       $('.work-container').delay(500).css({'display' : 'block'}, 800);
@@ -152,13 +169,30 @@ $(document).one('ready',function(){
   }
   
   function openAbout(){
-     if ($(window).width() < 768) {
-      $('.gradient').animate({height : "93%"},400);
-      $('.work-section').animate({height : "7%"},0);
-      $('.about-title').animate({bottom : "0"},400);
+
+    if ($(window).width() < 320) {
+      $('.gradient').animate({height : "90%"},400);
+      $('.work-section').animate({height : "10%"},0);
+      $('.work-title').css({'display' : 'block'});
+      $('.work-title h5').delay(400).fadeIn();
+      $('.work-title').delay(400).animate({height : "90%"},400);
+      $('.about-title').css({'height' : '0px', 'display' : 'none'});
       $('.identity').animate({top : "50%"},400);
-      $('.work-title').css({'display': 'block'}, 1000);
-      $('.about-title').css({'display': 'none'}, 400);
+      $('.next-about img').css({'display' : 'block'});
+      $('#work').fadeIn();
+      $('#work-detail').slideUp();
+      $('.work-container').css({'display' : 'none'}, 500);
+      return false;  
+    }
+
+    else if ($(window).width() < 768) {
+      $('.gradient').animate({height : "92%"},400);
+      $('.work-section').animate({height : "8%"},0);
+      $('.work-title').css({'display' : 'block'});
+      $('.work-title h5').delay(400).fadeIn();
+      $('.work-title').delay(400).animate({height : "90%"},400);
+      $('.about-title').css({'height' : '0px', 'display' : 'none'});
+      $('.identity').animate({top : "50%"},400);
       $('.next-about img').css({'display' : 'block'});
       $('#work').fadeIn();
       $('#work-detail').slideUp();
@@ -169,26 +203,33 @@ $(document).one('ready',function(){
     else {
       $('.gradient').animate({height : "95%"},400);
       $('.work-section').animate({height : "5%"},0);
-      $('.about-title').animate({bottom : "0"},400);
+      $('.work-title').css({'display' : 'block'});
+      $('.work-title h5').delay(400).fadeIn();
+      $('.work-title').delay(400).animate({height : "90%"},400);
+      $('.about-title').css({'height' : '0px', 'display' : 'none'});
       $('.identity').animate({top : "50%"},400);
-      $('.work-title').css({'display': 'block'}, 1000);
-      $('.about-title').css({'display': 'none'}, 400);
       $('.next-about img').css({'display' : 'block'});
       $('#work').fadeIn();
       $('#work-detail').slideUp();
       $('.work-container').css({'display' : 'none'}, 500);
-      return false; 
+      return false;  
     }
   }
 
   $(".work-container a").mouseenter(function(){
+   if ($(window).width() > 576) {
      $(this).find('.overlay').animate({width : "100%"},400);
      $(this).find('.overlay-title').animate({width : "100%"},400);
+    }
+    else {}
   });
   
   $(".work-container a").mouseleave(function(){
+   if ($(window).width() > 576) {
       $(this).find('.overlay').delay(500).animate({width : "0"},100);
       $(this).find('.overlay-title').animate({width : "0"},200);
+    }
+    else {}
   });
 
   $('.about-title').click(openAbout);
@@ -201,7 +242,8 @@ $(document).one('ready',function(){
     $('#work-detail').slideDown();
     $('#contentarea').delay(480).fadeIn(400);
     $('.work-section').css({'overflow' : 'scroll'});
-    $('.close-container').delay(500).slideDown(300);
+    $('.close-header').delay(500).animate({height : "60px"},500);
+    $('.close-container').delay(500).animate({height : "60px"},500);
     $('#close').delay(1000).fadeIn(300);
   });
 
@@ -212,7 +254,8 @@ $(document).one('ready',function(){
       $('#work-detail').slideUp();
       $('#contentarea').fadeOut();
       $('.work-section').css({'overflow' : 'scroll'});
-      $('.close-container').slideUp(0);
+      $('.close-header').animate({height : "0px"},500);
+      $('.close-container').animate({height : "0px"},500);
       $('#close').fadeOut(0);
     }
     else {
@@ -221,6 +264,8 @@ $(document).one('ready',function(){
       $('#contentarea').fadeOut();
       $('.work-section').css({'overflow' : 'hidden'});
       $('#close').fadeOut(0);
+      $('.close-header').animate({height : "0px"},0);
+      ('.close-container').animate({height : "0px"},500);
     }
   });
 });
