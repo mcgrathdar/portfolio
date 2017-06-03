@@ -80,16 +80,20 @@ $(document).one('ready',function(){
   $('.identity').delay(300).animate({opacity : 1},1500);
   $('.work-title').delay(1200).animate({height : "35px"},1000);
   $('.work-title h5').delay(2000).fadeIn(1000);
+  $('.cv').delay(1200).animate({height : "35px"},1000);
+  $('.cv h5').delay(2000).fadeIn(1000);
   $('.pointer').delay(1000).animate({height : "20%"},1000);
 
-  function switchAboutButton(n){
-    if(n === 0){
-      $('.about-title').css({"cursor" : "default"});
-    }  
-    if(n === 1){
-      $('.about-title').css({"cursor" : "pointer"});
-    }
-  }
+
+
+  // function switchAboutButton(n){
+  //   if(n === 0){
+  //     $('.about-title').css({"cursor" : "default"});
+  //   }  
+  //   if(n === 1){
+  //     $('.about-title').css({"cursor" : "pointer"});
+  //   }
+  // }
 
   function switchPreviousnextAboutButton(n){
     if(n === 0){

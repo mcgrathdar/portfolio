@@ -38,6 +38,11 @@
 						</div>
 					</div>
 				</div>
+				<a href="Daragh_McGrath_CV.pdf" target="_blank">
+						<div class="cv">
+							<h5>CV</h5>
+						</div>
+					</a>
 				<div class="about-details">				
 					<div class="employment">
 						<h2>Employment</h2>
@@ -60,11 +65,11 @@
 							BA Fine Art
 						</p>
 					</div>
-					<a href="#" target="_blank">
+					<!-- <a href="#" target="_blank">
 						<div class="cv">
 							<h5>CV</h5>
 						</div>
-					</a>
+					</a> -->
 				</div>
 				<div class="previous-about">
 					<img src="<?= get_template_directory_uri();?>/dist/images/previousAboutButton.svg">
