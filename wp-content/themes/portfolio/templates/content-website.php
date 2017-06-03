@@ -1,3 +1,11 @@
+<?
+    $vidID = $_POST['vidID'];
+    $url = "http://gdata.youtube.com/feeds/api/videos/". $vidID;
+    $doc = new DOMDocument;
+    $doc->load($url);
+    $title = $doc->getElementsByTagName("title")->item(0)->nodeValue;
+?>
+
 <?php while (have_posts()) : the_post(); ?>
   
 <div class="row work"> 
@@ -39,7 +47,7 @@
 <div class="row work"> 
   <div class="col-md-12 col-xl-12 col-xs-12">
     <div class="video-container">
-      <iframe src="http://www.youtube.com/embed/<?php echo $video; ?>?rel=0&amp;showinfo=0"  frameborder="0" allowfullscreen></iframe>
+      <iframe src="http://www.youtube.com/embed/<?php echo $video; ?>?enablejsapi=1&rel=0&amp;showinfo=0"  frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 </div>
