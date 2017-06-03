@@ -132,6 +132,9 @@ $(document).one('ready',function(){
         $('.gradient').animate({height : "10%"},400);
       $('.work-section').animate({height : "90%"},400);
       $('.about-title h5').delay(400).fadeIn();
+      
+      $('.cv').css({'height' : '0%' });
+
       $('.work-title').css({'height' : '0%', 'display' : 'none'});
       $('.about-title').css({'display' : 'block'});
       $('.about-title').delay(400).animate({height : "92%"},400);
@@ -145,6 +148,9 @@ $(document).one('ready',function(){
       $('.gradient').animate({height : "8%"},400);
       $('.work-section').animate({height : "92%"},400);
       $('.about-title h5').delay(400).fadeIn();
+
+      $('.cv').css({'height' : '0%' });
+
       $('.work-title').css({'height' : '0%', 'display' : 'none'});
       $('.about-title').css({'display' : 'block'});
       $('.about-title').delay(400).animate({height : "92%"},400);
@@ -158,6 +164,9 @@ $(document).one('ready',function(){
       $('.gradient').animate({height : "5%"},400);
       $('.work-section').animate({height : "95%"},400);
       $('.about-title h5').delay(400).fadeIn();
+
+      $('.cv').css({'height' : '0%' });
+
       $('.work-title').css({'height' : '0%', 'display' : 'none'});
       $('.about-title').css({'display' : 'block'});
       $('.about-title').delay(400).animate({height : "90%"},400);
@@ -173,6 +182,10 @@ $(document).one('ready',function(){
     if ($(window).width() < 320) {
       $('.gradient').animate({height : "90%"},400);
       $('.work-section').animate({height : "10%"},0);
+
+      $('.cv').animate({height : "35px"},1000);
+;
+
       $('.work-title').css({'display' : 'block'});
       $('.work-title h5').delay(400).fadeIn();
       $('.work-title').delay(400).animate({height : "90%"},400);
@@ -190,6 +203,11 @@ $(document).one('ready',function(){
       $('.work-section').animate({height : "8%"},0);
       $('.work-title').css({'display' : 'block'});
       $('.work-title h5').delay(400).fadeIn();
+
+      $('.cv').animate({height : "35px"},1000);
+
+
+
       $('.work-title').delay(400).animate({height : "90%"},400);
       $('.about-title').css({'height' : '0px', 'display' : 'none'});
       $('.identity').animate({top : "50%"},400);
@@ -205,6 +223,11 @@ $(document).one('ready',function(){
       $('.work-section').animate({height : "5%"},0);
       $('.work-title').css({'display' : 'block'});
       $('.work-title h5').delay(400).fadeIn();
+
+      $('.cv').animate({height : "35px"},1000);
+
+
+
       $('.work-title').delay(400).animate({height : "90%"},400);
       $('.about-title').css({'height' : '0px', 'display' : 'none'});
       $('.identity').animate({top : "50%"},400);
